@@ -3,38 +3,81 @@ package triviaMaze;
 public class MultipleChoiceQuestion implements Question {
      private boolean myQuestionAnswer;
 	 private static String myQuestionText; 
-	 private char myA; 
-	 private char myB; 
-	 private char myC; 
-	 private char myD;  
-	 
-	public MultipleChoiceQuestion(String theQuestionText, char theA, char theB, char theC, char theD) { 
-		myQuestionText = theQuestionText; 
-		myA = theA ; 
-		myB = theB;  
-		myC = theC; 
-		myD = theD;
+	
+	 private String myOptionA; 
+	 private String myOptionB; 
+	 private String myOptionC; 
+	 private String myOptionD;
+	 private char myCharacterAnswer;
+	 // maybe just have setters instead of things in constructor, to be seen 
+	public MultipleChoiceQuestion() { 
+	//	myQuestionText = theQuestionText; 
+	//	myCharacterAnswer = theAnswer;
+	}  
+	
+	
+	
+	
+	public void setCorrectChar(char theAnswer) { 
+		myCharacterAnswer = theAnswer;
 	}
 	
 	
 	@Override
-	public void checkQuestion(char a) {
-		// TODO Auto-generated method stub 
-		myQuestionAnswer= false;
-	//	return false;
+	public void checkQuestion(char theInput) {
+
+		if(myCharacterAnswer == theInput) {  
+			myQuestionAnswer= true;
+		} else {
+		
+		
+		myQuestionAnswer= false; 
+		}
+
 	}
 
 	@Override
-	public void setQuestionText() {
-		// TODO Auto-generated method stub
+	public void setQuestionText(String theQuestionText) {
 		
+		myQuestionText = theQuestionText;
+	} 
+	
+	public String getQuestionText() { 
+		return myQuestionText;
+	} 
+	
+	public String getMultipleChoiceOptionA() { 
+		return myOptionA;
+	} 
+	public String getMultipleChoiceOptionB() { 
+		return myOptionB;
+	} 
+	public String getMultipleChoiceOptionC() { 
+		return myOptionC;
 	}
+	public String getMultipleChoiceOptionD() { 
+		return myOptionD;
+	} 
+	public String setMultipleChoiceOptionA() { 
+		return myOptionA;
+	} 
+	public String setMultipleChoiceOptionB() { 
+		return myOptionB;
+	} 
+	public String setMultipleChoiceOptionC() { 
+		return myOptionC;
+	}
+	public String setMultipleChoiceOptionD() { 
+		return myOptionD;
+	}
+
+
+// block of setters and getters ,maybe make a class for the multiple choices to seperate this
 
 
 	@Override
 	public boolean answer() {
-		// TODO Auto-generated method stub
-		
+	
 		return myQuestionAnswer;
 		
 		

@@ -2,30 +2,43 @@ package triviaMaze;
 
 public class TFQuestion implements Question {
  
-	private final String myQuestionText; 
+	private String myQuestionText; 
 	
-	private boolean myQuestionAnswer; 
-	TFQuestion(String theQuestion) { 
-		myQuestionText = theQuestion; 
+	private boolean myQuestionAnswer;  
+	private char myAnswerCharacter; 
+	TFQuestion() { 
+	//	myQuestionText = theQuestion; 
 	}
 	
-	public void setQuestionText() { 
-		
+	public void setQuestionText(String theQuestionText) { 
+		myQuestionText = theQuestionText;
 	} 
 	
+	public String getQuestionText() { 
+		return myQuestionText;
+	}
+	
+	public char getAnswerCharacter()  { 
+		return myAnswerCharacter;
+	}
+	
+	public void setAnswer(char theAnswer) { 
+		myAnswerCharacter = theAnswer;
+	}
+	
 
-	 public void checkQuestion(char a) { 
-		 if(a=='T') { 
+	 public void checkQuestion(char theInput) { 
+		 if(theInput == myAnswerCharacter) { 
 			 myQuestionAnswer =  true;
-		 } else if( a == 'F') { 
-			 myQuestionAnswer = false; 
-		 } 
+		 } else { 
+			 myQuestionAnswer = false;
+		 }
 		
 	 }
 
 	@Override
 	public boolean answer() {
-		// TODO Auto-generated method stub
+	
 		return myQuestionAnswer;
 	} 
 	 

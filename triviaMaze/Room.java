@@ -23,8 +23,19 @@ private	Door myNorthDoor = new Door();
  	return myWestDoor;
  } 
  
-  public boolean check() { 
-	  return true;
+  public boolean checkBlockedDoors() { 
+	   if(!myNorthDoor.getQuestion().answer() && !myEastDoor.getQuestion().answer() && !mySouthDoor.getQuestion().answer() &&  
+			   !myWestDoor.getQuestion().answer()) {  
+		   
+		   myRoomBlocked = true;
+		   
+		   return true;
+	   } else {  
+		   myRoomBlocked = false;
+		   return false; 
+		  
+	   }
+		   
   }
  
  

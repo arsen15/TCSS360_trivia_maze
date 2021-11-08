@@ -1,31 +1,44 @@
 package triviaMaze;
 
 public class Door {
-    private boolean mydoorStatus; 
+    private boolean myDoorStatus= false;
     
-    private boolean myBlockedStatus; 
+    private boolean myBlockedStatus= false; 
     
-    private Question myQuestion = new TFQuestion("beans");
     
-    public void openDoor() { 
-    	mydoorStatus = true;
+    
+    
+    
+    private Question myQuestion = new TFQuestion();
+    
+    private void openDoor() { 
+    	 myDoorStatus = true;
     } 
     
     
-    public void closeDoor() { 
-    	mydoorStatus = false; 
+    private void closeDoor() { 
+    	 myDoorStatus = false; 
     } 
-    
+    /*
     public boolean doorStatus() { 
     	if(myBlockedStatus == false) { 
-    		return mydoorStatus;
-    	} else { 
+    		return myDoorStatus; 
+    	} 
+    	else { 
     		return myBlockedStatus;
     	}
     	
     	
-    } 
-   
+    }  */
+      
+    public void checkQuestion() { 
+    	if( myQuestion.answer() == true) { 
+    		openDoor();
+    	} else { 
+    		setBlockedStatus();
+    	}
+    }
+    
     public void setBlockedStatus() { 
     	myBlockedStatus = true;
     } 
@@ -34,6 +47,8 @@ public class Door {
     	return myQuestion;
     }
     
-    
+    public void setQuestion(Question thePassedQuestion) { 
+    	myQuestion = thePassedQuestion;
+    }
     
 }
