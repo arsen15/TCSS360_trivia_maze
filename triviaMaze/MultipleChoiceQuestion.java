@@ -58,17 +58,21 @@ public class MultipleChoiceQuestion implements Question {
 	public String getMultipleChoiceOptionD() { 
 		return myOptionD;
 	} 
-	public String setMultipleChoiceOptionA() { 
-		return myOptionA;
+	public void setMultipleChoiceOptionA(String theA) {  
+		myOptionA = theA;
+	//	return myOptionA;
 	} 
-	public String setMultipleChoiceOptionB() { 
-		return myOptionB;
+	public void setMultipleChoiceOptionB(String theB) {  
+		myOptionB = theB;
+		//return myOptionB;
 	} 
-	public String setMultipleChoiceOptionC() { 
-		return myOptionC;
+	public void setMultipleChoiceOptionC(String theC) {  
+		myOptionC = theC;
+	
 	}
-	public String setMultipleChoiceOptionD() { 
-		return myOptionD;
+	public void setMultipleChoiceOptionD(String theD) {  
+		myOptionD = theD;
+		//return myOptionD;
 	}
 
 
