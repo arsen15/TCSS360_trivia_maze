@@ -39,14 +39,6 @@ public class Room {
 	}
 	
 	/**
-	 * Set the state of the room.
-	 * @param s
-	 */
-//	public void setStateRoom(visitedState s) {
-//		roomState = s;
-//	}
-	
-	/**
 	 * This will help check if we are in the room.
 	 * @return true if is in room and false if not.
 	 */
@@ -54,15 +46,10 @@ public class Room {
 		return inRoom;
 	}
 	
-	
-	
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
-
 }
