@@ -13,7 +13,7 @@ public class mazeContainer {
 	
 	
 		ArrayList<ArrayList<Room>> myMaze = new ArrayList<ArrayList<Room>>(); 
-		
+		Room[][] nerd = new Room[5][5];
 		
 		
 		public void roomSetup() { 
