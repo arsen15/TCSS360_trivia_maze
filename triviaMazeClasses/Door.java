@@ -1,5 +1,5 @@
 /**
- * 
+ * The Door class that helps run the maze.
  */
 
 /**
@@ -9,7 +9,10 @@
 public class Door {
 	private Room roomOne;
 	private Room roomTwo;
+	private boolean myDoorStatus = false;
 	private boolean open = false;
+	private Question myQuestion = new TFQuestion();
+	private boolean myBlockedStatus = false;
 	
 	/**
 	 * Constructor that helps create connection to Room class.
@@ -26,16 +29,44 @@ public class Door {
 	 * @return true if it's opened and false if not.
 	 */
 	public boolean isOpen() {
-		return open ;
+		return open;
 	}
 	
 	/**
-	 * Manually opens the room.
+	 * Manually opens the door.
 	 * @param openIt
 	 */
-	public void openRoom(boolean openIt) {
-		openIt = open;
+	public void openDoor() {
+		myDoorStatus = true;
 	}
+	
+	/**
+	 * Manually closes the door.
+	 * @param openIt
+	 */
+	public void closeDoor() {
+		myDoorStatus = false;
+	}
+	
+    public void checkQuestion() { 
+    	if( myQuestion.answer() == true) { 
+    		openDoor();
+    	} else { 
+    		setBlockedStatus();
+    	}
+    }
+    
+    public void setBlockedStatus() { 
+    	myBlockedStatus = true;
+    } 
+    
+    public Question getQuestion() { 
+    	return myQuestion;
+    }
+    
+    public void setQuestion(Question thePassedQuestion) { 
+    	myQuestion = thePassedQuestion;
+    }
 	
 	/**
 	 * @param args
