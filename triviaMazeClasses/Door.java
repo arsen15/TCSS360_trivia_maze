@@ -7,22 +7,10 @@
  *
  */
 public class Door {
-//	private Room roomOne;
-//	private Room roomTwo;
 	private boolean myDoorStatus = false;
 	private boolean open = false;
 	private Question myQuestion = new TFQuestion();
 	private boolean myBlockedStatus = false;
-	
-//	/**
-//	 * Constructor that helps create connection to Room class.
-//	 * @param firstRoom
-//	 * @param secondRoom
-//	 */
-//	public Door(Room firstRoom, Room secondRoom) {
-//		firstRoom = roomOne;
-//		secondRoom = roomTwo;	
-//	}
 	
 	/**
 	 * Check if the door is opened.
@@ -37,7 +25,7 @@ public class Door {
 	 * @param openIt
 	 */
 	public void openDoor() {
-		myDoorStatus = true;
+		setMyDoorStatus(true);
 	}
 	
 	/**
@@ -45,9 +33,12 @@ public class Door {
 	 * @param openIt
 	 */
 	public void closeDoor() {
-		myDoorStatus = false;
+		setMyDoorStatus(false);
 	}
 	
+	/*
+	 * Check to see if users answer questions.
+	 */
     public void checkQuestion() { 
     	if( myQuestion.answer() == true) { 
     		openDoor();
@@ -56,22 +47,57 @@ public class Door {
     	}
     }
     
+    /**
+     * Set the status of the door.
+     */
     public void setBlockedStatus() { 
-    	myBlockedStatus = true;
+    	setMyBlockedStatus(true);
     } 
     
+    /**
+     * Return the question.
+     * @return the question.
+     */
     public Question getQuestion() { 
     	return myQuestion;
     }
     
+    /**
+     * Set the questions.
+     * @param thePassedQuestion
+     */
     public void setQuestion(Question thePassedQuestion) { 
     	myQuestion = thePassedQuestion;
     }
 	
 	/**
-	 * @param args
+	 * Check to see if door is open.
+	 * @return the myDoorStatus
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub	
+	public boolean isMyDoorStatus() {
+		return myDoorStatus;
+	}
+
+	/**
+	 * Set the door status.
+	 * @param myDoorStatus the myDoorStatus to set
+	 */
+	public void setMyDoorStatus(boolean myDoorStatus) {
+		this.myDoorStatus = myDoorStatus;
+	}
+
+	/**
+	 * Check to see if it's blocked.
+	 * @return the myBlockedStatus
+	 */
+	public boolean isMyBlockedStatus() {
+		return myBlockedStatus;
+	}
+
+	/**
+	 * @param myBlockedStatus the myBlockedStatus to set
+	 */
+	public void setMyBlockedStatus(boolean myBlockedStatus) {
+		this.myBlockedStatus = myBlockedStatus;
 	}
 }
