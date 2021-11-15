@@ -7,22 +7,22 @@
  *
  */
 public class Door {
-	private Room roomOne;
-	private Room roomTwo;
+//	private Room roomOne;
+//	private Room roomTwo;
 	private boolean myDoorStatus = false;
 	private boolean open = false;
 	private Question myQuestion = new TFQuestion();
 	private boolean myBlockedStatus = false;
 	
-	/**
-	 * Constructor that helps create connection to Room class.
-	 * @param firstRoom
-	 * @param secondRoom
-	 */
-	public Door(Room firstRoom, Room secondRoom) {
-		firstRoom = roomOne;
-		secondRoom = roomTwo;	
-	}
+//	/**
+//	 * Constructor that helps create connection to Room class.
+//	 * @param firstRoom
+//	 * @param secondRoom
+//	 */
+//	public Door(Room firstRoom, Room secondRoom) {
+//		firstRoom = roomOne;
+//		secondRoom = roomTwo;	
+//	}
 	
 	/**
 	 * Check if the door is opened.
