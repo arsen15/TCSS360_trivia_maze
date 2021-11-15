@@ -18,10 +18,10 @@ public class MultipleChoiceQuestion implements Question {
 	
 	
 	
-	public void setCorrectChar(char theAnswer) { 
+	
+	public void setAnswer(char theAnswer) { 
 		myCharacterAnswer = theAnswer;
 	}
-	
 	
 	@Override
 	public void checkQuestion(char theInput) {

@@ -40,6 +40,30 @@ public class TFQuestion implements Question {
 	public boolean answer() {
 	
 		return myQuestionAnswer;
+	}
+
+	@Override
+	public String getMultipleChoiceOptionA() {
+		
+		return "T";
+	}
+
+	@Override
+	public String getMultipleChoiceOptionB() {
+	
+		return "F";
+	}
+
+	@Override
+	public String getMultipleChoiceOptionC() {
+	
+		return null;
+	}
+
+	@Override
+	public String getMultipleChoiceOptionD() {
+		
+		return null;
 	} 
 	 
 

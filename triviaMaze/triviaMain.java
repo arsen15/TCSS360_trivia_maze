@@ -5,7 +5,7 @@ public class triviaMain {
 		
 		
 		mazeContainer mc = new mazeContainer(); 
-		 mc.roomSetup(); 
+	//	 mc.roomSetup(); 
 		System.out.println( mc.getMaze().get(0).get(0).getEast().getQuestion().getQuestionText());
 		/*
 		TFQuestion q = new TFQuestion(); 
