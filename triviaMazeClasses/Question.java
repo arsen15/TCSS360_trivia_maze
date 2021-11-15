@@ -1,10 +1,6 @@
 /**
- * An interface class for Question that will lay out the necessary methods.
- */
-
-/**
  * @author Ryan, Phuc, Arsen
- *
+ * An interface class for Question that will lay out the necessary methods.
  */
 public interface Question {
 	public void checkQuestion(char a);  	 
