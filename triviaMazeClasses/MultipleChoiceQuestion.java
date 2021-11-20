@@ -1,5 +1,5 @@
 /**
- * 
+ * Ryan, Arsen, Phuc
  */
 public class MultipleChoiceQuestion implements Question {
      private boolean myQuestionAnswer;
@@ -15,10 +15,6 @@ public class MultipleChoiceQuestion implements Question {
   //  myQuestionText = theQuestionText; 
   //  myCharacterAnswer = theAnswer;
   }  
-  
-  
-  
-  
   
   public void setAnswer(char theAnswer) { 
     myCharacterAnswer = theAnswer;

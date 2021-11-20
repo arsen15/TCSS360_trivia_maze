@@ -1,17 +1,16 @@
-
+/**
+ * Ryan, Arsen, Phuc
+ */
 import java.util.ArrayList;
 import java.util.Random;
 
 public class mazeContainer { 
-  
       private boolean myCompleteStatus = false;
       private  int myCurrentX =  0;
       private  int myCurrentY= 0; 
       public mazeContainer() { 
         
       }
-  
-  
     ArrayList<ArrayList<Room>> myMaze = new ArrayList<ArrayList<Room>>(); 
     Room[][] myFixedMaze = new Room[7][7];
     
@@ -22,30 +21,17 @@ public class mazeContainer {
         myMaze.add(new ArrayList<Room>()); 
                  for(int j =0; j<6; j++) {  
                    myMaze.get(i).add(j,new Room()); 
-                   myMaze.get(i).get(j).getEast().getQuestion().setQuestionText("beans");
-                   
-                   
-                   
-                 }
-             
-                 
-      }
-      
-      
-      
+                   myMaze.get(i).get(j).getEast().getQuestion().setQuestionText("beans")                
+                 }               
+      }   
     } */
      
-    
     
     public void fixedArraySetup() { 
       
       for(int i = 1; i<6; i++) { 
         for(int j =1; j<6; j++) { 
-          myFixedMaze[i][j] = new Room(); 
-          
-          
-          
-          
+          myFixedMaze[i][j] = new Room();        
         }
       }
     }  
@@ -141,17 +127,11 @@ public class mazeContainer {
           myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));   
           myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
           myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
-          myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
-          
-        
-          
+          myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));       
         }
-      }
-      
-      
+      }  
     }
-    
-    
+
     public boolean won() { 
       if(myCurrentX == myFixedMaze.length && myCurrentY == myFixedMaze[0].length) {   
         myCompleteStatus = true;
@@ -179,12 +159,4 @@ public class mazeContainer {
       System.out.println(beans.myFixedMaze[1][1].getEast().getQuestion().getMultipleChoiceOptionA());
       
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

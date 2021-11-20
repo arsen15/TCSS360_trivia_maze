@@ -1,24 +1,10 @@
 
 public class questionInput {
-      
-  public void testing() {  
-    
-    
-    
-    Room temp = new Room();  
-    
-    TFQuestion darkSoul = new TFQuestion(); 
-    darkSoul.setQuestionText("Does gael seek the dark soul?"); 
+  public void testing() {
+    Room temp = new Room();
+    TFQuestion darkSoul = new TFQuestion();
+    darkSoul.setQuestionText("Does gael seek the dark soul?");
     darkSoul.setAnswer('T');
-    
-    
-    temp.getNorth().setQuestion(darkSoul); 
-    
-    
-    
-    
-    
+    temp.getNorth().setQuestion(darkSoul);
   }
-  
-  
 }

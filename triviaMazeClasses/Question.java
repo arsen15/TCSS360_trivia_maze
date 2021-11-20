@@ -7,4 +7,8 @@ public interface Question {
 	public void setQuestionText(String a); 	
 	public boolean answer(); 
 	public String getQuestionText();
+  public String getMultipleChoiceOptionA();   
+  public String getMultipleChoiceOptionB();    
+  public String getMultipleChoiceOptionC();   
+  public String getMultipleChoiceOptionD();  
 }

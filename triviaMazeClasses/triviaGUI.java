@@ -1,20 +1,18 @@
-
+/**
+ * Ryan, Arsen, Phuc
+ */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class triviaGUI extends JPanel {
- 
-   
   /**
    * 
    */
@@ -26,23 +24,17 @@ public class triviaGUI extends JPanel {
   public triviaGUI() { 
     
   }
-  
-  
-  public void start() {  
-    
+
+  public void start() {    
     this.setLayout(new BorderLayout());
-    
-    
-  
+
     JPanel panel = new JPanel(); 
   
     JButton north = new JButton("north");   
     
     JPanel southPanel = new JPanel();
     JButton answerBox = new JButton("answer");    
-    
-    
-    
+ 
     JLabel errorBox = new JLabel("errorLabel");  
     southPanel.setLayout(new GridLayout(5,1));  
     southPanel.setVisible(false);
@@ -56,10 +48,6 @@ public class triviaGUI extends JPanel {
         if(myMaze.getCurrentDoorEast().getQuestion().answer()) { 
           //myMaze.moveNorth();
         }
-        
-        
-        
-        
       }
     });
     
@@ -124,31 +112,21 @@ public class triviaGUI extends JPanel {
               j.add(keyButtons[i]);
           }
     add(j, BorderLayout.WEST);
-  
-    
-    
-    
-    
-    
   } 
+  
   //pass door arraylist of doors containing questions to the maze container from the SQL for door and question choices  
   //mazecontainer sets up doors trivia SQL might move some to it as well 
     public static void main(final String[] theArgs) {
           EventQueue.invokeLater(new Runnable() {
               @Override
               public void run() {  
-                
-              
-           
                 triviaSQL sq = new triviaSQL();   
-                
-                mazeContainer mC = new mazeContainer(); 
+              mazeContainer mC = new mazeContainer(); 
                 mC.fixedArraySetup();  
-              //  sq.setup();  
+                //  sq.setup();  
                 mC.setDoors(sq.setup());
                   final triviaGUI mainPanel = new triviaGUI();
-                  mainPanel.start();
-                  
+                  mainPanel.start(); 
                   // A size for the JFrame.
                   final Dimension frameSize = new Dimension(500, 500);
                   
@@ -165,9 +143,4 @@ public class triviaGUI extends JPanel {
               }
           });
       }
-  
-  
-  
-  
-  
 }
