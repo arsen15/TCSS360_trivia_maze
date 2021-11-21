@@ -1,6 +1,5 @@
 /**
- * @author Phuc, Arsen, Ryan TCSS 350 A
- * The Room class for Trivia Maze.
+ * @author Phuc, Arsen, Ryan TCSS 350 A The Room class for Trivia Maze.
  */
 public class Room {
   private static final boolean inRoom = false;
@@ -50,9 +49,10 @@ public class Room {
   public boolean isInRoom() {
     return inRoom;
   }
-  
+
   /**
    * The door in the North.
+   * 
    * @return the North Door.
    */
   public Door getNorth() {
@@ -61,22 +61,25 @@ public class Room {
 
   /**
    * The door in the East.
+   * 
    * @return the East Door.
    */
   public Door getEast() {
     return myEastDoor;
   }
-  
+
   /**
    * The door in the South.
+   * 
    * @return the South Door.
    */
   public Door getSouth() {
     return mySouthDoor;
   }
-  
+
   /**
    * The door in the West.
+   * 
    * @return the West Door.
    */
   public Door getWest() {

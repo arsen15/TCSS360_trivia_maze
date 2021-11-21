@@ -16,8 +16,9 @@ public class Door {
   /**
    * Initialize the Door class.
    */
-  public Door() {}
-  
+  public Door() {
+  }
+
   /**
    * Check if the door is opened.
    * 
@@ -40,7 +41,6 @@ public class Door {
   public void closeDoor() {
     setMyDoorStatus(false);
   }
-
 
   /**
    * Check to questions.
@@ -72,7 +72,8 @@ public class Door {
   /**
    * Set the questions.
    * 
-   * @param thePassedQuestion questions that are being passed in.
+   * @param thePassedQuestion
+   *          questions that are being passed in.
    */
   public void setQuestion(Question thePassedQuestion) {
     myQuestion = thePassedQuestion;
@@ -108,6 +109,7 @@ public class Door {
 
   /**
    * Set the blocked door status.
+   * 
    * @param myBlockedStatus
    *          the myBlockedStatus to set
    */
