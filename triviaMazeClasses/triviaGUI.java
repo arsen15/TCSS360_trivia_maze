@@ -13,18 +13,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class triviaGUI extends JPanel {
-  /**
-   * 
-   */
   private static final long serialVersionUID = 197500895779284794L;
   private mazeContainer myMaze;
   public triviaGUI(mazeContainer theMaze) { 
     myMaze = theMaze;
   } 
-  public triviaGUI() { 
-    
-  }
+  /**
+   * Constructor.
+   */
+  public triviaGUI() {}
 
+  /**
+   * Initialization to start the GUI.
+   */
   public void start() {    
     this.setLayout(new BorderLayout());
 
