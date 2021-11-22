@@ -132,14 +132,16 @@ public class triviaSQL {
 	                
 	                questionList.add(q); 
 	               
-	                } else { 
+	                }  
+	                else { 
 	                	TFQuestion TF = new TFQuestion(); 
 	                	TF.setQuestionText(question);  
 	                	
 	                	char[] a = answerA.toCharArray();   
 	                	
-	                    TF.setAnswer(a[0]);
-	                }
+	                    TF.setAnswer(a[0]); 
+	                    questionList.add(TF);
+	                } 
 	                
 	                
 	                

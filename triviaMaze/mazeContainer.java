@@ -6,8 +6,8 @@ import java.util.Random;
 public class mazeContainer { 
 	
 	    private boolean myCompleteStatus = false;
-	    private  int myCurrentX =  0;
-	    private  int myCurrentY= 0; 
+	    private  int myCurrentX =  1;
+	    private  int myCurrentY= 1; 
 	    public mazeContainer() { 
 	    	
 	    }
@@ -99,6 +99,18 @@ public class mazeContainer {
 		if(myFixedMaze[myCurrentX][myCurrentY].getSouth().checkDoor()) { 
 			myCurrentY--;
 		}
+	}   
+	
+	public void moveEast() { 
+		if(checkInBoundX(1)== false) {  
+			System.out.println("move east error");
+			return;
+		} else { 
+		myFixedMaze[myCurrentX][myCurrentY].getEast().checkQuestion();
+		if(myFixedMaze[myCurrentX][myCurrentY].getEast().checkDoor()) { 
+			myCurrentX++;
+		} 
+	  }
 	}
 		
 		
@@ -136,14 +148,16 @@ public class mazeContainer {
 			for(int i =1; i< 6; i++) { 
 				for(int j=1; j<6; j++) {  
 					
+					int roll = rand.nextInt(theDoorSelection.size());
+			      if(roll <= 0) { 
+			    	  System.out.println("shouldn't do that"); // this doesn't help anything as it can be 0 and valid
+			      } else {
 					
-			
-					
-					myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));   
-					myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
-					myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
-					myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(rand.nextInt(theDoorSelection.size())));  
-					
+					myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(roll));   
+					myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(roll));  
+					myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(roll));  
+					myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(roll));  
+			      }
 				
 					
 				}
@@ -171,11 +185,18 @@ public class mazeContainer {
 		
 			MultipleChoiceQuestion mc2 = new MultipleChoiceQuestion(); 
 			mc2.setMultipleChoiceOptionA("the dark soul beans"); 
-; 
+;  
+
+			Random rand = new Random(); 
+			//int nerd = rand.nextInt(0);   
+			ArrayList<Question> testing = new ArrayList<Question>(); 
+			System.out.println(testing.size());
+			//System.out.println(nerd);
 			
 			ArrayList<Question> testArray = new ArrayList<Question>(); 
 			testArray.add(mc); 
-			testArray.add(mc2);
+			testArray.add(mc2); 
+			
 			beans.setDoors(testArray); 
 			System.out.println(beans.myFixedMaze[1][1].getEast().getQuestion().getMultipleChoiceOptionA());
 			

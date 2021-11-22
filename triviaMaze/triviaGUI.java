@@ -55,7 +55,9 @@ public class triviaGUI extends JPanel {
 				System.out.println("new button pressed"); 
 				myMaze.getCurrentDoorEast().getQuestion().checkQuestion('A');
 				if(myMaze.getCurrentDoorEast().getQuestion().answer()) { 
-					//myMaze.moveNorth();
+					//myMaze.moveNorth(); 
+					
+					
 				}
 				
 				
@@ -67,7 +69,7 @@ public class triviaGUI extends JPanel {
 		
 		// create a panel for the south location i guess idk 
 		answerBox.setVisible(false); 
-		add(answerBox,BorderLayout.SOUTH);
+		add(southPanel,BorderLayout.SOUTH);
 		
 		north.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {  
@@ -96,9 +98,47 @@ public class triviaGUI extends JPanel {
 			   System.out.println("nerd"); 
 			  //repaint();
 			}
-		});
+		}); 
+		
+		
+		
+		
 		panel.add(north,BorderLayout.NORTH);
-		JButton east = new JButton("east");
+		JButton east = new JButton("east");  
+	    EastButton actionListenerEast = new EastButton(myMaze); 
+	 //   east.addActionListener(actionListenerEast); 
+	    
+	    east.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {  
+			     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
+			    	 System.out.println("game over");
+			     }
+				if(myMaze.getCurrentDoorEast().checkDoor()) { 
+					myMaze.moveEast(); 
+					System.out.println("moved east");
+				} 
+				
+				//answerBox.setText(myMaze.getCurrentRoom().getNorth().getQuestion().getQuestionText());
+				
+				
+				// put forward the question connecting buttons then check it in the container  
+				
+				if(myMaze.checkInBoundX(1)) {  
+					southPanel.setVisible(true);
+					
+				} 
+				
+				
+				//myMaze.checkNorth();   
+				//  answerBox.setVisible(true);
+			//	add(new JButton("input"),BorderLayout.SOUTH);
+				
+			   System.out.println("nerd"); 
+			  //repaint();
+			}
+		}); 
+		
+		
 		panel.add(east,BorderLayout.EAST);
 		JButton south = new JButton("south");
 		panel.add(south,BorderLayout.SOUTH);
@@ -145,9 +185,9 @@ public class triviaGUI extends JPanel {
 	            	
 	            	mazeContainer mC = new mazeContainer(); 
 	            	mC.fixedArraySetup();  
-	            //	sq.setup();  
+	            	//sq.setup();  
 	            	mC.setDoors(sq.setup());
-	                final triviaGUI mainPanel = new triviaGUI();
+	                final triviaGUI mainPanel = new triviaGUI(mC);
 	                mainPanel.start();
 	                
 	                // A size for the JFrame.
