@@ -3,8 +3,7 @@
  */
 public class Room {
   private static final boolean inRoom = false;
-  private int xPosition;
-  private int yPosition;
+  private static boolean myRoomBlocked;
   private Door myNorthDoor = new Door();
   private Door myEastDoor = new Door();
   private Door mySouthDoor = new Door();
@@ -18,29 +17,27 @@ public class Room {
    * @param theYthe
    *          X coordinate position.
    */
-  public Room(int theX, int theY) {
-    xPosition = theX;
-    yPosition = theY;
+  public Room() {
   }
 
   /**
-   * Return the X position.
+   * Check to see if the door is blocked or not.
    * 
-   * @return the x coordinate.
+   * @return True if blocked and False if not.
    */
-  public int getXPosition() {
-    return xPosition;
+  public boolean checkBlockedDoors() {
+    if (!myNorthDoor.getQuestion().answer()
+        && !myEastDoor.getQuestion().answer()
+        && !mySouthDoor.getQuestion().answer()
+        && !myWestDoor.getQuestion().answer()) {
+      myRoomBlocked = true;
+      return true;
+    } else {
+      myRoomBlocked = false;
+      return false;
+    }
   }
-
-  /**
-   * Return the Y position.
-   * 
-   * @return the y coordinate
-   */
-  public int getYPosition() {
-    return yPosition;
-  }
-
+  
   /**
    * This will help check if we are in the room.
    * 

@@ -84,7 +84,7 @@ public class Door {
    * 
    * @return the myDoorStatus
    */
-  public boolean isMyDoorStatus() {
+  public boolean checkDoor() {
     return myDoorStatus;
   }
 
