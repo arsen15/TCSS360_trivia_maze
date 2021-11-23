@@ -24,8 +24,8 @@ private	Door myNorthDoor = new Door();
  } 
  
   public boolean checkBlockedDoors() { 
-	   if(!myNorthDoor.getQuestion().answer() && !myEastDoor.getQuestion().answer() && !mySouthDoor.getQuestion().answer() &&  
-			   !myWestDoor.getQuestion().answer()) {  
+	   if(myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus() && mySouthDoor.getBlockedStatus() &&  
+			   myWestDoor.getBlockedStatus()) {  
 		   
 		   myRoomBlocked = true;
 		   

@@ -95,9 +95,10 @@ public class triviaSQL {
 	                	
 	                MultipleChoiceQuestion q = new MultipleChoiceQuestion(); 
 	                q.setQuestionText(question);  
-	                
+	                final int MCRoll = 4;
 	                //roll for stuff here  
-	                int a = myRandomQuestion.nextInt(4);
+	             //   int a = myRandomQuestion.nextInt(MCRoll); 
+	                int a = 3;
 	                if(a ==0) { 
 	                	q.setAnswer('A'); 
 	                  q.setMultipleChoiceOptionA(answerA);    
@@ -121,15 +122,9 @@ public class triviaSQL {
 	                	  q.setMultipleChoiceOptionD(answerA);    
 	                	  q.setMultipleChoiceOptionA(answerC); 
 	                	  q.setMultipleChoiceOptionC(answerB); 
-	                	  q.setMultipleChoiceOptionD(answerD);
+	                	  q.setMultipleChoiceOptionB(answerD);
 	                }  
-	                
-	            	q.setAnswer('D'); 
-              	  q.setMultipleChoiceOptionD(answerA);    
-              	  q.setMultipleChoiceOptionA(answerC); 
-              	  q.setMultipleChoiceOptionC(answerB); 
-              	  q.setMultipleChoiceOptionD(answerD);
-	                
+	               
 	                questionList.add(q); 
 	               
 	                }  
@@ -138,7 +133,7 @@ public class triviaSQL {
 	                	TF.setQuestionText(question);  
 	                	
 	                	char[] a = answerA.toCharArray();   
-	                	
+	                	System.out.println(a[0]);
 	                    TF.setAnswer(a[0]); 
 	                    questionList.add(TF);
 	                } 
