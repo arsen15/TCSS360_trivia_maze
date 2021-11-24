@@ -1,6 +1,8 @@
 package GUI;
 
-public abstract class gameState {
+import javax.swing.JPanel;
+
+public abstract class gameState extends JPanel {
 	
 	protected gameStateManager gameStateManager;
 	

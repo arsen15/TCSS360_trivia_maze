@@ -15,14 +15,14 @@ public class gameStateManager {
 	private int currentState;
 	
 	public static final int MENU_STATE = 0;
-	//public static final int LEVEL1_STATE = 1;
+	public static final int TRIVIA_MAZE_STATE = 1;
 
 	public gameStateManager() {
 		gameStates = new ArrayList<gameState>();
 		
 		currentState = MENU_STATE;
 		gameStates.add(new gameMenu(this));
-		//gameStates.add(new Level_1_State(this));
+		gameStates.add(new triviaGUI(this));
 	}
 	
 	public void setState(int state) {

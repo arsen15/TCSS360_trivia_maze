@@ -69,6 +69,7 @@ private int currentChoice = 0;
 	private void select() {
 		if (currentChoice == 0) {
 			//start
+			gameStateManager.setState(gameStateManager.TRIVIA_MAZE_STATE);
 			
 		}
 		if (currentChoice == 1) {
