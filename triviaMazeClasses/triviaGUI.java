@@ -306,4 +306,3 @@ public class triviaGUI extends gameState {
   
 }
 
-}

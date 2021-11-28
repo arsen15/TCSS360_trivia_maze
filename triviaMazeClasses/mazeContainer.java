@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class mazeContainer {
   private boolean myCompleteStatus = false;
+  private int myDoorDirection;
   private int myCurrentX = 1;
   private int myCurrentY = 1;
   ArrayList<ArrayList<Room>> myMaze = new ArrayList<ArrayList<Room>>();
@@ -81,6 +82,19 @@ public class mazeContainer {
     return myFixedMaze[myCurrentX][myCurrentY].getWest();
   }
 
+  public Door getCurrentDoorFace() {
+    if (myDoorDirection == 0) {
+      return getCurrentDoorWest();
+    } else if (myDoorDirection == 1) {
+      return getCurrentDoorNorth();
+    } else if (myDoorDirection == 2) {
+      return getCurrentDoorEast();
+    } else if (myDoorDirection == 3) {
+      return getCurrentDoorSouth();
+    } else {
+      return null;
+    }
+  }
   /**
    * Check if we are in the East direction.
    */
@@ -130,6 +144,9 @@ public class mazeContainer {
     }
   }
 
+  /**
+   * 
+   */
   public void moveEast() {
     if (checkInBoundX(1) == false) {
       System.out.println("move east error");
@@ -138,6 +155,36 @@ public class mazeContainer {
       myFixedMaze[myCurrentX][myCurrentY].getEast().checkQuestion();
       if (myFixedMaze[myCurrentX][myCurrentY].getEast().checkDoor()) {
         myCurrentX++;
+      }
+    }
+  }
+
+  /**
+   * 
+   */
+  public void moveSouth() {
+    if (checkInBoundY(1) == false) {
+      System.out.println("move south error");
+      return;
+    } else {
+      myFixedMaze[myCurrentX][myCurrentY].getSouth().checkQuestion();
+      if (myFixedMaze[myCurrentX][myCurrentY].getSouth().checkDoor()) {
+        myCurrentY++;
+      }
+    }
+  }
+
+  /**
+   * 
+   */
+  public void moveWest() {
+    if (checkInBoundX(-1) == false) {
+      System.out.println("move east error");
+      return;
+    } else {
+      myFixedMaze[myCurrentX][myCurrentY].getWest().checkQuestion();
+      if (myFixedMaze[myCurrentX][myCurrentY].getWest().checkDoor()) {
+        myCurrentY++;
       }
     }
   }
@@ -237,6 +284,13 @@ public class mazeContainer {
     }
   }
 
+  /**
+   * 
+   * @param theDirection
+   */
+  public void setDoorDirection(final int theDirection) {
+    myDoorDirection = theDirection;
+  }
   /**
    * Main program to run the maze.
    * 
