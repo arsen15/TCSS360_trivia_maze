@@ -7,11 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
+
 import org.sqlite.SQLiteDataSource;
 
+
+
 public class triviaSQL {   
+  
+  
   Random myRandomQuestion = new Random();
- 
+  
+  
    public ArrayList<Question> setup() { 
           SQLiteDataSource ds = null;
           ArrayList<Question> questionList = new ArrayList<Question>();
@@ -23,11 +29,20 @@ public class triviaSQL {
               e.printStackTrace();
               System.exit(0);
           }
-          System.out.println( "Opened database successfully" ); 
+
+          System.out.println( "Opened database successfully" );
+          
+          
+     
           String query = "CREATE TABLE IF NOT EXISTS questions ( " +
               "QUESTION TEXT NOT NULL, " +
                   "TYPE TEXT NOT NULL, " +"ANSWERA TEXT NOT NULL, "+  
-              "ANSWERB TEXT NOT NULL, "+"ANSWERC TEXT NOT NULL, "+"ANSWERD TEXT NOT NULL )";       
+              "ANSWERB TEXT NOT NULL, "+"ANSWERC TEXT NOT NULL, "+"ANSWERD TEXT NOT NULL )"; 
+          
+          
+          
+          
+          
           try ( Connection conn = ds.getConnection();
                   Statement stmt = conn.createStatement(); ) {
                 int rv = stmt.executeUpdate( query );
@@ -117,15 +132,20 @@ public class triviaSQL {
                   
                   questionList.add(q); 
                  
-                  } else { 
+                  }  
+                  else { 
                     TFQuestion TF = new TFQuestion(); 
                     TF.setQuestionText(question);  
                     
                     char[] a = answerA.toCharArray();   
                     
-                      TF.setAnswer(a[0]);
-                  }
-           
+                      TF.setAnswer(a[0]); 
+                      questionList.add(TF);
+                  } 
+                  
+                  
+                  
+                
                   System.out.println( "Result: Question = " + question +
                       ", Type = " + type + " option A "+answerA+" option B "+answerB+ " option C "+answerC+ " option D "+answerD);
               }    
