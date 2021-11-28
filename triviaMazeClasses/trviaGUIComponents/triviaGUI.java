@@ -15,9 +15,15 @@ import javax.swing.JPanel;
 
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
+import triviaMaze.gamePanel;
 import triviaMaze.mazeContainer;
 import triviaMaze.triviaSQL;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public class triviaGUI extends gameState {
 
   /**
@@ -280,7 +286,7 @@ public class triviaGUI extends gameState {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-
+        
         triviaSQL sq = new triviaSQL();
 
         mazeContainer mC = new mazeContainer();
@@ -297,12 +303,19 @@ public class triviaGUI extends gameState {
         final JFrame window = new JFrame("VideoGameTriva");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(frameSize);
-        // window.add(mainPanel);
+        window.add(mainPanel);
         window.setContentPane(mainPanel);
         window.pack();
-        // window.setSize(frameSize);
 
         window.setVisible(true);
+        window.setLocationRelativeTo(null);
+        
+        // Attempting to add Menu screen into GAME GUI.
+        final JFrame window2 = new JFrame("VideoGameTriva");
+//        JFrame window2 = new JFrame();
+        window2.setContentPane(new gamePanel());
+        window2.add(mainPanel);
+        window2.pack();
       }
     });
   }

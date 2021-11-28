@@ -3,6 +3,11 @@ package triviaMaze;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public class QuestionButton implements ActionListener {
 
   mazeContainer myMaze;

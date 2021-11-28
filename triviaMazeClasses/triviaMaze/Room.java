@@ -1,5 +1,10 @@
 package triviaMaze;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public class Room {
 
   private static boolean myRoomBlocked;

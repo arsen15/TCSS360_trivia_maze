@@ -1,5 +1,8 @@
 package triviaMaze;
 
+/**
+ * @author Ryan, Arsen, Phuc
+ */
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -5,6 +5,11 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public class gameMenu extends gameState {
 	
 /**

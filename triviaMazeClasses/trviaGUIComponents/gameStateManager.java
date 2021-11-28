@@ -1,7 +1,13 @@
 package trviaGUIComponents;
 
+
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public class gameStateManager {
 
   /**

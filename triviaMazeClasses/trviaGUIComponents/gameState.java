@@ -2,6 +2,11 @@ package trviaGUIComponents;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Ryan. Arsen, Phuc
+ *
+ */
 public abstract class gameState extends JPanel {
 
   /**
