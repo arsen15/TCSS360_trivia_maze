@@ -7,6 +7,11 @@ import java.awt.event.KeyEvent;
 
 public class gameMenu extends gameState {
 	
+/**
+   * 
+   */
+  private static final long serialVersionUID = -7944824268026497271L;
+
 private int currentChoice = 0;
 	
 	private String [] options = {
