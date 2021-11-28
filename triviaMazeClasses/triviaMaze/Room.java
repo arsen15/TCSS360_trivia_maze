@@ -9,31 +9,46 @@ public class Room {
   private Door myWestDoor = new Door();
   private boolean myRoomAccessed;
 
-  public Door getNorth() {
-    return myNorthDoor;
+  public Door getNorth() throws IllegalArgumentException {
+    if (myNorthDoor != null) {
+      return myNorthDoor;
+    } else {
+      throw new IllegalArgumentException("We don't have a North Door.");
+    }
   }
 
-  public Door getEast() {
-    return myEastDoor;
+  public Door getEast() throws IllegalArgumentException {
+    if (myEastDoor != null) {
+      return myEastDoor;
+    } else {
+      throw new IllegalArgumentException("We don't have an East Door.");
+    }
   }
-  public Door getSouth() {
-    return mySouthDoor;
+
+  public Door getSouth() throws IllegalArgumentException {
+    if (mySouthDoor != null) {
+      return mySouthDoor;
+    } else {
+      throw new IllegalArgumentException("We don't have a South Door.");
+    }
   }
-  public Door getWest() {
-    return myWestDoor;
+
+  public Door getWest() throws IllegalArgumentException {
+    if (myWestDoor != null) {
+      return myWestDoor;
+    } else {
+      throw new IllegalArgumentException("We don't have a West Door.");
+    }
   }
 
   public boolean checkBlockedDoors() {
     if (myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus()
         && mySouthDoor.getBlockedStatus() && myWestDoor.getBlockedStatus()) {
-
-      myRoomBlocked = true;
-
+      setMyRoomBlocked(true);
       return true;
     } else {
-      myRoomBlocked = false;
+      setMyRoomBlocked(false);
       return false;
-
     }
 
   }
@@ -44,6 +59,21 @@ public class Room {
 
   public boolean isRoomAccessed() {
     return myRoomAccessed;
+  }
+
+  /**
+   * @return the myRoomBlocked
+   */
+  public static boolean isMyRoomBlocked() {
+    return myRoomBlocked;
+  }
+
+  /**
+   * @param myRoomBlocked
+   *          the myRoomBlocked to set
+   */
+  public static void setMyRoomBlocked(boolean myRoomBlocked) {
+    Room.myRoomBlocked = myRoomBlocked;
   }
 
 }
