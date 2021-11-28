@@ -46,7 +46,7 @@ private int currentChoice = 0;
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		System.out.println("IN IT");
 		
 	}
 
@@ -80,18 +80,19 @@ private int currentChoice = 0;
 		if (currentChoice == 0) {
 			//start
 			gameStateManager.setState(gameStateManager.TRIVIA_MAZE_STATE);
+			System.out.println("CHOSE START");
 			
 		}
 		if (currentChoice == 1) {
 			//load 
-			
+		  System.out.println("CHOSE LOAD");
 		}
 		if (currentChoice == 2) {
 			//options
-			
+		  System.out.println("CHOSE OPTIONS");
 		}
 		if (currentChoice == 3) {
-			//quit
+			//quit 
 			System.exit(0);
 		}
 	}

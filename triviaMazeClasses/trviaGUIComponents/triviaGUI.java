@@ -277,7 +277,7 @@ public class triviaGUI extends gameState {
       j.add(keyButtons[i]);
     }
     add(j, BorderLayout.WEST);
-
+    
   }
   // pass door arraylist of doors containing questions to the maze container
   // from the SQL for door and question choices
@@ -296,6 +296,7 @@ public class triviaGUI extends gameState {
 
         final triviaGUI mainPanel = new triviaGUI(mC);
         mainPanel.start();
+        
 
         // A size for the JFrame.
         final Dimension frameSize = new Dimension(500, 500);
@@ -304,18 +305,21 @@ public class triviaGUI extends gameState {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(frameSize);
         window.add(mainPanel);
+        
         window.setContentPane(mainPanel);
+        // THIS WILL ADD GAME MENU INTO THE GAME GUI!
+        window.setContentPane(new gamePanel());
         window.pack();
 
         window.setVisible(true);
         window.setLocationRelativeTo(null);
         
         // Attempting to add Menu screen into GAME GUI.
-        final JFrame window2 = new JFrame("VideoGameTriva");
-//        JFrame window2 = new JFrame();
-        window2.setContentPane(new gamePanel());
-        window2.add(mainPanel);
-        window2.pack();
+//        final JFrame window2 = new JFrame("VideoGameTriva");
+////        JFrame window2 = new JFrame();
+//        window2.setContentPane(new gamePanel());
+//        window2.add(mainPanel);
+//        window2.pack();
       }
     });
   }
