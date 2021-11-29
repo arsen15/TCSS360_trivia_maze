@@ -7,11 +7,16 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
@@ -277,7 +282,7 @@ public class triviaGUI extends gameState {
       j.add(keyButtons[i]);
     }
     add(j, BorderLayout.WEST);
-    
+
   }
   // pass door arraylist of doors containing questions to the maze container
   // from the SQL for door and question choices
@@ -286,7 +291,7 @@ public class triviaGUI extends gameState {
     EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        
+
         triviaSQL sq = new triviaSQL();
 
         mazeContainer mC = new mazeContainer();
@@ -296,7 +301,6 @@ public class triviaGUI extends gameState {
 
         final triviaGUI mainPanel = new triviaGUI(mC);
         mainPanel.start();
-        
 
         // A size for the JFrame.
         final Dimension frameSize = new Dimension(500, 500);
@@ -305,21 +309,32 @@ public class triviaGUI extends gameState {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(frameSize);
         window.add(mainPanel);
-        
-        window.setContentPane(mainPanel);
+
+//        window.setContentPane(mainPanel);
         // THIS WILL ADD GAME MENU INTO THE GAME GUI!
-        window.setContentPane(new gamePanel());
+//        window.setContentPane(new gamePanel());
+        window.setContentPane(mainPanel);
         window.pack();
 
+        /////
+        JMenuBar menuBar = new JMenuBar();
+
+        // Create a menu option in game.
+        JMenu menu = new JMenu("File");
+        menuBar.add(menu);
+
+        // A sub menu in game. Allow us to SAVE the game. NOT FINISHED!        
+        JMenuItem menuItem = new JMenuItem("SAVE", KeyEvent.VK_T);
+        menu.add(menuItem);
+        
+        // Allow us to LOAD the game. NOT FINISHED!   
+        JMenuItem menuItem2 = new JMenuItem("LOAD", KeyEvent.VK_T);
+        menu.add(menuItem2);
+        window.setJMenuBar(menuBar);
+
+        /////
         window.setVisible(true);
         window.setLocationRelativeTo(null);
-        
-        // Attempting to add Menu screen into GAME GUI.
-//        final JFrame window2 = new JFrame("VideoGameTriva");
-////        JFrame window2 = new JFrame();
-//        window2.setContentPane(new gamePanel());
-//        window2.add(mainPanel);
-//        window2.pack();
       }
     });
   }

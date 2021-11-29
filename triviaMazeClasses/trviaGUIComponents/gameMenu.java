@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 /**
  * 
  * @author Ryan. Arsen, Phuc
- *
+ * 
  */
 public class gameMenu extends gameState {
 	
@@ -81,6 +81,7 @@ private int currentChoice = 0;
 			//start
 			gameStateManager.setState(gameStateManager.TRIVIA_MAZE_STATE);
 			System.out.println("CHOSE START");
+			
 			
 		}
 		if (currentChoice == 1) {
