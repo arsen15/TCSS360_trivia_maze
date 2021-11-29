@@ -2,7 +2,9 @@ package triviaMaze;
 
 public class Door {
   private boolean myDoorStatus = false;
+
   private boolean myBlockedStatus = false;
+
   private Question myQuestion = new TFQuestion();
 
   private void openDoor() {
@@ -12,6 +14,13 @@ public class Door {
   private void closeDoor() {
     myDoorStatus = false;
   }
+  /*
+   * public boolean doorStatus() { if(myBlockedStatus == false) { return
+   * myDoorStatus; } else { return myBlockedStatus; }
+   * 
+   * 
+   * }
+   */
 
   public void checkQuestion() {
     if (myQuestion.answer() == true) {
@@ -29,7 +38,7 @@ public class Door {
     return myBlockedStatus;
   }
 
-  private void setBlockedStatus() {
+  public void setBlockedStatus() {
     myBlockedStatus = true;
     closeDoor();
   }

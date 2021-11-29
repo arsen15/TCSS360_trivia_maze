@@ -49,13 +49,12 @@ public class Room {
   public boolean checkBlockedDoors() {
     if (myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus()
         && mySouthDoor.getBlockedStatus() && myWestDoor.getBlockedStatus()) {
-      setMyRoomBlocked(true);
+      myRoomBlocked = true;
       return true;
     } else {
-      setMyRoomBlocked(false);
+      myRoomBlocked = false;
       return false;
     }
-
   }
 
   public void setRoomState() {
