@@ -97,8 +97,8 @@ public class triviaSQL {
 	                q.setQuestionText(question);  
 	                final int MCRoll = 4;
 	                //roll for stuff here  
-	             //   int a = myRandomQuestion.nextInt(MCRoll); 
-	                int a = 3;
+	                int a = myRandomQuestion.nextInt(MCRoll); 
+	              
 	                if(a ==0) { 
 	                	q.setAnswer('A'); 
 	                  q.setMultipleChoiceOptionA(answerA);    

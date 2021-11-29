@@ -25,11 +25,22 @@ public class triviaGUI extends JPanel {
 		myMaze = theMaze;
 	} 
 	public triviaGUI() { 
-		
+		myMaze = new mazeContainer();
 	}
 	
 	
 	public void start() {  
+		 
+		
+	//	triviaSQL sq = new triviaSQL();    
+	//	myMaze.fixedArraySetup();  
+	//	myMaze.setDoors(sq.setup()); 
+		
+		
+		
+		
+		
+		
 		
 		this.setLayout(new BorderLayout());
 		
@@ -54,14 +65,16 @@ public class triviaGUI extends JPanel {
 		southPanel.setVisible(false); 
 		add(southPanel,BorderLayout.SOUTH); 
 		
-		myOptionA.addActionListener(new QuestionButton(myMaze,'A'));  
-		myOptionB.addActionListener(new QuestionButton(myMaze,'B'));   
-		
-		myOptionC.addActionListener(new QuestionButton(myMaze,'C')); 
-		myOptionD.addActionListener(new QuestionButton(myMaze,'D'));
+		myOptionA.addActionListener(new QuestionButton(myMaze,'A',southPanel));  
+		myOptionB.addActionListener(new QuestionButton(myMaze,'B',southPanel));   
+		myOptionC.addActionListener(new QuestionButton(myMaze,'C',southPanel)); 
+		myOptionD.addActionListener(new QuestionButton(myMaze,'D',southPanel)); 
+	
 		
 		add(southPanel,BorderLayout.SOUTH);
-		
+	//	north.addActionListener(new DirectionButton(myMaze,1,southPanel));  
+		north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel)); 
+		 /*
 		north.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {  
 			     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
@@ -87,23 +100,32 @@ public class triviaGUI extends JPanel {
 					myOptionB.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionB()); 
 					myOptionC.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionC()); 
 					myOptionD.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionD());
-					southPanel.setVisible(true);
+			
 		
 					int north = 1;
-					myMaze.setDoorDirection(north);
+					myMaze.setDoorDirection(north); 
+					if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
+						southPanel.setVisible(true);
+					} else { 
+						System.out.println("that door is blocked");
+					}
 				} 
 			
-			   System.out.println("nerd"); 
-		
+			    System.out.println(myMaze.getCurrentXYString());
+			    if(myMaze.won()) { 
+			    	 System.out.println("you won");
+			     }
 			}
-		}); 
+		});  */
 		
 		
 		
 		
 		panel.add(north,BorderLayout.NORTH);
 		JButton east = new JButton("east");  
-	
+	//    east.addActionListener(new DirectionButton(myMaze,2,southPanel));  
+	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel)); 
+	     /*
 	    east.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {  
 			     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
@@ -126,21 +148,35 @@ public class triviaGUI extends JPanel {
 					myOptionA.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionA()); 
 					myOptionB.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionB()); 
 					myOptionC.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionC()); 
-					myOptionD.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionD());
-					southPanel.setVisible(true);
+					myOptionD.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionD()); 
 			
+					
 					int east = 2;
-					myMaze.setDoorDirection(east);
+					myMaze.setDoorDirection(east); 
+					
+					if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
+						southPanel.setVisible(true);
+					} else { 
+						System.out.println("that door is blocked");
+					}
+					
+					
 				} 
 				
-			   System.out.println("nerd"); 
-			 
+				  System.out.println(myMaze.getCurrentXYString());
+			     if(myMaze.won()) { 
+			    	 System.out.println("you won");
+			     }
 			}
-		}); 
+		});  */
 		
 		
-		panel.add(east,BorderLayout.EAST);
-		JButton south = new JButton("south");  
+		panel.add(east,BorderLayout.EAST); 
+		
+		JButton south = new JButton("south");   
+	//	 south.addActionListener(new DirectionButton(myMaze,3,southPanel));  
+		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel)); 
+		  /*
 		 south.addActionListener(new ActionListener() { 
 				public void actionPerformed(ActionEvent e) {  
 				     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
@@ -164,20 +200,32 @@ public class triviaGUI extends JPanel {
 						myOptionB.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionB()); 
 						myOptionC.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionC()); 
 						myOptionD.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionD());
-						southPanel.setVisible(true);
+				
 					  
 						int south = 3;
-						myMaze.setDoorDirection(south);
+						myMaze.setDoorDirection(south);  
+						if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
+							southPanel.setVisible(true);
+						} else { 
+							System.out.println("that door is blocked");
+						} 
+						
 					} 
 					
-				   System.out.println("nerd"); 
-				 
+					  System.out.println(myMaze.getCurrentXYString());
+					  if(myMaze.won()) { 
+					    	 System.out.println("you won");
+					     }
 				}
-			}); 
+			});  */
 		
 		
-		panel.add(south,BorderLayout.SOUTH); 
-		JButton west = new JButton("west"); 
+		panel.add(south,BorderLayout.SOUTH);  
+		
+		JButton west = new JButton("west");  
+	//	 west.addActionListener(new DirectionButton(myMaze,0, southPanel));  
+		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel)); 
+		 /*
 		 west.addActionListener(new ActionListener() { 
 				public void actionPerformed(ActionEvent e) {  
 				     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
@@ -201,17 +249,24 @@ public class triviaGUI extends JPanel {
 						myOptionB.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionB()); 
 						myOptionC.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionC()); 
 						myOptionD.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionD());
-						southPanel.setVisible(true);
-						//repaint();  
+				
+				
 						int west = 0;
-						myMaze.setDoorDirection(west);
+						myMaze.setDoorDirection(west); 
+						if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
+							southPanel.setVisible(true);
+						} else { 
+							System.out.println("that door is blocked");
+						}
 					} 
 					
-				   System.out.println("nerd"); 
-				 
+					  System.out.println(myMaze.getCurrentXYString());
+					  if(myMaze.won()) { 
+					    	 System.out.println("you won");
+					     } 
+					 
 				}
-			}); 
-		
+			});   */
 		
 		panel.add(west,BorderLayout.WEST);
 		add(panel, BorderLayout.EAST);  
@@ -235,10 +290,7 @@ public class triviaGUI extends JPanel {
 	            j.add(keyButtons[i]);
 	        }
 		add(j, BorderLayout.WEST);
-	
-		
-		
-		
+	    
 		
 		
 	} 
@@ -254,9 +306,11 @@ public class triviaGUI extends JPanel {
 	            	triviaSQL sq = new triviaSQL();   
 	            	
 	            	mazeContainer mC = new mazeContainer(); 
-	            	mC.fixedArraySetup();  
-	            	//sq.setup();  
-	            	mC.setDoors(sq.setup());
+	            	mC.fixedArraySetup();    
+	            	mC.setDoors(sq.setup()); 
+	            	
+	            	
+	            	
 	                final triviaGUI mainPanel = new triviaGUI(mC);
 	                mainPanel.start();
 	                
@@ -270,7 +324,7 @@ public class triviaGUI extends JPanel {
 	                //window.add(mainPanel);
 	                window.setContentPane(mainPanel);  
 	                window.pack();
-	               // window.setSize(frameSize);
+	             
 	             
 	                window.setVisible(true);
 	            }

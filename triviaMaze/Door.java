@@ -48,7 +48,7 @@ public class Door {
     	return myBlockedStatus;
     }
     
-    private void setBlockedStatus() { 
+    public void setBlockedStatus() { 
     	myBlockedStatus = true; 
     	closeDoor();
     } 
