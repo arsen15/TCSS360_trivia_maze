@@ -1,116 +1,79 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class gameMenu extends gameState {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class gameMenu extends JFrame {
 	
-private int currentChoice = 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4802340630976324291L;
 	
-	private String [] options = {
-			"START",
-			"LOAD",
-			"OPTIONS",
-			"QUIT"
-	};
+	private int VERT_GAP_BETWEEN_BUTTONS = 5;
 	
-	private Color titleColor;
-	private Font titleFont;
-	private Font font;
-	
-	public gameMenu(gameStateManager gameStateManager) {
-		this.gameStateManager = gameStateManager;
+	public gameMenu() {
+		super();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setPreferredSize(new Dimension(500, 500));
 		
-		try {
-
-			titleColor = new Color(128, 0, 0);
-			titleFont = new Font("Century Gothic", Font.PLAIN, 28);
-			font = new Font("Arial", Font.PLAIN, 12);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		add(panel, BorderLayout.NORTH);
 		
-	}
-
-	@Override
-	public void update() {
-		// maybe add animation in the future
+		//Panel to hold the several elements in the menuPanel and prevent window's dimension change.
+		JPanel containerPanel = new JPanel();
+		containerPanel.setLayout(new BorderLayout());
 		
-	}
-
-	@Override
-	public void draw(Graphics2D theG) {
+		//Menu buttons panel
+		JPanel menuButtonsPanel = new JPanel();
+		GridLayout menuButtonsLayout = new GridLayout(0, 1);
+		menuButtonsLayout.setVgap(VERT_GAP_BETWEEN_BUTTONS);
+		menuButtonsPanel.setLayout(menuButtonsLayout);
+		containerPanel.add(menuButtonsPanel, BorderLayout.NORTH);
 		
-		//draw the title
-		theG.setColor(titleColor);
-		theG.setFont(titleFont);
-		theG.drawString("Game", 80, 70);
+		JButton start = new JButton("START");
+		start.setPreferredSize(new Dimension(30, 30));
+		start.addActionListener(new gameListener());
+		menuButtonsPanel.add(start);
+		
+		add(containerPanel, BorderLayout.CENTER);
+		
+		// The quit button
+		JButton quit = new JButton("Quit Game");
+		quit.addActionListener(new ActionListener() {
+		@Override
+			public void actionPerformed(ActionEvent e) {
+				// Quit the program
+				System.exit(0);
+			}
+		});
+		quit.setBackground(Color.LIGHT_GRAY);
+		add(quit, BorderLayout.SOUTH);
 				
-		// drawing the menu options
-		theG.setFont(font);
-		for (int i = 0; i < options.length; i++) {
-			if(i == currentChoice) {
-				theG.setColor(Color.WHITE);
-			} else {
-				theG.setColor(Color.RED);
-			}
-			theG.drawString(options[i], 145, 140 + i * 15);
-		}
+		pack();
+		setLocationRelativeTo(null); // Center in screen
 	}
 	
-	private void select() {
-		if (currentChoice == 0) {
-			//start
-			gameStateManager.setState(gameStateManager.TRIVIA_MAZE_STATE);
-			
-		}
-		if (currentChoice == 1) {
-			//load 
-			
-		}
-		if (currentChoice == 2) {
-			//options
-			
-		}
-		if (currentChoice == 3) {
-			//quit
-			System.exit(0);
-		}
-	}
+	private class gameListener implements ActionListener{
 
-	@Override
-	public void keyPressed(int k) {
-		
-		if(k == KeyEvent.VK_ENTER) {
-			select();
-		}
-		if (k == KeyEvent.VK_UP) {
-			currentChoice--;
-			if (currentChoice == -1) {
-				currentChoice = options.length - 1;
-			}
-		}
-		if (k == KeyEvent.VK_DOWN) {
-			currentChoice++;
-			if (currentChoice == options.length) {
-				currentChoice = 0;
-			}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			setVisible(false);
+			
+			new gameFrame(gameMenu.this).setVisible(true);
 		}
 		
 	}
 
-	@Override
-	public void keyReleased(int k) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
