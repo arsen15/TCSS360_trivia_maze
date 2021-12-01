@@ -2,6 +2,9 @@ package triviaMaze;
 
 import javax.swing.JFrame;
 
+import GUI.gameMenu;
+import GUI.triviaMazePanel;
+
 
 public class main {
 	
@@ -10,15 +13,8 @@ public class main {
 	 * @param theArgs
 	 */
 	public static void main(final String[] theArgs) {
-		JFrame window = new JFrame();
-		window.setContentPane(new gamePanel());
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.pack();
-		window.setVisible(true);
+		gameMenu gameMenu = new gameMenu();
+		gameMenu.setVisible(true);
 	}
-	
 
-	
-	
 }

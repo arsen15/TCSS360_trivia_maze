@@ -37,10 +37,20 @@ public class Door {
     	} else { 
     		setBlockedStatus();
     	}
+    } 
+    
+    
+    public boolean checkDoor() { 
+    	return myDoorStatus;
+    } 
+    
+    public boolean getBlockedStatus() { 
+    	return myBlockedStatus;
     }
     
-    public void setBlockedStatus() { 
-    	myBlockedStatus = true;
+    private void setBlockedStatus() { 
+    	myBlockedStatus = true; 
+    	closeDoor();
     } 
     
     public Question getQuestion() { 

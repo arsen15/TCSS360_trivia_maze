@@ -3,7 +3,7 @@ package triviaMaze;
 public class Room {
 
 	private static boolean myRoomBlocked;
-	private	Door myNorthDoor = new Door(); 
+private	Door myNorthDoor = new Door(); 
 	private Door myEastDoor = new Door();
 	private Door mySouthDoor = new Door();
 	private Door myWestDoor = new Door(); 
@@ -24,8 +24,8 @@ public class Room {
  } 
  
   public boolean checkBlockedDoors() { 
-	   if(!myNorthDoor.getQuestion().answer() && !myEastDoor.getQuestion().answer() && !mySouthDoor.getQuestion().answer() &&  
-			   !myWestDoor.getQuestion().answer()) {  
+	   if(myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus() && mySouthDoor.getBlockedStatus() &&  
+			   myWestDoor.getBlockedStatus()) {  
 		   
 		   myRoomBlocked = true;
 		   
