@@ -40,8 +40,13 @@ public class Door {
     } 
     
     
-    public boolean checkDoor() { 
-    	return myDoorStatus;
+    public boolean checkDoor() {  
+    	if(myDoorStatus && !myBlockedStatus) { 
+    		return true;
+    	} else { 
+    		return false;
+    	}
+    //	return myDoorStatus;
     } 
     
     public boolean getBlockedStatus() { 

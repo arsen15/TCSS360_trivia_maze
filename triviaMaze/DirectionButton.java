@@ -21,7 +21,7 @@ public class DirectionButton implements ActionListener {
 	JButton myOptionC; 
 	JButton myOptionD;
 	
-	
+	JButton[][] myArray;
 	
 	public DirectionButton(mazeContainer theMaze, int theDirection, JPanel thePanel) { 
 		myDirection =theDirection; 
@@ -42,6 +42,20 @@ public class DirectionButton implements ActionListener {
 		 myOptionC = theOptionC;
 		 myOptionD = theOptionD; 
 		 myPanel = thePanel;
+	} public DirectionButton(mazeContainer theMaze, int theDirection, JLabel theQuestionText, JButton theOptionA, JButton theOptionB, JButton theOptionC 
+			, JButton theOptionD, JPanel thePanel, JButton[][] theArray) { 
+		myMaze =theMaze; 
+		
+		myDirection = theDirection;
+		
+		
+		 myQuestionText= theQuestionText;
+	     myOptionA= theOptionA;
+		 myOptionB= theOptionB; 
+		 myOptionC = theOptionC;
+		 myOptionD = theOptionD; 
+		 myPanel = thePanel; 
+		 myArray = theArray;
 	}
 	
 	
@@ -60,10 +74,15 @@ public class DirectionButton implements ActionListener {
 		 if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
 	    	 System.out.println("game over");
 	     }
-		if(myMaze.getCurrentDoorFace().checkDoor()) {  
-			
-			myMaze.moveFaceDirection(); 
-			System.out.println("moved north ");
+		if(myMaze.getCurrentDoorFace().checkDoor()) {   
+		//	int index = myMaze.getCurrrentX()
+			JButton beforeMove = myArray[myMaze.getCurrentY()-1][myMaze.getCurrentX()-1];
+			 beforeMove.setText("*");
+			myMaze.moveFaceDirection();  
+			JButton afterMove = myArray[myMaze.getCurrentY()-1][myMaze.getCurrentX()-1];
+		    afterMove.setText("'*'");
+
+			System.out.println("moved");
 		} 
 		
 	//	 JLabel myQuestionText = (JLabel)myPanel.getComponentAt(1,1);
@@ -87,13 +106,17 @@ public class DirectionButton implements ActionListener {
 			myOptionB.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionB()); 
 			myOptionC.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionC()); 
 			myOptionD.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionD());
-	
+	       if(myDirection == 0) { 
+	    	   System.out.println("got to set the question for west direction");
+	       }
 		} 
 	
 	    System.out.println(myMaze.getCurrentXYString());
 	    if(myMaze.won()) { 
 	    	 System.out.println("you won");
-	     }
-	}
+	     } 
+	    
+	   
+	 }
 	}
 

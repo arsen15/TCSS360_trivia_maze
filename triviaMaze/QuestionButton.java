@@ -67,8 +67,6 @@ public class QuestionButton implements ActionListener {
 		} */    
 		
 		
-		
-		
 	}	
 		
 	

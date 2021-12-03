@@ -17,36 +17,13 @@ public class mazeContainer {
 		ArrayList<ArrayList<Room>> myMaze = new ArrayList<ArrayList<Room>>(); 
 		Room[][] myFixedMaze = new Room[7][7];
 		
-		/*
-		public void roomSetup() { 
-			
-			for(int i = 0; i< 6; i++) { 
-				myMaze.add(new ArrayList<Room>()); 
-                 for(int j =0; j<6; j++) {  
-                	 myMaze.get(i).add(j,new Room()); 
-                	 myMaze.get(i).get(j).getEast().getQuestion().setQuestionText("beans");
-                	 
-                	 
-                	 
-                 }
-             
-                 
-			}
-			
-			
-			
-		} */
-		 
 		
 		
 		public void fixedArraySetup() { 
 			
 			for(int i = 1; i<6; i++) { 
 				for(int j =1; j<6; j++) { 
-					myFixedMaze[i][j] = new Room(); 
-					
-					
-					
+					myFixedMaze[i][j] = new Room(); 	
 					
 				}
 			}
@@ -58,7 +35,9 @@ public class mazeContainer {
 	    	
 	   public Door getCurrentDoorEast() { 
 		   return myFixedMaze[myCurrentX][myCurrentY].getEast();
-	   } 
+	   }  
+	   
+	   
 	   public Door getCurrentDoorNorth() { 
 		   return myFixedMaze[myCurrentX][myCurrentY].getNorth();
 	   } 
@@ -85,7 +64,8 @@ public class mazeContainer {
 		   }
 	   }
 		
-		//blocks of checking directions
+		//blocks of checking directions 
+	   /*
 		public void checkEast() {  
 			checkInBoundX(1); 
 			myFixedMaze[myCurrentX][myCurrentY].getEast().checkQuestion();
@@ -98,25 +78,28 @@ public class mazeContainer {
 			if(myFixedMaze[myCurrentX][myCurrentY].getWest().getQuestion().answer()) { 
 				myCurrentX--;
 			}
-		} 
+		}  
+	
+	*/
 	public boolean moveNorth() { 
 		if(checkInBoundY(-1) == false) { 
 	     return false;
 		}
 		myFixedMaze[myCurrentX][myCurrentY].getNorth().checkQuestion();
 		if(myFixedMaze[myCurrentX][myCurrentY].getNorth().checkDoor()) { 
-			myCurrentY++; 
+			myCurrentY--; 
 		
 		} 
 		return true;
-	} 
+	}  
+	/*
 	public void checkSouth() { 
 		checkInBoundY(1); 
 		myFixedMaze[myCurrentX][myCurrentY].getSouth().checkQuestion();
 		if(myFixedMaze[myCurrentX][myCurrentY].getSouth().checkDoor()) { 
 			myCurrentY--;
 		}
-	}   
+	}      */
 	
 	public void moveEast() { 
 		if(checkInBoundX(1)== false) {  
@@ -147,16 +130,17 @@ public class mazeContainer {
 		} else { 
 		myFixedMaze[myCurrentX][myCurrentY].getWest().checkQuestion();
 		if(myFixedMaze[myCurrentX][myCurrentY].getWest().checkDoor()) { 
-			myCurrentY++;
+			myCurrentX--;
 		} 
 	  }
 	}
 		
 		
-	    public boolean checkInBoundX(int theX) { 
+	    public boolean checkInBoundX(int theX) {  
+	       
 	    	if(myFixedMaze[myCurrentX+theX][myCurrentY] == null ) {  
 	    		
-				System.out.println("error not in  bound x"); 
+			//	System.out.println("error not in  bound x"); 
 				return false;
 			} else { 
 				return true;
@@ -165,21 +149,28 @@ public class mazeContainer {
 	    public boolean checkInBoundY(int theY) { 
            if(myFixedMaze[myCurrentX][myCurrentY+theY] == null ) {  
 	    		
-				System.out.println("error not in bound y "); 
+				//System.out.println("error not in bound y "); 
 				return false;
 			} else { 
 				return true;
 			}
 	    } 
 	    
-	    public boolean checkInBoundDirection(int theDirection) { 
-	    	if(theDirection == 3 ) { 
+	    public boolean checkInBoundDirection(int theDirection) {  
+	    	
+	    	int west = 0; 
+	    	int north = 1; 
+	    	int east = 2; 
+	    	int south = 3;
+	    	
+	    	
+	    	if(theDirection == south ) { 
 	    		return checkInBoundY(1);
-	    	} else if(theDirection ==2 ) { 
+	    	} else if(theDirection ==east ) { 
 	    		return checkInBoundX(1); 
-	    	} else if(theDirection == 1) { 
+	    	} else if(theDirection == north) { 
 	    		return  checkInBoundY(-1);
-	    	} else if(theDirection == 0) { 
+	    	} else if(theDirection == west) { 
 	    		return checkInBoundX(-1);
 	    	} else {  
 	    		System.out.println("invalid direction");
@@ -197,9 +188,27 @@ public class mazeContainer {
 	    	} else if(myDoorDirection ==0) { 
 	    		moveWest();
 	    	}
+	    } 
+	    
+	    public int getCurrentX() { 
+	    	return myCurrentX;
+	    } 
+	    public int getCurrentY() {  
+	    	return myCurrentY;
 	    }
 		
-		
+		public void blockAdjacent() { 
+			if (myDoorDirection == 0 && checkInBoundX(-1)) { 
+				myFixedMaze[myCurrentX-1][myCurrentY].getEast().setBlockedStatus();
+			} else if(myDoorDirection ==  1 && checkInBoundY(-1)) { 
+				myFixedMaze[myCurrentX][myCurrentY-1].getSouth().setBlockedStatus();
+			} else if(myDoorDirection ==2 && checkInBoundX(1)) { 
+				myFixedMaze[myCurrentX+1][myCurrentY].getWest().setBlockedStatus();
+			} else if(myDoorDirection == 3 && checkInBoundY(1)) { 
+				myFixedMaze[myCurrentX][myCurrentY+1].getNorth().setBlockedStatus();
+			}
+			
+		}
 		
 		public ArrayList<ArrayList<Room>> getMaze() { 
 			return myMaze;
@@ -210,26 +219,31 @@ public class mazeContainer {
 		
 		public void setDoors(final ArrayList<Question> theDoorSelection) { 
 			Random rand = new Random();
-			
+			int westCount = 0; 
+			int eastCount = 0;  
+			int northCount = 0;
 			for(int i =1; i< 6; i++) { 
 				for(int j=1; j<6; j++) {  
 					int roll = rand.nextInt(theDoorSelection.size()); 
 					
 					
-			        if(checkInBoundX(-1) == false) {  
+			        if(checkInBoundXDoorSetup(-1,i,j) == false) {  
 			        
-			        	myFixedMaze[i][j].getWest().setBlockedStatus();  
+			        	myFixedMaze[i][j].getWest().setBlockedStatus();   
+			            
 			        }  
 			        
-			        if(checkInBoundY(1) == false) { 
-			        	myFixedMaze[i][j].getSouth().setBlockedStatus(); 
+			        if(checkInBoundYDoorSetup(1,i,j) == false) { 
+			        	myFixedMaze[i][j].getSouth().setBlockedStatus();  
+			        	
 			        } 
 			        
-			        if(checkInBoundX(1) == false) { 
+			        if(checkInBoundXDoorSetup(1,i,j) == false) { 
 			        	myFixedMaze[i][j].getEast().setBlockedStatus();
 			        } 
-			        if(checkInBoundY(-1) == false ) { 
-			        	myFixedMaze[i][j].getNorth().setBlockedStatus();
+			        if(checkInBoundYDoorSetup(-1,i,j) == false) { 
+			        	myFixedMaze[i][j].getNorth().setBlockedStatus(); 
+			       
 			        } 
 			        
 			        
@@ -246,11 +260,31 @@ public class mazeContainer {
 			
 		}  
 		
+		
+		public boolean checkInBoundXDoorSetup(final int theX, final int theXCoordinate, final int theYCoordinate) { 
+			if(myFixedMaze[theXCoordinate+theX][theYCoordinate] == null ) {  
+	    		
+				//	System.out.println("error not in  bound x"); 
+					return false;
+				} else { 
+					return true;
+				}
+		}  
+		public boolean checkInBoundYDoorSetup(final int theY, final int theXCoordinate, final int theYCoordinate) { 
+			if(myFixedMaze[theXCoordinate][theYCoordinate+theY] == null ) {  
+	    		
+				//	System.out.println("error not in  bound x"); 
+					return false;
+				} else { 
+					return true;
+				}
+		} 
+		
        		
 		public String getCurrentXYString() { 
 			return myCurrentX+", "+myCurrentY;
 		}
-		
+		 
 		
 		public boolean won() { 
 			if(myCurrentX == myFixedMaze.length-2 && myCurrentY == myFixedMaze[0].length-2) {   
@@ -260,38 +294,7 @@ public class mazeContainer {
 				myCompleteStatus = false;
 				return false;
 			}
-		}
-	    /*
-		public static void main(String[] args) { 
-			mazeContainer beans = new mazeContainer();  
-			beans.fixedArraySetup(); 
-			MultipleChoiceQuestion mc = new MultipleChoiceQuestion(); 
-			mc.setMultipleChoiceOptionA("the dark soul"); 
-		
-			MultipleChoiceQuestion mc2 = new MultipleChoiceQuestion(); 
-			mc2.setMultipleChoiceOptionA("the dark soul beans"); 
-;  
-
-			Random rand = new Random(); 
-			
-			ArrayList<Question> testing = new ArrayList<Question>(); 
-			System.out.println(testing.size());
-		
-			
-			ArrayList<Question> testArray = new ArrayList<Question>(); 
-			testArray.add(mc); 
-			testArray.add(mc2); 
-			
-			beans.setDoors(testArray); 
-			System.out.println(beans.myFixedMaze[1][1].getEast().getQuestion().getMultipleChoiceOptionA());
-			
-		} */
-		
-		
-		
-		
-		
-		
-		
+		} 
+		   
 		
 }
