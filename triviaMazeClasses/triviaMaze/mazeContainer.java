@@ -206,6 +206,24 @@ public class mazeContainer {
     }
   }
 
+  public boolean checkInBoundXDoorSetup(final int theX, final int theXCoordinate, final int theYCoordinate) { 
+    if(myFixedMaze[theXCoordinate+theX][theYCoordinate] == null ) {  
+        
+      //  System.out.println("error not in  bound x"); 
+        return false;
+      } else { 
+        return true;
+      }
+  }  
+  public boolean checkInBoundYDoorSetup(final int theY, final int theXCoordinate, final int theYCoordinate) { 
+    if(myFixedMaze[theXCoordinate][theYCoordinate+theY] == null ) {  
+        
+      //  System.out.println("error not in  bound x"); 
+        return false;
+      } else { 
+        return true;
+      }
+  } 
   public ArrayList<ArrayList<Room>> getMaze() {
     return myMaze;
   }
@@ -252,6 +270,7 @@ public class mazeContainer {
     }
   }
 
+  
   public String getCurrentXYString() {
     return myCurrentX + ", " + myCurrentY;
   }
