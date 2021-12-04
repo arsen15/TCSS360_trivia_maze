@@ -60,6 +60,9 @@ public class mazeContainer {
     }
   }
 
+  
+  
+  
   // blocks of checking directions
   public void checkEast() {
     checkInBoundX(1);
@@ -136,6 +139,7 @@ public class mazeContainer {
       return true;
     }
   }
+  
   public boolean checkInBoundY(int theY) {
     if (myFixedMaze[myCurrentX][myCurrentY + theY] == null) {
 
@@ -145,21 +149,50 @@ public class mazeContainer {
       return true;
     }
   }
+  
+  public int getCurrentX() {
+    return myCurrentX;
+  }
+  
+  public int getCurrentY() {
+    return myCurrentY;
+  }
+ 
 
   public boolean checkInBoundDirection(int theDirection) {
-    if (theDirection == 3) {
+    
+    int west = 0; 
+    int north = 1; 
+    int east = 2; 
+    int south = 3;
+    
+    
+    if(theDirection == south ) { 
       return checkInBoundY(1);
-    } else if (theDirection == 2) {
-      return checkInBoundX(1);
-    } else if (theDirection == 1) {
-      return checkInBoundY(-1);
-    } else if (theDirection == 0) {
+    } else if(theDirection ==east ) { 
+      return checkInBoundX(1); 
+    } else if(theDirection == north) { 
+      return  checkInBoundY(-1);
+    } else if(theDirection == west) { 
       return checkInBoundX(-1);
-    } else {
+    } else {  
       System.out.println("invalid direction");
       return false;
     }
+  } 
+  
+  public void blockAdjacent() {
+    if (myDoorDirection == 0 && checkInBoundX(-1)) { 
+      myFixedMaze[myCurrentX-1][myCurrentY].getEast().setBlockedStatus();
+    } else if(myDoorDirection ==  1 && checkInBoundY(-1)) { 
+      myFixedMaze[myCurrentX][myCurrentY-1].getSouth().setBlockedStatus();
+    } else if(myDoorDirection ==2 && checkInBoundX(1)) { 
+      myFixedMaze[myCurrentX+1][myCurrentY].getWest().setBlockedStatus();
+    } else if(myDoorDirection == 3 && checkInBoundY(1)) { 
+      myFixedMaze[myCurrentX][myCurrentY+1].getNorth().setBlockedStatus();
+    }
   }
+  
 
   public void moveFaceDirection() {
     if (myDoorDirection == 3) {
@@ -182,35 +215,41 @@ public class mazeContainer {
 
   public void setDoors(final ArrayList<Question> theDoorSelection) {
     Random rand = new Random();
-
-    for (int i = 1; i < 6; i++) {
-      for (int j = 1; j < 6; j++) {
-        int roll = rand.nextInt(theDoorSelection.size());
-
-        if (checkInBoundX(-1) == false) {
-
-          myFixedMaze[i][j].getWest().setBlockedStatus();
-        }
-
-        if (checkInBoundY(1) == false) {
-          myFixedMaze[i][j].getSouth().setBlockedStatus();
-        }
-
-        if (checkInBoundX(1) == false) {
-          myFixedMaze[i][j].getEast().setBlockedStatus();
-        }
-        if (checkInBoundY(-1) == false) {
-          myFixedMaze[i][j].getNorth().setBlockedStatus();
-        }
-
-        myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(roll));
-        myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(roll));
-        myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(roll));
-        myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(roll));
+    int westCount = 0; 
+    int eastCount = 0;  
+    int northCount = 0;
+    for(int i =1; i< 6; i++) { 
+      for(int j=1; j<6; j++) {  
+        int roll = rand.nextInt(theDoorSelection.size()); 
+        
+        
+            if(checkInBoundXDoorSetup(-1,i,j) == false) {  
+            
+              myFixedMaze[i][j].getWest().setBlockedStatus();   
+                
+            }  
+            
+            if(checkInBoundYDoorSetup(1,i,j) == false) { 
+              myFixedMaze[i][j].getSouth().setBlockedStatus();  
+              
+            } 
+            
+            if(checkInBoundXDoorSetup(1,i,j) == false) { 
+              myFixedMaze[i][j].getEast().setBlockedStatus();
+            } 
+            if(checkInBoundYDoorSetup(-1,i,j) == false) { 
+              myFixedMaze[i][j].getNorth().setBlockedStatus(); 
+           
+            } 
+            
+            
+        myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(roll));   
+        myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(roll));  
+        myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(roll));  
+        myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(roll));  
 
       }
     }
-
   }
 
   public String getCurrentXYString() {
