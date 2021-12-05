@@ -8,7 +8,7 @@ public class mazeContainer {
 	    private boolean myCompleteStatus = false;
 	    private  int myCurrentX =  1;
 	    private  int myCurrentY= 1;  
-	    private int myDoorDirection;
+	    private int myDoorDirection=5;
 	    public mazeContainer() { 
 	    	
 	    }
@@ -62,25 +62,23 @@ public class mazeContainer {
 		   } else { 
 			   return null;
 		   }
+	   }  
+	   
+	   
+	    String getCurrentDoorFaceString() { 
+		   if(myDoorDirection == 0) { 
+			   return  "west";
+		   } else if(myDoorDirection == 1) { 
+			   return "north";
+		   } else if(myDoorDirection == 2) { 
+			   return "east";
+		   } else if(myDoorDirection == 3) { 
+			   return "south";
+		   } else { 
+			   return "nowhere";
+		   }
 	   }
 		
-		//blocks of checking directions 
-	   /*
-		public void checkEast() {  
-			checkInBoundX(1); 
-			myFixedMaze[myCurrentX][myCurrentY].getEast().checkQuestion();
-			if(myFixedMaze[myCurrentX][myCurrentY].getEast().checkDoor()) { 
-				myCurrentX++;
-			}
-		} 
-	public void checkWest() {  
-		checkInBoundX(-1); 
-			if(myFixedMaze[myCurrentX][myCurrentY].getWest().getQuestion().answer()) { 
-				myCurrentX--;
-			}
-		}  
-	
-	*/
 	public boolean moveNorth() { 
 		if(checkInBoundY(-1) == false) { 
 	     return false;
@@ -92,14 +90,6 @@ public class mazeContainer {
 		} 
 		return true;
 	}  
-	/*
-	public void checkSouth() { 
-		checkInBoundY(1); 
-		myFixedMaze[myCurrentX][myCurrentY].getSouth().checkQuestion();
-		if(myFixedMaze[myCurrentX][myCurrentY].getSouth().checkDoor()) { 
-			myCurrentY--;
-		}
-	}      */
 	
 	public void moveEast() { 
 		if(checkInBoundX(1)== false) {  
@@ -224,8 +214,10 @@ public class mazeContainer {
 			int northCount = 0;
 			for(int i =1; i< 6; i++) { 
 				for(int j=1; j<6; j++) {  
-					int roll = rand.nextInt(theDoorSelection.size()); 
-					
+					int rollNorth = rand.nextInt(theDoorSelection.size()); 
+					int rollEast = rand.nextInt(theDoorSelection.size());  
+					int rollSouth = rand.nextInt(theDoorSelection.size());  
+					int rollWest =rand.nextInt(theDoorSelection.size()); 
 					
 			        if(checkInBoundXDoorSetup(-1,i,j) == false) {  
 			        
@@ -247,10 +239,10 @@ public class mazeContainer {
 			        } 
 			        
 			        
-					myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(roll));   
-					myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(roll));  
-					myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(roll));  
-					myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(roll));  
+					myFixedMaze[i][j].getNorth().setQuestion(theDoorSelection.get(rollNorth));   
+					myFixedMaze[i][j].getEast().setQuestion(theDoorSelection.get(rollEast));  
+					myFixedMaze[i][j].getSouth().setQuestion(theDoorSelection.get(rollSouth));  
+					myFixedMaze[i][j].getWest().setQuestion(theDoorSelection.get(rollWest));  
 			           
 				
 					

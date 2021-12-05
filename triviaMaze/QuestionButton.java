@@ -38,7 +38,8 @@ public class QuestionButton implements ActionListener {
 		} 
 		 
 		 myMaze.getCurrentDoorFace().checkQuestion(); 
-		 if(myMaze.getCurrentDoorFace().getBlockedStatus()) { 
+		 if(myMaze.getCurrentDoorFace().getBlockedStatus()) {  
+			 myMaze.blockAdjacent();
 			 myPanel.setVisible(false);  
 				System.out.println("Jpanel case ");
 				myPanel.repaint();

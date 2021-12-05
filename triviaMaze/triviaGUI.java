@@ -5,10 +5,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,9 +36,9 @@ public class triviaGUI extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 	
-		JPanel panel = new JPanel(); 
+	//	JPanel panel = new JPanel(); 
 	
-		JButton north = new JButton("north");   
+	//	JButton north = new JButton("north");   
 		
 		JPanel southPanel = new JPanel();
 	
@@ -63,7 +64,7 @@ public class triviaGUI extends JPanel {
 		
 		add(southPanel,BorderLayout.SOUTH);
 
-		add(panel, BorderLayout.EAST);  
+//		add(panel, BorderLayout.EAST);  
 		
 		JPanel westPanel = new JPanel();  
 		westPanel.setLayout(new GridLayout(5,5));
@@ -81,34 +82,34 @@ public class triviaGUI extends JPanel {
 				  }
 				  westPanel.add(keyButtons[i][j]);
 			  }
-		  }
-		  
+		  }  
 		  
 		add(westPanel, BorderLayout.WEST);	 
 		
-		
-        north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons)); 
-		panel.add(north,BorderLayout.NORTH);  
+		JPanel EastPanel = new JPanel();   
+		JLabel faceText = new JLabel("Currently Facing "+myMaze.getCurrentDoorFaceString());
+		JButton north = new JButton("north");   
+        north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText)); 
+		EastPanel.add(north,BorderLayout.NORTH);  
 		
 		
 		JButton south = new JButton("south");  
-		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons)); 
-		 panel.add(south,BorderLayout.SOUTH); 
+		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText)); 
+		 EastPanel.add(south,BorderLayout.SOUTH); 
 		 
 		 
 		 JButton west = new JButton("west");  
-		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons)); 
-		 panel.add(west,BorderLayout.WEST);
+		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText)); 
+		 EastPanel.add(west,BorderLayout.WEST);
 		 
 		
 		JButton east = new JButton("east");  
-	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons)); 
-		panel.add(east,BorderLayout.EAST);  
-		
-		
-		
-		
-		
+	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText)); 
+		EastPanel.add(east,BorderLayout.EAST);    
+	//	JLabel faceText = new JLabel("Currently "+myMaze.getCurrentDoorFaceString());
+		EastPanel.add(faceText, BorderLayout.EAST);
+		add (EastPanel, BorderLayout.EAST); 
+	
 		
 	} 
 	//pass door arraylist of doors containing questions to the maze container from the SQL for door and question choices  
@@ -135,7 +136,11 @@ public class triviaGUI extends JPanel {
 	                final Dimension frameSize = new Dimension(500, 500);
 	                
 	                final JFrame window = 
-	                    new JFrame("VideoGameTriva");
+	                    new JFrame("VideoGameTriva");  
+	                
+	                ImageIcon img = new ImageIcon("C:\\Users\\ryanm\\Desktop\\dndShit");
+	                
+	             //   window.setIconImage(img);
 	                window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	                window.setSize(frameSize); 
 	                

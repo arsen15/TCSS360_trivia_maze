@@ -21,7 +21,8 @@ public class DirectionButton implements ActionListener {
 	JButton myOptionC; 
 	JButton myOptionD;
 	
-	JButton[][] myArray;
+	JButton[][] myArray; 
+	JLabel myDirectionText;
 	
 	public DirectionButton(mazeContainer theMaze, int theDirection, JPanel thePanel) { 
 		myDirection =theDirection; 
@@ -56,15 +57,35 @@ public class DirectionButton implements ActionListener {
 		 myOptionD = theOptionD; 
 		 myPanel = thePanel; 
 		 myArray = theArray;
-	}
+	} 
+	 public DirectionButton(mazeContainer theMaze, int theDirection, JLabel theQuestionText, JButton theOptionA, JButton theOptionB, JButton theOptionC 
+				, JButton theOptionD, JPanel thePanel, JButton[][] theArray, JLabel theDirectionText) { 
+			myMaze =theMaze; 
+			
+			myDirection = theDirection;
+			
+			
+			 myQuestionText= theQuestionText;
+		     myOptionA= theOptionA;
+			 myOptionB= theOptionB; 
+			 myOptionC = theOptionC;
+			 myOptionD = theOptionD; 
+			 myPanel = thePanel; 
+			 myArray = theArray; 
+			 myDirectionText = theDirectionText;
+		}
 	
 	
 	public void actionPerformed (ActionEvent e) {   
 		
-	     
+        
+		//myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString()); 
 		
-		
-		myMaze.setDoorDirection(myDirection); 
+		myMaze.setDoorDirection(myDirection);   
+		myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString()); 
+		if(myMaze.getCurrentDoorFace().getBlockedStatus() == true) { 
+			myPanel.setVisible(false);
+		}
 		if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
 			myPanel.setVisible(true);
 		} else { 
