@@ -1,9 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
@@ -28,21 +28,29 @@ public class triviaMazePanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 197500895779284794L;
 	
+	/**
+	 * Dimensions
+	 */
+	public static final int WIDTH = 500; 
+	public static final int HEIGHT = 500;
+	
+	private static final Color bgColor = new Color(59, 24, 80);
+	
 	private mazeContainer myMaze;
 	
-	/**
-	 * The constructor for the maze with myMaze as parameter.
-	 * @param theMaze
-	 */
+
 	public triviaMazePanel(mazeContainer theMaze) {
+		super();
+		//setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setBackground(bgColor);
 		
 		myMaze = theMaze;
+
 	}
-	
+
 	public void start() {  
 		
-		this.setLayout(new BorderLayout());
-		
+		//this.setLayout(new BorderLayout());
 	
 		JPanel panel = new JPanel(); 
 	
@@ -238,18 +246,6 @@ public class triviaMazePanel extends JPanel{
 		add(j, BorderLayout.WEST);
 	
 	} 
-	//pass door arraylist of doors containing questions to the maze container from the SQL for door and question choices  
-	public void init() {
-		
-		myMaze = new mazeContainer();
-		triviaSQL sq = new triviaSQL();
-		myMaze.fixedArraySetup();    
-		myMaze.setDoors(sq.setup());
-        final triviaMazePanel triviaMazePanel = new triviaMazePanel(myMaze); 
-        triviaMazePanel.start();
 
-
-	}
-	
 
 }

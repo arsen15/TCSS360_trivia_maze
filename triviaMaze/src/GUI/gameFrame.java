@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,69 +10,56 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import triviaMaze.mazeContainer;
+import triviaMaze.triviaSQL;
+
+
+
 
 public class gameFrame extends JFrame{
 	
 	/**
-	 * Dimensions
+	 * 
 	 */
-	public static final int WIDTH = 500; 
-	public static final int HEIGHT = 500;
-	public static final int SCALE = 2;
+	private static final long serialVersionUID = 3800326469028396142L;
 	
-	//the menu panel
+	
+	/**
+	 * The menu panel.
+	 */
 	private gameMenu menu;
 	
-	//the game panel
+	/**
+	 * The game panel.
+	 */
 	private triviaMazePanel game;
+	
+	//private mazeContainer myMaze;
 	
 	public gameFrame(gameMenu menu) {
 		super();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		//setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		
-		//saving the menu, so we can return to it after game is over
+		//saving the menu, so we can return to it after closing the game, saving the game should return to game menu too.
 		this.menu = menu;
 		
-		//the panel to hold the menu buttons
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		
-		/**
-		 * The start button. Starts the game when clicked.
-		 */
-		JButton startButton = new JButton("START");
-		startButton.addActionListener(new ActionListener() {
+		EventQueue.invokeLater(new Runnable() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				game.init();
-				
+			public void run() {
+				//pass door arraylist of doors containing questions to the maze container from the SQL for door and question choices 
+				triviaSQL sq = new triviaSQL();
+				mazeContainer mC = new mazeContainer();
+				mC.fixedArraySetup();    
+				mC.setDoors(sq.setup());
+				game = new triviaMazePanel(mC);
+				game.start();
+				add(game, BorderLayout.CENTER);
+				setPreferredSize(new Dimension(500, 500));
 			}
-			
+	
 		});
-		
-		panel.add(startButton, BorderLayout.WEST);
-		
-		/**
-		 * The quit button, closes the game when clicked.
-		 */
-		JButton quitButton = new JButton("QUIT");
-		quitButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				gameFrame.this.setVisible(false);
-				gameFrame.this.dispose();
-				
-			}
-			
-		});
-		
-		panel.add(quitButton, BorderLayout.EAST);
-		
 		// Pack the frame
 		pack();
 		setLocationRelativeTo(null); // Center in screen
@@ -83,8 +71,6 @@ public class gameFrame extends JFrame{
 	@Override
 	public void dispose() {
 		super.dispose();
-		
-		//game.pause();
 		
 		menu.setVisible(true);
 	}
