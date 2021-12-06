@@ -1,7 +1,13 @@
 package triviaMaze;
 
-public class MultipleChoiceQuestion implements Question {
-     private boolean myQuestionAnswer;
+import java.io.Serializable;
+
+public class MultipleChoiceQuestion implements Question , Serializable{
+     /**
+   * 
+   */
+  private static final long serialVersionUID = 9129880869446421445L;
+    private boolean myQuestionAnswer;
 	 private static String myQuestionText; 
 	
 	 private String myOptionA; 

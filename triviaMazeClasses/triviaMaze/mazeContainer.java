@@ -1,5 +1,6 @@
 package triviaMaze;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,8 +8,12 @@ import java.util.Random;
  * @author Ryan, Arsen, Phuc
  */
 
-public class mazeContainer {
+public class mazeContainer implements Serializable{
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 6879807784401692805L;
   private boolean myCompleteStatus = false;
   private int myCurrentX = 1;
   private int myCurrentY = 1;

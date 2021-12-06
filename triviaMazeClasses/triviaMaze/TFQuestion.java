@@ -1,13 +1,20 @@
 package triviaMaze;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Ryan. Arsen, Phuc
  *
  */
-public class TFQuestion implements Question {
+public class TFQuestion implements Question, Serializable {
  
-	private static String myQuestionText; 
+	/**
+   * 
+   */
+  private static final long serialVersionUID = -8456352154158600169L;
+
+  private static String myQuestionText; 
 	
 	private boolean myQuestionAnswer;  
 	private char myAnswerCharacter; 

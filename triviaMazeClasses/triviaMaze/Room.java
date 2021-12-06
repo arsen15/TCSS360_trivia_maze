@@ -1,12 +1,18 @@
 package triviaMaze;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Ryan. Arsen, Phuc
  *
  */
-public class Room {
+public class Room implements Serializable{
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 9101079280627683610L;
   private static boolean myRoomBlocked;
   private Door myNorthDoor = new Door();
   private Door myEastDoor = new Door();
