@@ -24,8 +24,8 @@ public class QuestionButton implements ActionListener {
 	
 	public void actionPerformed (ActionEvent e) { 
 		 
-		
-		
+		// sets the door into questioning status
+		myMaze.getCurrentDoorFace().setQuestioningStatus(true);
 		
 	//	System.out.println("new button pressed"); 
 		if(myMaze.getCurrentDoorFace().getQuestion() instanceof TFQuestion && myMultipleChoice =='A') { 
@@ -67,7 +67,7 @@ public class QuestionButton implements ActionListener {
 			}
 		} */    
 		
-		
+		myMaze.setDoorDirection(5);
 	}	
 		
 	

@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -137,10 +138,8 @@ public class triviaGUI extends JPanel {
 	                
 	                final JFrame window = 
 	                    new JFrame("VideoGameTriva");  
-	                
-	                ImageIcon img = new ImageIcon("C:\\Users\\ryanm\\Desktop\\dndShit");
-	                
-	             //   window.setIconImage(img);
+	               
+	     
 	                window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	                window.setSize(frameSize); 
 	                

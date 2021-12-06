@@ -62,7 +62,10 @@ public class mazeContainer {
 		   } else { 
 			   return null;
 		   }
-	   }  
+	   } 
+	   public int getDoorDirection() { 
+		   return myDoorDirection;
+	   }
 	   
 	   
 	    String getCurrentDoorFaceString() { 

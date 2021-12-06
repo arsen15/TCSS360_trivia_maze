@@ -79,7 +79,16 @@ public class DirectionButton implements ActionListener {
 	public void actionPerformed (ActionEvent e) {   
 		
         
-		//myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString()); 
+		//myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString());  
+		
+		
+		
+		// returns if the door is in questioning as movement is locked 
+	
+		if(myMaze.getCurrentDoorFace() != null && myMaze.getCurrentDoorFace().getQuestioningStatus() && myMaze.getDoorDirection() != myDirection) { 
+			return;
+		} 
+		
 		
 		myMaze.setDoorDirection(myDirection);   
 		myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString()); 
@@ -103,7 +112,12 @@ public class DirectionButton implements ActionListener {
 			JButton afterMove = myArray[myMaze.getCurrentY()-1][myMaze.getCurrentX()-1];
 		    afterMove.setText("'*'");
 
-			System.out.println("moved");
+			System.out.println("moved");  
+			//move door direction out of range
+			myMaze.setDoorDirection(5);  
+			myPanel.setVisible(false); 
+			myDirectionText.setText("Currently Facing "+myMaze.getCurrentDoorFaceString()); 
+			return;
 		} 
 		
 	//	 JLabel myQuestionText = (JLabel)myPanel.getComponentAt(1,1);
@@ -129,7 +143,9 @@ public class DirectionButton implements ActionListener {
 			myOptionD.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionD());
 	       if(myDirection == 0) { 
 	    	   System.out.println("got to set the question for west direction");
-	       }
+	       }  
+	       //sets questioning status 
+	       myMaze.getCurrentDoorFace().setQuestioningStatus(true);
 		} 
 	
 	    System.out.println(myMaze.getCurrentXYString());
@@ -137,7 +153,6 @@ public class DirectionButton implements ActionListener {
 	    	 System.out.println("you won");
 	     } 
 	    
-	   
 	 }
 	}
 
