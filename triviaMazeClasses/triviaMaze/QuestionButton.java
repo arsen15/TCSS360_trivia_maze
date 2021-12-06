@@ -10,29 +10,17 @@ import javax.swing.JPanel;
  * @author Ryan. Arsen, Phuc
  *
  */
+
 public class QuestionButton implements ActionListener {
 
   private mazeContainer myMaze;
   private char myMultipleChoice;
   private JPanel myPanel;
-  
-  /**
-   * Constructor that helps set up the Question Button.
-   * @param theMaze set up the maze.
-   * @param theChoice Set up all the multiple choice.
-   */
   public QuestionButton(mazeContainer theMaze, char theChoice) {
     myMaze = theMaze;
     myMultipleChoice = theChoice;
   }
 
-  /**
-   * Second constructor that helps set up the Question Button.
-   * Also will take in the Panel.
-   * @param theMaze
-   * @param theChoice
-   * @param thePanel
-   */
   public QuestionButton(mazeContainer theMaze, char theChoice,
       JPanel thePanel) {
     myMaze = theMaze;
@@ -40,10 +28,12 @@ public class QuestionButton implements ActionListener {
     myPanel = thePanel;
   }
 
-  /**
-   * Actions that follow after the buttons are pressed.
-   */
   public void actionPerformed(ActionEvent e) {
+
+    // sets the door into questioning status
+    myMaze.getCurrentDoorFace().setQuestioningStatus(true);
+
+    // System.out.println("new button pressed");
     if (myMaze.getCurrentDoorFace().getQuestion() instanceof TFQuestion
         && myMultipleChoice == 'A') {
       myMaze.getCurrentDoorFace().getQuestion().checkQuestion('T');
@@ -64,10 +54,12 @@ public class QuestionButton implements ActionListener {
     } else {
       System.out.println("try to move again");
     }
+
     if (myMaze.getCurrentRoom().checkBlockedDoors()) {
       System.out.println("game over");
     }
 
+    myMaze.setDoorDirection(5);
   }
 
 }
