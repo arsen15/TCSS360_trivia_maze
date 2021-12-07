@@ -39,6 +39,10 @@ public class triviaSQL {
 	                "TYPE TEXT NOT NULL, " +"ANSWERA TEXT NOT NULL, "+  
 	        		"ANSWERB TEXT NOT NULL, "+"ANSWERC TEXT NOT NULL, "+"ANSWERD TEXT NOT NULL )"; 
 	        
+	        
+	        
+	        
+	        
 	        try ( Connection conn = ds.getConnection();
 	                Statement stmt = conn.createStatement(); ) {
 	              int rv = stmt.executeUpdate( query );
@@ -93,8 +97,8 @@ public class triviaSQL {
 	                q.setQuestionText(question);  
 	                final int MCRoll = 4;
 	                //roll for stuff here  
-	             //   int a = myRandomQuestion.nextInt(MCRoll); 
-	                int a = 3;
+	                int a = myRandomQuestion.nextInt(MCRoll); 
+	              
 	                if(a ==0) { 
 	                	q.setAnswer('A'); 
 	                  q.setMultipleChoiceOptionA(answerA);    

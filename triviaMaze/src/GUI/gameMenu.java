@@ -47,6 +47,7 @@ public class gameMenu extends JFrame {
 		//Options button
 		JButton options = new JButton("OPTIONS");
 		options.setPreferredSize(new Dimension(50, 50));
+		options.addActionListener(new optionsListener());
 		
 		// The quit button
 		JButton quit = new JButton("Quit Game");
@@ -89,6 +90,17 @@ public class gameMenu extends JFrame {
 			setVisible(false);
 			
 			new gameFrame(gameMenu.this).setVisible(true);
+		}
+		
+	}
+	
+	private class optionsListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			
+			new optionsFrame(gameMenu.this).setVisible(true);
 		}
 		
 	}

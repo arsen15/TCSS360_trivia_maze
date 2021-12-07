@@ -30,16 +30,12 @@ public class triviaMazePanel extends JPanel{
 	public static final int WIDTH = 500; 
 	public static final int HEIGHT = 500;
 	
-	private static final Color bgColor = new Color(59, 24, 80);
-	
 	private mazeContainer myMaze;
 	
 
 	public triviaMazePanel(mazeContainer theMaze) {
 		super();
 		myMaze = theMaze;
-		
-		setBackground(bgColor);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 	}
 

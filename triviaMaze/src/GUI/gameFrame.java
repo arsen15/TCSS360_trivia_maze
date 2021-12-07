@@ -37,6 +37,7 @@ public class gameFrame extends JFrame{
 	 */
 	private triviaMazePanel game;
 	
+	
 	public gameFrame(gameMenu menu) {
 		super();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,9 +77,11 @@ public class gameFrame extends JFrame{
 		        setJMenuBar(menuBar);
 
 		        /////
+		        
 			}
 	
 		});
+		
 
 		// Pack the frame
 		pack();

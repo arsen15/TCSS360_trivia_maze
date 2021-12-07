@@ -3,13 +3,23 @@ package triviaMaze;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
 public class QuestionButton implements ActionListener {
 	
-	mazeContainer myMaze;
-	char myMultipleChoice;
+	private mazeContainer myMaze;
+	private char myMultipleChoice; 
+	private JPanel myPanel;
 	public QuestionButton(mazeContainer theMaze, char theChoice) { 
 		myMaze=theMaze; 
 		myMultipleChoice = theChoice;
+	} 
+	
+	
+	public QuestionButton(mazeContainer theMaze, char theChoice, JPanel thePanel) { 
+		myMaze = theMaze; 
+		myMultipleChoice = theChoice; 
+		myPanel = thePanel;
 	}
 	
 	public void actionPerformed (ActionEvent e) { 
@@ -25,11 +35,40 @@ public class QuestionButton implements ActionListener {
 		} else {
 		
 		myMaze.getCurrentDoorFace().getQuestion().checkQuestion(myMultipleChoice); 
-		}
+		} 
+		 
+		 myMaze.getCurrentDoorFace().checkQuestion(); 
+		 if(myMaze.getCurrentDoorFace().getBlockedStatus()) {  
+			 myMaze.blockAdjacent();
+			 myPanel.setVisible(false);  
+				System.out.println("Jpanel case ");
+				myPanel.repaint();
+		 } else { 
+			 System.out.println("try to move again");
+		 }
+		 
+		 
+		 
+		 
+		 if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
+	    	 System.out.println("game over");
+	     } 
+		 
+		
+		 /*
 		if(myMaze.getCurrentDoorFace().getQuestion().answer()) { 
 			System.out.println("try to move again");
-			myMaze.getCurrentDoorFace().checkQuestion();
+			myMaze.getCurrentDoorFace().checkQuestion(); 
 			
-		}
-	}
+			if(myMaze.getCurrentDoorFace().getBlockedStatus() == true) { 
+				myPanel.setVisible(false);  
+				System.out.println("Jpanel case ");
+				myPanel.repaint();
+			}
+		} */    
+		
+		
+	}	
+		
+	
 }

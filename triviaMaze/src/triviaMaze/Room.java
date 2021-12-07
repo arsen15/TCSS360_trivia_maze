@@ -2,11 +2,16 @@ package triviaMaze;
 
 public class Room {
 
-	private static boolean myRoomBlocked;
-private	Door myNorthDoor = new Door(); 
+	private static boolean myRoomBlocked; 
+	
+	
+	
+	
+    private	Door myNorthDoor = new Door(); 
 	private Door myEastDoor = new Door();
 	private Door mySouthDoor = new Door();
-	private Door myWestDoor = new Door(); 
+	private Door myWestDoor = new Door();  
+	
 	
 	
     public Door getNorth() { 
