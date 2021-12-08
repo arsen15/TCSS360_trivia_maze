@@ -1,128 +1,79 @@
 package trviaGUIComponents;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-/**
- * 
- * @author Ryan. Arsen, Phuc
- * 
- */
-public class gameMenu extends gameState {
-	
-/**
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class gameMenu extends JFrame {
+  
+  /**
    * 
    */
-  private static final long serialVersionUID = -7944824268026497271L;
+  private static final long serialVersionUID = -4802340630976324291L;
+  
+  private int VERT_GAP_BETWEEN_BUTTONS = 5;
+  
+  public gameMenu() {
+    super();
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setPreferredSize(new Dimension(500, 500));
+    
+    JPanel panel = new JPanel();
+    panel.setLayout(new FlowLayout());
+    add(panel, BorderLayout.NORTH);
+    
+    //Panel to hold the several elements in the menuPanel and prevent window's dimension change.
+    JPanel containerPanel = new JPanel();
+    containerPanel.setLayout(new BorderLayout());
+    
+    //Menu buttons panel
+    JPanel menuButtonsPanel = new JPanel();
+    GridLayout menuButtonsLayout = new GridLayout(0, 1);
+    menuButtonsLayout.setVgap(VERT_GAP_BETWEEN_BUTTONS);
+    menuButtonsPanel.setLayout(menuButtonsLayout);
+    containerPanel.add(menuButtonsPanel, BorderLayout.NORTH);
+    
+    JButton start = new JButton("START");
+    start.setPreferredSize(new Dimension(30, 30));
+    start.addActionListener(new gameListener());
+    menuButtonsPanel.add(start);
+    
+    add(containerPanel, BorderLayout.CENTER);
+    
+    // The quit button
+    JButton quit = new JButton("Quit Game");
+    quit.addActionListener(new ActionListener() {
+    @Override
+      public void actionPerformed(ActionEvent e) {
+        // Quit the program
+        System.exit(0);
+      }
+    });
+    quit.setBackground(Color.LIGHT_GRAY);
+    add(quit, BorderLayout.SOUTH);
+        
+    pack();
+    setLocationRelativeTo(null); // Center in screen
+  }
+  
+  private class gameListener implements ActionListener{
 
-private int currentChoice = 0;
-	
-	private String [] options = {
-			"START",
-			"LOAD",
-			"OPTIONS",
-			"QUIT"
-	};
-	
-	private Color titleColor;
-	private Font titleFont;
-	private Font font;
-	
-	public gameMenu(gameStateManager gameStateManager) {
-		this.gameStateManager = gameStateManager;
-		
-		try {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      
+      setVisible(false);
+      
+      new gameFrame(gameMenu.this).setVisible(true);
+    }
+    
+  }
 
-			titleColor = new Color(128, 0, 0);
-			titleFont = new Font("Century Gothic", Font.PLAIN, 28);
-			font = new Font("Arial", Font.PLAIN, 12);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void init() {
-		System.out.println("IN IT");
-		
-	}
-
-	@Override
-	public void update() {
-		// maybe add animation in the future
-		
-	}
-
-	@Override
-	public void draw(Graphics2D theG) {
-		
-		//draw the title
-		theG.setColor(titleColor);
-		theG.setFont(titleFont);
-		theG.drawString("Game", 80, 70);
-				
-		// drawing the menu options
-		theG.setFont(font);
-		for (int i = 0; i < options.length; i++) {
-			if(i == currentChoice) {
-				theG.setColor(Color.WHITE);
-			} else {
-				theG.setColor(Color.RED);
-			}
-			theG.drawString(options[i], 145, 140 + i * 15);
-		}
-	}
-	
-	private void select() {
-		if (currentChoice == 0) {
-			//start
-			gameStateManager.setState(gameStateManager.TRIVIA_MAZE_STATE);
-			System.out.println("CHOSE START");
-			
-			
-		}
-		if (currentChoice == 1) {
-			//load 
-		  System.out.println("CHOSE LOAD");
-		}
-		if (currentChoice == 2) {
-			//options
-		  System.out.println("CHOSE OPTIONS");
-		}
-		if (currentChoice == 3) {
-			//quit 
-			System.exit(0);
-		}
-	}
-
-	@Override
-	public void keyPressed(int k) {
-		
-		if(k == KeyEvent.VK_ENTER) {
-			select();
-		}
-		if (k == KeyEvent.VK_UP) {
-			currentChoice--;
-			if (currentChoice == -1) {
-				currentChoice = options.length - 1;
-			}
-		}
-		if (k == KeyEvent.VK_DOWN) {
-			currentChoice++;
-			if (currentChoice == options.length) {
-				currentChoice = 0;
-			}
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(int k) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

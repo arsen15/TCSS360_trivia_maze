@@ -11,22 +11,22 @@ import java.util.Random;
 public class mazeContainer implements Serializable{
 
   /**
-   * 
+   * Unique ID that helps identify the class.
    */
   private static final long serialVersionUID = 6879807784401692805L;
   private boolean myCompleteStatus = false;
   private int myCurrentX = 1;
   private int myCurrentY = 1;
   private int myDoorDirection = 5;
-  public mazeContainer() {
-
-  }
+  public mazeContainer() {}
 
   ArrayList<ArrayList<Room>> myMaze = new ArrayList<ArrayList<Room>>();
   Room[][] myFixedMaze = new Room[7][7];
 
+  /**
+   * Create the default array of size 6.
+   */
   public void fixedArraySetup() {
-
     for (int i = 1; i < 6; i++) {
       for (int j = 1; j < 6; j++) {
         myFixedMaze[i][j] = new Room();
@@ -35,26 +35,58 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Return the current Room that player is in.
+   * @return the current room
+   */
   public Room getCurrentRoom() {
     return myFixedMaze[myCurrentX][myCurrentY];
   }
 
+  /**
+   * Return the current Door in the East Direction.
+   * @return the door in the East.
+   */
   public Door getCurrentDoorEast() {
     return myFixedMaze[myCurrentX][myCurrentY].getEast();
   }
 
+  /**
+   * Return the current Door in the North Direction.
+   * @return the door in the North.
+   */
   public Door getCurrentDoorNorth() {
     return myFixedMaze[myCurrentX][myCurrentY].getNorth();
   }
+  
+  /**
+   * Return the current Door in the South Direction.
+   * @return the door in the South.
+   */
   public Door getCurrentDoorSouth() {
     return myFixedMaze[myCurrentX][myCurrentY].getSouth();
   }
+  
+  /**
+   * Return the current Door in the West Direction.
+   * @return the door in the West.
+   */
   public Door getCurrentDoorWest() {
     return myFixedMaze[myCurrentX][myCurrentY].getWest();
   }
+  
+/**
+ * Set the door direction.
+ * @param theDirection the direction you want to set the door.
+ */
   public void setDoorDirection(final int theDirection) {
     myDoorDirection = theDirection;
   }
+  
+  /**
+   * Return the current door where the player is facing.
+   * @return the door where player is facing
+   */
   public Door getCurrentDoorFace() {
     if (myDoorDirection == 0) {
       return getCurrentDoorWest();
@@ -68,10 +100,19 @@ public class mazeContainer implements Serializable{
       return null;
     }
   }
+  
+  /**
+   * Get the direction of the door.
+   * @return direction of the door
+   */
   public int getDoorDirection() {
     return myDoorDirection;
   }
 
+  /**
+   * String presentation of where the door is facing.
+   * @return the string represents where the door is facing
+   */
   public String getCurrentDoorFaceString() {
     if (myDoorDirection == 0) {
       return "west";
@@ -86,6 +127,10 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Check if we move in the North direction.
+   * @return T or F if we moved in the North direction.
+   */
   public boolean moveNorth() {
     if (checkInBoundY(-1) == false) {
       return false;
@@ -98,6 +143,10 @@ public class mazeContainer implements Serializable{
     return true;
   }
 
+  /**
+   * Check if we move in the East direction.
+   * @return T or F if we moved in the East direction.
+   */
   public void moveEast() {
     if (checkInBoundX(1) == false) {
       System.out.println("move east error");
@@ -109,6 +158,11 @@ public class mazeContainer implements Serializable{
       }
     }
   }
+  
+  /**
+   * Check if we move in the South direction.
+   * @return T or F if we moved in the South direction.
+   */
   public void moveSouth() {
     if (checkInBoundY(1) == false) {
       System.out.println("move east error");
@@ -120,6 +174,11 @@ public class mazeContainer implements Serializable{
       }
     }
   }
+  
+  /**
+   * Check if we move in the West direction.
+   * @return T or F if we moved in the West direction.
+   */
   public void moveWest() {
     if (checkInBoundX(-1) == false) {
       System.out.println("move east error");
@@ -132,6 +191,11 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Check if we are inside the maze in X Coordinate.
+   * @param theX where we are in X coordinate.
+   * @return T or F if we are in side the X coordinate of the maze
+   */
   public boolean checkInBoundX(int theX) {
 
     if (myFixedMaze[myCurrentX + theX][myCurrentY] == null) {
@@ -142,6 +206,12 @@ public class mazeContainer implements Serializable{
       return true;
     }
   }
+  
+  /**
+   * Check if we are inside the maze in Y Coordinate.
+   * @param theX where we are in Y coordinate.
+   * @return T or F if we are in side the Y coordinate of the maze
+   */
   public boolean checkInBoundY(int theY) {
     if (myFixedMaze[myCurrentX][myCurrentY + theY] == null) {
 
@@ -152,13 +222,16 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Check if we are in the right direction.
+   * @param theDirection the direction we are facing
+   * @return T or F if we are inside
+   */
   public boolean checkInBoundDirection(int theDirection) {
-
     int west = 0;
     int north = 1;
     int east = 2;
     int south = 3;
-
     if (theDirection == south) {
       return checkInBoundY(1);
     } else if (theDirection == east) {
@@ -173,6 +246,9 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Move in the certain direction depends on the numbers.
+   */
   public void moveFaceDirection() {
     if (myDoorDirection == 3) {
       moveSouth();
@@ -185,13 +261,25 @@ public class mazeContainer implements Serializable{
     }
   }
 
+  /**
+   * Return the current X coordinate of player inside the maze.
+   * @return the current X coordinate
+   */
   public int getCurrentX() {
     return myCurrentX;
   }
+  
+  /**
+   * Return the current Y coordinate of player inside the maze.
+   * @return the current Y coordinate
+   */
   public int getCurrentY() {
     return myCurrentY;
   }
 
+  /**
+   * Block the doors accordingly.
+   */
   public void blockAdjacent() {
     if (myDoorDirection == 0 && checkInBoundX(-1)) {
       myFixedMaze[myCurrentX - 1][myCurrentY].getEast().setBlockedStatus();
@@ -205,13 +293,26 @@ public class mazeContainer implements Serializable{
 
   }
 
+  /**
+   * Get the array list of the maze.
+   * @return the array list 
+   */
   public ArrayList<ArrayList<Room>> getMaze() {
     return myMaze;
   }
+  
+  /**
+   * Return the Room 2D array.
+   * @return the Room 2D array.
+   */
   public Room[][] getFixedMaze() {
     return myFixedMaze;
   }
 
+  /**
+   * Set the doors according to the questions.
+   * @param theDoorSelection 
+   */
   public void setDoors(final ArrayList<Question> theDoorSelection) {
     Random rand = new Random();
     int westCount = 0;
@@ -255,6 +356,13 @@ public class mazeContainer implements Serializable{
 
   }
 
+  /**
+   * 
+   * @param theX
+   * @param theXCoordinate
+   * @param theYCoordinate
+   * @return
+   */
   public boolean checkInBoundXDoorSetup(final int theX,
       final int theXCoordinate, final int theYCoordinate) {
     if (myFixedMaze[theXCoordinate + theX][theYCoordinate] == null) {

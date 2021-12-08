@@ -83,7 +83,8 @@ public class DirectionButton implements ActionListener {
 
     if (myMaze.getCurrentDoorFace() != null
         && myMaze.getCurrentDoorFace().getQuestioningStatus()
-        && myMaze.getDoorDirection() != myDirection) {
+        && myMaze.getDoorDirection() != myDirection && myMaze.getCurrentDoorFace().getBlockedStatus() == false) {
+      // This return creates a loop where we cannot move forward.
       return;
     }
 
@@ -97,10 +98,12 @@ public class DirectionButton implements ActionListener {
       myPanel.setVisible(true);
     } else {
       System.out.println("that door is blocked");
+      
     }
 
     if (myMaze.getCurrentRoom().checkBlockedDoors()) {
       System.out.println("game over");
+      System.exit(0);
     }
     if (myMaze.getCurrentDoorFace().checkDoor()) {
       // int index = myMaze.getCurrrentX()
