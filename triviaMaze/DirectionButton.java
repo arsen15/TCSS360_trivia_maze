@@ -15,7 +15,7 @@ public class DirectionButton implements ActionListener {
 	
 	
 	
-	JLabel myQuestionText;
+	private JLabel myQuestionText;
 	JButton myOptionA; 
 	JButton myOptionB;  
 	JButton myOptionC; 
@@ -58,7 +58,7 @@ public class DirectionButton implements ActionListener {
 		 myPanel = thePanel; 
 		 myArray = theArray;
 	} 
-	 public DirectionButton(mazeContainer theMaze, int theDirection, JLabel theQuestionText, JButton theOptionA, JButton theOptionB, JButton theOptionC 
+	 public DirectionButton(mazeContainer theMaze, int theDirection,final  JLabel theQuestionText, JButton theOptionA, JButton theOptionB, JButton theOptionC 
 				, JButton theOptionD, JPanel thePanel, JButton[][] theArray, JLabel theDirectionText) { 
 			myMaze =theMaze; 
 			
@@ -83,11 +83,30 @@ public class DirectionButton implements ActionListener {
 		
 		
 		
-		// returns if the door is in questioning as movement is locked 
+		// returns if the door is in questioning as movement is locked   
+		
+		
+		
+		
+		
 	
-		if(myMaze.getCurrentDoorFace() != null && myMaze.getCurrentDoorFace().getQuestioningStatus() && myMaze.getDoorDirection() != myDirection) { 
-			return;
-		} 
+		if(myMaze.getCurrentDoorFace() != null && myMaze.getCurrentDoorFace().getQuestioningStatus() && myMaze.getDoorDirection() != myDirection 
+				&& myMaze.getCurrentDoorFace().getBlockedStatus() == false) {  
+			
+			
+			
+			
+			return; 
+			
+			
+			
+			
+		}   
+		
+		
+		
+		
+		
 		
 		
 		myMaze.setDoorDirection(myDirection);   
@@ -128,22 +147,26 @@ public class DirectionButton implements ActionListener {
 	
 		if(myMaze.checkInBoundDirection(myDirection)) {  
 		
-			System.out.println("checked in bound x");   
+			System.out.println("checked in bound x");    
+			
+			// likely the problem zone 
 			if(myMaze.getCurrentDoorFace().getQuestion() instanceof TFQuestion) {  
 				
 			   
 				myQuestionText.setText(myMaze.getCurrentDoorFace().getQuestion().getQuestionText()+" (TF)"); 
               } else { 
 			myQuestionText.setText(myMaze.getCurrentDoorFace().getQuestion().getQuestionText()+" (MC)");  
-              } 
-			System.out.println(myMaze.getCurrentDoorFace().getQuestion().getQuestionText());
-			myOptionA.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionA()); 
+              }  
+			
+			
+			
+			System.out.println(myMaze.getCurrentDoorFace().getQuestion().getQuestionText()); 
+			myOptionA.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionA());  
+			System.out.println(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionA()); 
 			myOptionB.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionB()); 
 			myOptionC.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionC()); 
-			myOptionD.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionD());
-	       if(myDirection == 0) { 
-	    	   System.out.println("got to set the question for west direction");
-	       }  
+			myOptionD.setText(myMaze.getCurrentDoorFace().getQuestion().getMultipleChoiceOptionD()); 
+			 
 	       //sets questioning status 
 	       myMaze.getCurrentDoorFace().setQuestioningStatus(true);
 		} 

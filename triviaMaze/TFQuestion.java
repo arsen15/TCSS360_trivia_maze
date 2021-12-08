@@ -2,7 +2,7 @@ package triviaMaze;
 
 public class TFQuestion implements Question {
  
-	private static String myQuestionText; 
+	private String myQuestionText; 
 	
 	private boolean myQuestionAnswer;  
 	private char myAnswerCharacter; 
@@ -10,9 +10,9 @@ public class TFQuestion implements Question {
 	//	myQuestionText = theQuestion; 
 	}
 	
-	public void setQuestionText(final String theQuestionText) { 
+	public void setQuestionText(final  String theQuestionText) { 
 		myQuestionText = theQuestionText;
-	} 
+	}  
 	
 	public String getQuestionText() { 
 		return myQuestionText;

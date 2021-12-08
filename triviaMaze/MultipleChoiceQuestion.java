@@ -2,7 +2,7 @@ package triviaMaze;
 
 public class MultipleChoiceQuestion implements Question {
      private boolean myQuestionAnswer;
-	 private static String myQuestionText; 
+	 private String myQuestionText; 
 	
 	 private String myOptionA; 
 	 private String myOptionB; 
@@ -37,7 +37,7 @@ public class MultipleChoiceQuestion implements Question {
 	}
 
 	@Override
-	public void setQuestionText(String theQuestionText) {
+	public void setQuestionText(final String theQuestionText) {
 		
 		myQuestionText = theQuestionText;
 	} 
@@ -58,19 +58,19 @@ public class MultipleChoiceQuestion implements Question {
 	public String getMultipleChoiceOptionD() { 
 		return myOptionD;
 	} 
-	public void setMultipleChoiceOptionA(String theA) {  
+	public void setMultipleChoiceOptionA(final String theA) {  
 		myOptionA = theA;
 	//	return myOptionA;
 	} 
-	public void setMultipleChoiceOptionB(String theB) {  
+	public void setMultipleChoiceOptionB(final String theB) {  
 		myOptionB = theB;
 		//return myOptionB;
 	} 
-	public void setMultipleChoiceOptionC(String theC) {  
+	public void setMultipleChoiceOptionC(final String theC) {  
 		myOptionC = theC;
 	
 	}
-	public void setMultipleChoiceOptionD(String theD) {  
+	public void setMultipleChoiceOptionD(final String theD) {  
 		myOptionD = theD;
 		//return myOptionD;
 	}
