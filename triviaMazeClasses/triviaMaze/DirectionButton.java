@@ -2,7 +2,6 @@ package triviaMaze;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,13 +11,11 @@ public class DirectionButton implements ActionListener {
   private mazeContainer myMaze;
   private int myDirection;
   private JPanel myPanel;
-
   JLabel myQuestionText;
   JButton myOptionA;
   JButton myOptionB;
   JButton myOptionC;
   JButton myOptionD;
-
   JButton[][] myArray;
   JLabel myDirectionText;
 
@@ -33,9 +30,7 @@ public class DirectionButton implements ActionListener {
       JLabel theQuestionText, JButton theOptionA, JButton theOptionB,
       JButton theOptionC, JButton theOptionD, JPanel thePanel) {
     myMaze = theMaze;
-
     myDirection = theDirection;
-
     myQuestionText = theQuestionText;
     myOptionA = theOptionA;
     myOptionB = theOptionB;
@@ -64,9 +59,7 @@ public class DirectionButton implements ActionListener {
       JButton theOptionC, JButton theOptionD, JPanel thePanel,
       JButton[][] theArray, JLabel theDirectionText) {
     myMaze = theMaze;
-
     myDirection = theDirection;
-
     myQuestionText = theQuestionText;
     myOptionA = theOptionA;
     myOptionB = theOptionB;
@@ -83,8 +76,8 @@ public class DirectionButton implements ActionListener {
 
     if (myMaze.getCurrentDoorFace() != null
         && myMaze.getCurrentDoorFace().getQuestioningStatus()
-        && myMaze.getDoorDirection() != myDirection && myMaze.getCurrentDoorFace().getBlockedStatus() == false) {
-      // This return creates a loop where we cannot move forward.
+        && myMaze.getDoorDirection() != myDirection
+        && myMaze.getCurrentDoorFace().getBlockedStatus() == false) {
       return;
     }
 
@@ -98,7 +91,7 @@ public class DirectionButton implements ActionListener {
       myPanel.setVisible(true);
     } else {
       System.out.println("that door is blocked");
-      
+
     }
 
     if (myMaze.getCurrentRoom().checkBlockedDoors()) {

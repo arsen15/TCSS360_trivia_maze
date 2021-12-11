@@ -8,12 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
 import triviaMaze.gameSaveAndLoad;
@@ -27,7 +32,7 @@ public class triviaGUI extends JPanel {
    */
   private static final long serialVersionUID = 197500895779284794L;
   private mazeContainer myMaze;
-
+  private static int click = 0;
   /**
    * Constructor that helps set up the maze.
    * 
@@ -42,16 +47,6 @@ public class triviaGUI extends JPanel {
    */
   public triviaGUI() {
     myMaze = new mazeContainer();
-  }
-
-  /**
-   * A method that helps set up the new maze.
-   * 
-   * @param theMaze
-   *          the new maze
-   */
-  public void setMaze(mazeContainer theMaze) {
-    myMaze = theMaze;
   }
 
   /**
@@ -134,6 +129,19 @@ public class triviaGUI extends JPanel {
     add(EastPanel, BorderLayout.EAST);
 
   }
+
+  /**
+   * Initialize the SQL data base and set up the doors.
+   * @param theMaze the maze that is created
+   * @return the mazeContainer that has the maze.
+   */
+  public static mazeContainer returnMaze(mazeContainer theMaze) {
+    triviaSQL sq = new triviaSQL();
+    theMaze.fixedArraySetup();
+    theMaze.setDoors(sq.setup());
+    return theMaze;
+  }
+
   // Pass door arraylist of doors containing questions to the maze container
   // from the SQL for door and question choices.
   // MazeContainer sets up doors trivia SQL might move some to it as well
@@ -146,6 +154,7 @@ public class triviaGUI extends JPanel {
         mC.fixedArraySetup();
         mC.setDoors(sq.setup());
         final triviaGUI mainPanel = new triviaGUI(mC);
+        // final triviaGUI mainPanel = new triviaGUI(returnMaze(mC));
         mainPanel.start();
 
         // A size for the JFrame. Name the game VideoGameTrivia.
@@ -168,12 +177,14 @@ public class triviaGUI extends JPanel {
         JMenuItem saveMenuButton = new JMenuItem("SAVE", KeyEvent.VK_S);
         subMenu.add(saveMenuButton);
 
-        // Save the game when SAVE button is pressed.
+        // Save the game when SAVE button is pressed. And generate different save files.
         saveMenuButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ev) {
             System.out.println("you pressed SAVE");
             try {
-              gameSaveAndLoad.saveGame(mC, "currentMazeVer.ser");
+              click++;
+              System.out.println(click);
+              gameSaveAndLoad.saveGame(mC, click + " Maze.ser");
             } catch (Exception e) {
               System.out.println(
                   "Something is wrong! Couldn't save!" + e.getMessage());
@@ -189,23 +200,36 @@ public class triviaGUI extends JPanel {
           public void actionPerformed(ActionEvent ev) {
             System.out.println("you pressed LOAD");
             try {
-              // Load the game with the data and initialize the new maze.
+              // Load the game with the data and initialize the new maze. Need
+              // to have something like a fileCHooser to allow players to choose the
+              // file that they want.
+              // Create a file Chooser for LOAD method. And changed the save
+              // button text on FileChooser to Open.
+              // Source:
+              // https://community.oracle.com/tech/developers/discussion/1390408/jfilechooser-uimanager-keys-i18n
+              UIManager.put("FileChooser.saveButtonText", "Open");
+              JFileChooser jChooser = new JFileChooser(
+                  FileSystemView.getFileSystemView().getHomeDirectory());
+              jChooser.showSaveDialog(null);
               mazeContainer maze = (mazeContainer) gameSaveAndLoad
-                  .loadGame("currentMazeVer.ser");
-              triviaSQL sq = new triviaSQL();
-              maze.fixedArraySetup();
-              maze.setDoors(sq.setup());
+                  .loadGame(jChooser.getSelectedFile().getName());
+
+              // triviaSQL sq = new triviaSQL();
+              // maze.fixedArraySetup();
+              // maze.setDoors(sq.setup());
               // Assign the new updated maze into the mainPanel and show it.
-              final triviaGUI mainPanel = new triviaGUI(maze);
+              final triviaGUI mainPanel = new triviaGUI(returnMaze(maze));
+              // final triviaGUI mainPanel = new triviaGUI(maze);
               mainPanel.start();
               window.pack();
               window.setContentPane(mainPanel);
+              window.repaint();
+              window.pack();
             } catch (Exception e) {
               System.out
                   .println("Something is wrong! Couldn't load the saved data!"
                       + e.getMessage());
             }
-
           }
         });
 
@@ -222,4 +246,5 @@ public class triviaGUI extends JPanel {
       }
     });
   }
+
 }
