@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
 import triviaMaze.mazeContainer;
@@ -32,6 +33,13 @@ public class triviaMazePanel extends JPanel{
 	
 	private mazeContainer myMaze;
 	
+	JPanel myCenterPanel = new JPanel();
+	JLabel myDoorBlockedText = new JLabel("");
+	JLabel myGameOverText = new JLabel("");
+	JLabel myMovedText = new JLabel ("");
+	JLabel myWonText = new JLabel("");
+	JLabel myCorrectAnswerLabel = new JLabel("");
+	private JLabel myWrongAnswerLabel = new JLabel("");
 
 	public triviaMazePanel(mazeContainer theMaze) {
 		super();
@@ -39,13 +47,13 @@ public class triviaMazePanel extends JPanel{
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 	}
 
-	public void start() {  
+public void start() {  
 		
 		this.setLayout(new BorderLayout());
 	
-		JPanel panel = new JPanel(); 
+	//	JPanel panel = new JPanel(); 
 	
-		JButton north = new JButton("north");   
+	//	JButton north = new JButton("north");   
 		
 		JPanel southPanel = new JPanel();
 	
@@ -63,180 +71,82 @@ public class triviaMazePanel extends JPanel{
 		southPanel.setVisible(false); 
 		add(southPanel,BorderLayout.SOUTH); 
 		
-		myOptionA.addActionListener(new QuestionButton(myMaze,'A'));  
-		myOptionB.addActionListener(new QuestionButton(myMaze,'B'));   
-		myOptionC.addActionListener(new QuestionButton(myMaze,'C')); 
-		myOptionD.addActionListener(new QuestionButton(myMaze,'D'));
+		myOptionA.addActionListener(new QuestionButton(myMaze,'A',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel));  
+		myOptionB.addActionListener(new QuestionButton(myMaze,'B',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel));   
+		myOptionC.addActionListener(new QuestionButton(myMaze,'C',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel)); 
+		myOptionD.addActionListener(new QuestionButton(myMaze,'D',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel)); 
+	
 		
 		add(southPanel,BorderLayout.SOUTH);
+
+//		add(panel, BorderLayout.EAST);  
 		
-		north.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {  
-			     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
-			    	 System.out.println("game over");
-			     }
-				if(myMaze.getCurrentDoorNorth().checkDoor()) { 
-					myMaze.moveNorth(); 
-					System.out.println("moved north ");
-				} 
-				
-				int northOne = -1;
-				if(myMaze.checkInBoundY(northOne)) {  
-				
-					System.out.println("checked in bound x");   
-					if(myMaze.getCurrentDoorNorth().getQuestion() instanceof TFQuestion) { 
-						myQuestionText.setText(myMaze.getCurrentDoorNorth().getQuestion().getQuestionText()+" (TF)"); 
-	                  } else { 
-					myQuestionText.setText(myMaze.getCurrentDoorNorth().getQuestion().getQuestionText()+" (MC)");  
-	                  } 
-					System.out.println(myMaze.getCurrentDoorNorth().getQuestion().getQuestionText());
-					myOptionA.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionA()); 
-					myOptionB.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionB()); 
-					myOptionC.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionC()); 
-					myOptionD.setText(myMaze.getCurrentDoorNorth().getQuestion().getMultipleChoiceOptionD());
-					southPanel.setVisible(true);
+		JPanel westPanel = new JPanel();  
+		westPanel.setLayout(new GridLayout(5,5));
 		
-					int north = 1;
-					myMaze.setDoorDirection(north);
-				} 
-			
-			   System.out.println("nerd"); 
+		int rowSize= 5; 
+		int columnSize=5; 
+		final JButton[][] keyButtons = new JButton[rowSize][columnSize];
+		  
+		  for(int i = 0; i< rowSize; i++) { 
+			  for(int j =0; j< columnSize; j++) {  
+				  if(i==0 && j==0 ) { 
+					  keyButtons[i][j] = new JButton("'*'"); 
+				  } else {
+ 				  keyButtons[i][j] = new JButton("*");  
+				  }
+				  westPanel.add(keyButtons[i][j]);
+			  }
+		  }  
+		  
+		add(westPanel, BorderLayout.WEST);	 
 		
-			}
-		}); 
-		panel.add(north,BorderLayout.NORTH);
+		JPanel EastPanel = new JPanel();   
+		JLabel faceText = new JLabel("Currently Facing " + myMaze.getCurrentDoorFaceString());
 		
-		JButton east = new JButton("east");  
-	    east.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {  
-			     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
-			    	 System.out.println("game over");
-			     }
-				if(myMaze.getCurrentDoorEast().checkDoor()) { 
-					myMaze.moveEast(); 
-					System.out.println("moved east");
-				} 
-				
-				int eastOne = 1;
-				if(myMaze.checkInBoundX(eastOne)) {   
-					System.out.println("checked in bound x");   
-					if(myMaze.getCurrentDoorEast().getQuestion() instanceof TFQuestion) { 
-						myQuestionText.setText(myMaze.getCurrentDoorEast().getQuestion().getQuestionText()+" (TF)"); 
-	                  } else { 
-					myQuestionText.setText(myMaze.getCurrentDoorEast().getQuestion().getQuestionText()+" (MC)");  
-	                  } 
-					System.out.println(myMaze.getCurrentDoorEast().getQuestion().getQuestionText());
-					myOptionA.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionA()); 
-					myOptionB.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionB()); 
-					myOptionC.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionC()); 
-					myOptionD.setText(myMaze.getCurrentDoorEast().getQuestion().getMultipleChoiceOptionD());
-					southPanel.setVisible(true);
-			
-					int east = 2;
-					myMaze.setDoorDirection(east);
-				} 
-				
-			   System.out.println("nerd"); 
-			 
-			}
-		}); 
-	    panel.add(east,BorderLayout.EAST);
+//		JPanel CenterPanel = new JPanel();
+//		JLabel doorBlockedText = new JLabel("");
+//		JLabel gameOverText = new JLabel("");
+//		JLabel movedText = new JLabel ("");
+//		JLabel wonText = new JLabel("");
+		
+		JButton north = new JButton("north");   
+        north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
+        											myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		EastPanel.add(north,BorderLayout.NORTH);  
+		
 		
 		JButton south = new JButton("south");  
-		south.addActionListener(new ActionListener() { 
-				public void actionPerformed(ActionEvent e) {  
-				     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
-				    	 System.out.println("game over");
-				     }
-					if(myMaze.getCurrentDoorSouth().checkDoor()) { 
-						myMaze.moveSouth(); 
-						System.out.println("moved south");
-					} 
-					
-					int southOne = 1;
-					if(myMaze.checkInBoundY(southOne)) {   
-						System.out.println("checked in bound x");   
-						if(myMaze.getCurrentDoorEast().getQuestion() instanceof TFQuestion) { 
-							myQuestionText.setText(myMaze.getCurrentDoorSouth().getQuestion().getQuestionText()+" (TF)"); 
-		                  } else { 
-						myQuestionText.setText(myMaze.getCurrentDoorSouth().getQuestion().getQuestionText()+" (MC)");  
-		                  } 
-						System.out.println(myMaze.getCurrentDoorSouth().getQuestion().getQuestionText());
-						myOptionA.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionA()); 
-						myOptionB.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionB()); 
-						myOptionC.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionC()); 
-						myOptionD.setText(myMaze.getCurrentDoorSouth().getQuestion().getMultipleChoiceOptionD());
-						southPanel.setVisible(true);
-					  
-						int south = 3;
-						myMaze.setDoorDirection(south);
-					} 
-					
-				   System.out.println("nerd"); 
-				 
-				}
-			}); 
-		panel.add(south,BorderLayout.SOUTH); 
-		
-		JButton west = new JButton("west"); 
-		west.addActionListener(new ActionListener() { 
-				public void actionPerformed(ActionEvent e) {  
-				     if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
-				    	 System.out.println("game over");
-				     }
-					if(myMaze.getCurrentDoorSouth().checkDoor()) { 
-						myMaze.moveWest(); 
-						System.out.println("moved west");
-					} 
-					
-					int westOne = -1;
-					if(myMaze.checkInBoundX(westOne)) {   
-						System.out.println("checked in bound x");   
-						if(myMaze.getCurrentDoorEast().getQuestion() instanceof TFQuestion) { 
-							myQuestionText.setText(myMaze.getCurrentDoorSouth().getQuestion().getQuestionText()+" (TF)"); 
-		                  } else { 
-						myQuestionText.setText(myMaze.getCurrentDoorWest().getQuestion().getQuestionText()+" (MC)");  
-		                  } 
-						System.out.println(myMaze.getCurrentDoorWest().getQuestion().getQuestionText());
-						myOptionA.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionA()); 
-						myOptionB.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionB()); 
-						myOptionC.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionC()); 
-						myOptionD.setText(myMaze.getCurrentDoorWest().getQuestion().getMultipleChoiceOptionD());
-						southPanel.setVisible(true);
-						//repaint();  
-						int west = 0;
-						myMaze.setDoorDirection(west);
-					} 
-					
-				   System.out.println("nerd"); 
-				 
-				}
-			}); 
-		panel.add(west,BorderLayout.WEST);
-		
-		add(panel, BorderLayout.EAST);  
-		
-		JPanel j = new JPanel();  
-		j.setLayout(new GridLayout(5,5));
-		
-		 final String[] KEYS = {
-			        "*", "*", "*", "*", "*",
-			        "*", "*", "*", "*", "*",
-			        "*", "*", "*", "*", "*",
-			        "*", "*", "*", "*", "*",
-			        "*", "*", "*",  "*", "*" }; 
+		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
+													 myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		 EastPanel.add(south,BorderLayout.SOUTH); 
 		 
-		  final JButton[] keyButtons = new JButton[KEYS.length];
-		 // Dimension KEY_SIZE = new Dimension(50, 50);
+		 
+		 JButton west = new JButton("west");  
+		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
+													myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		 EastPanel.add(west,BorderLayout.WEST);
+		 
 		
-		  for (int i = 0; i < keyButtons.length; i++) {
-	            keyButtons[i] = new JButton(KEYS[i]);
-	          //  keyButtons[i].setPreferredSize(KEY_SIZE);
-	            j.add(keyButtons[i]);
-	        }
-		add(j, BorderLayout.WEST);
+		JButton east = new JButton("east");  
+	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
+												   myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		EastPanel.add(east,BorderLayout.EAST);
+		
+		EastPanel.add(faceText, BorderLayout.EAST);
+		add (EastPanel, BorderLayout.EAST); 
+		
+		myCenterPanel.add(myDoorBlockedText, BorderLayout.CENTER);
+		myCenterPanel.add(myGameOverText, BorderLayout.CENTER);
+		myCenterPanel.add(myMovedText, BorderLayout.CENTER);
+		myCenterPanel.add(myWonText, BorderLayout.CENTER);
+		myCenterPanel.add(myCorrectAnswerLabel, BorderLayout.CENTER);
+		myCenterPanel.add(myWrongAnswerLabel, BorderLayout.CENTER);
+		add(myCenterPanel, BorderLayout.CENTER);
 	
+		
 	} 
 
+	
 
 }

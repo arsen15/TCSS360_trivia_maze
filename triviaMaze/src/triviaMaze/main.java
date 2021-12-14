@@ -1,7 +1,6 @@
 package triviaMaze;
 
 import javax.swing.JFrame;
-
 import GUI.gameMenu;
 import GUI.triviaMazePanel;
 

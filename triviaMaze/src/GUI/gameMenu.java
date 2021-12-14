@@ -36,16 +36,35 @@ public class gameMenu extends JFrame {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
 		//Start button
-		JButton start = new JButton("START");
+		JButton start = new JButton("Start Game");
 		start.setPreferredSize(new Dimension(50, 50));
 		start.addActionListener(new gameListener());
 		
 		//Load button
-		JButton load = new JButton("LOAD");
+		JButton load = new JButton("Load");
 		load.setPreferredSize(new Dimension(50, 50));
+		load.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent theEvent) {
+				
+				System.out.println("you pressed LOAD");
+				try {
+					
+					
+					
+				} catch (Exception theException) {
+		              System.out
+	                  .println("Something is wrong! Couldn't load the saved data!"
+	                      + theException.getMessage());
+	            } 
+				
+			}
+			
+		});
 		
 		//Options button
-		JButton options = new JButton("OPTIONS");
+		JButton options = new JButton("Options");
 		options.setPreferredSize(new Dimension(50, 50));
 		options.addActionListener(new optionsListener());
 		
