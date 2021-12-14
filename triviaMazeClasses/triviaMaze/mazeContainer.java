@@ -125,15 +125,15 @@ public class mazeContainer implements Serializable {
    */
   public String getCurrentDoorFaceString() {
     if (myDoorDirection == 0) {
-      return "west";
+      return "West";
     } else if (myDoorDirection == 1) {
-      return "north";
+      return "North";
     } else if (myDoorDirection == 2) {
-      return "east";
+      return "East";
     } else if (myDoorDirection == 3) {
-      return "south";
+      return "South";
     } else {
-      return "nowhere";
+      return "Nowhere";
     }
   }
 

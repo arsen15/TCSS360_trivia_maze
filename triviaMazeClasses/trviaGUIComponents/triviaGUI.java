@@ -14,11 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
 import triviaMaze.gameSaveAndLoad;
@@ -132,7 +131,9 @@ public class triviaGUI extends JPanel {
 
   /**
    * Initialize the SQL data base and set up the doors.
-   * @param theMaze the maze that is created
+   * 
+   * @param theMaze
+   *          the maze that is created
    * @return the mazeContainer that has the maze.
    */
   public static mazeContainer returnMaze(mazeContainer theMaze) {
@@ -173,11 +174,34 @@ public class triviaGUI extends JPanel {
         // Create a menu option in game.
         JMenu subMenu = new JMenu("File");
         menuBar.add(subMenu);
+        // Create a Help menu option in game.
+        JMenu subMenu2 = new JMenu("Help");
+        menuBar.add(subMenu2);
+        // Add the cheat button that shows the answers to the questions.
+        JMenuItem cheatMenuButton = new JMenuItem("Cheat", KeyEvent.VK_C);
+        cheatMenuButton.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent ev) {
+            // Print out the cheat sheet in the Console.
+            System.out.println("\n--- Cheat Sheet is printed in the Console ---\n"
+                + "1. Who/What does gael seek?\n" + "Answer: The Dark Soul\n"
+                + "2. Artorias slew manus\n" + "Answer: F");
+            // A pop up will appear when the player chooses Cheat in the Help sub menu.
+            String answers = "1. Who/What does gael seek?\r\n"
+                + "Answer: The Dark Soul\n"
+                + "2. Artorias slew manus\n"
+                + "Answer: F";
+            JOptionPane.showMessageDialog(mainPanel, answers, "Cheat Sheet", JOptionPane.INFORMATION_MESSAGE);
+          }
+        });
+        // Add the Help button into the sub menu.
+        subMenu2.add(cheatMenuButton);
+
         // A sub menu in game. Allow us to SAVE the game.
         JMenuItem saveMenuButton = new JMenuItem("SAVE", KeyEvent.VK_S);
         subMenu.add(saveMenuButton);
 
-        // Save the game when SAVE button is pressed. And generate different save files.
+        // Save the game when SAVE button is pressed. And generate different
+        // save files.
         saveMenuButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ev) {
             System.out.println("you pressed SAVE");
@@ -201,7 +225,8 @@ public class triviaGUI extends JPanel {
             System.out.println("you pressed LOAD");
             try {
               // Load the game with the data and initialize the new maze. Need
-              // to have something like a fileCHooser to allow players to choose the
+              // to have something like a fileCHooser to allow players to choose
+              // the
               // file that they want.
               // Create a file Chooser for LOAD method. And changed the save
               // button text on FileChooser to Open.
@@ -213,10 +238,6 @@ public class triviaGUI extends JPanel {
               jChooser.showSaveDialog(null);
               mazeContainer maze = (mazeContainer) gameSaveAndLoad
                   .loadGame(jChooser.getSelectedFile().getName());
-
-              // triviaSQL sq = new triviaSQL();
-              // maze.fixedArraySetup();
-              // maze.setDoors(sq.setup());
               // Assign the new updated maze into the mainPanel and show it.
               final triviaGUI mainPanel = new triviaGUI(returnMaze(maze));
               // final triviaGUI mainPanel = new triviaGUI(maze);

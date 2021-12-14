@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DirectionButton implements ActionListener {
@@ -90,11 +91,13 @@ public class DirectionButton implements ActionListener {
     if (myMaze.getCurrentDoorFace().getBlockedStatus() == false) {
       myPanel.setVisible(true);
     } else {
+      JOptionPane.showMessageDialog(myPanel, "Door in the " + myMaze.getCurrentDoorFaceString() +" is locked!\n" + "Please choose a different door!", "Warning", JOptionPane.WARNING_MESSAGE);
       System.out.println("that door is blocked");
-
     }
 
     if (myMaze.getCurrentRoom().checkBlockedDoors()) {
+      String loseMessage = "You Lose :( \n" + "Please Try Again!";
+      JOptionPane.showMessageDialog(myPanel, loseMessage, "Game Over", JOptionPane.INFORMATION_MESSAGE);
       System.out.println("game over");
       System.exit(0);
     }
@@ -107,8 +110,9 @@ public class DirectionButton implements ActionListener {
       JButton afterMove = myArray[myMaze.getCurrentY() - 1][myMaze.getCurrentX()
           - 1];
       afterMove.setText("'*'");
-
+      
       System.out.println("moved");
+      
       // move door direction out of range
       myMaze.setDoorDirection(5);
       myPanel.setVisible(false);
@@ -149,7 +153,10 @@ public class DirectionButton implements ActionListener {
 
     System.out.println(myMaze.getCurrentXYString());
     if (myMaze.won()) {
+      String winMessage = "You win!\n" + "Congratulation!";
+      JOptionPane.showMessageDialog(myPanel, winMessage, "Win", JOptionPane.INFORMATION_MESSAGE);
       System.out.println("you won");
+      System.exit(0);
     }
 
   }
