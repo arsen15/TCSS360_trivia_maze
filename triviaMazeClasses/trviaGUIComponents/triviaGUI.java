@@ -182,15 +182,18 @@ public class triviaGUI extends JPanel {
         cheatMenuButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ev) {
             // Print out the cheat sheet in the Console.
-            System.out.println("\n--- Cheat Sheet is printed in the Console ---\n"
-                + "1. Who/What does gael seek?\n" + "Answer: The Dark Soul\n"
-                + "2. Artorias slew manus\n" + "Answer: F");
-            // A pop up will appear when the player chooses Cheat in the Help sub menu.
+            System.out
+                .println("\n--- Cheat Sheet is printed in the Console ---\n"
+                    + "1. Who/What does gael seek?\n"
+                    + "Answer: The Dark Soul\n" + "2. Artorias slew manus\n"
+                    + "Answer: F");
+            // A pop up will appear when the player chooses Cheat in the Help
+            // sub menu.
             String answers = "1. Who/What does gael seek?\r\n"
-                + "Answer: The Dark Soul\n"
-                + "2. Artorias slew manus\n"
+                + "Answer: The Dark Soul\n" + "2. Artorias slew manus\n"
                 + "Answer: F";
-            JOptionPane.showMessageDialog(mainPanel, answers, "Cheat Sheet", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(mainPanel, answers, "Cheat Sheet",
+                JOptionPane.INFORMATION_MESSAGE);
           }
         });
         // Add the Help button into the sub menu.
@@ -236,11 +239,20 @@ public class triviaGUI extends JPanel {
               JFileChooser jChooser = new JFileChooser(
                   FileSystemView.getFileSystemView().getHomeDirectory());
               jChooser.showSaveDialog(null);
-              mazeContainer maze = (mazeContainer) gameSaveAndLoad
-                  .loadGame(jChooser.getSelectedFile().getName());
+              // --------- WORKED but still have '*' everytime u load the game
+              // -------------
+              // mazeContainer maze = (mazeContainer) gameSaveAndLoad
+              // .loadGame(jChooser.getSelectedFile().getName());
+              // --------- WORKED but still have '*' everytime u load the game
+              // -------------
+
+              // 2nd way that WORKED (USING) but still have '*' every time u
+              // load the game but solved the issues where if u have more than 3
+              // saved files, it doesn't save newest progress
               // Assign the new updated maze into the mainPanel and show it.
-              final triviaGUI mainPanel = new triviaGUI(returnMaze(maze));
-              // final triviaGUI mainPanel = new triviaGUI(maze);
+              final triviaGUI mainPanel = new triviaGUI(
+                  returnMaze(gameSaveAndLoad
+                      .loadGame(jChooser.getSelectedFile().getName())));
               mainPanel.start();
               window.pack();
               window.setContentPane(mainPanel);

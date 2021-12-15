@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -19,7 +20,11 @@ public class gameMenu extends JFrame {
   /**
    * 
    */
-  private static final long serialVersionUID = -4802340630976324291L;
+  private static final long serialVersionUID = -2237268183700714062L;
+  /**
+   * 
+   */
+  
   
   /**
    * Dimensions
@@ -35,16 +40,35 @@ public class gameMenu extends JFrame {
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     
     //Start button
-    JButton start = new JButton("START");
+    JButton start = new JButton("Start Game");
     start.setPreferredSize(new Dimension(50, 50));
     start.addActionListener(new gameListener());
     
     //Load button
-    JButton load = new JButton("LOAD");
+    JButton load = new JButton("Load");
     load.setPreferredSize(new Dimension(50, 50));
+    load.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent theEvent) {
+        
+        System.out.println("you pressed LOAD");
+        try {
+          
+          
+          
+        } catch (Exception theException) {
+                  System.out
+                    .println("Something is wrong! Couldn't load the saved data!"
+                        + theException.getMessage());
+              } 
+        
+      }
+      
+    });
     
     //Options button
-    JButton options = new JButton("OPTIONS");
+    JButton options = new JButton("Options");
     options.setPreferredSize(new Dimension(50, 50));
     options.addActionListener(new optionsListener());
     
