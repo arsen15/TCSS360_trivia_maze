@@ -24,6 +24,12 @@ import triviaMaze.gameSaveAndLoad;
 import triviaMaze.mazeContainer;
 import triviaMaze.triviaSQL;
 
+/**
+ * 
+ * 
+ * @author luuph
+ *
+ */
 public class triviaGUI extends JPanel {
 
   /**
@@ -143,6 +149,9 @@ public class triviaGUI extends JPanel {
     return theMaze;
   }
 
+  /**
+   * @enduml
+   */
   // Pass door arraylist of doors containing questions to the maze container
   // from the SQL for door and question choices.
   // MazeContainer sets up doors trivia SQL might move some to it as well
@@ -279,5 +288,9 @@ public class triviaGUI extends JPanel {
       }
     });
   }
+/**
+ * @enduml
+ */
 
 }
+

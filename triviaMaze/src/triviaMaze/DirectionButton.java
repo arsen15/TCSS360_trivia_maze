@@ -7,6 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * @startuml
+ * @author luuph
+ *
+ */
 public class DirectionButton implements ActionListener {
 
   private mazeContainer myMaze;
@@ -160,4 +165,7 @@ public class DirectionButton implements ActionListener {
     }
 
   }
+  /**
+   * @enduml
+   */
 }
