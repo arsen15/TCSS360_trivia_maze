@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @startuml
- * @author luuph
+ * 
+ * @author Ryan, Arsen, Phuc
  *
  */
 public class DirectionButton implements ActionListener {
@@ -165,7 +165,4 @@ public class DirectionButton implements ActionListener {
     }
 
   }
-  /**
-   * @enduml
-   */
 }

@@ -27,7 +27,7 @@ import triviaMaze.triviaSQL;
 /**
  * 
  * 
- * @author luuph
+ * @author Ryan, Arsen, Phuc
  *
  */
 public class triviaGUI extends JPanel {
@@ -288,9 +288,4 @@ public class triviaGUI extends JPanel {
       }
     });
   }
-/**
- * @enduml
- */
-
 }
-
