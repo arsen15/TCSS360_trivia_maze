@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.sun.tools.javac.Main;
@@ -134,9 +135,17 @@ public class DirectionButton implements ActionListener {
 		}
 		if(myMaze.getCurrentDoorFace().getBlockedStatus() == false ) { 
 			myPanel.setVisible(true);
-		} else { 
+		} else {  
+			JOptionPane.showMessageDialog(myPanel, "Door in the " + myMaze.getCurrentDoorFaceString() +" is locked!\n" + "Please choose a different door!", "Warning", JOptionPane.WARNING_MESSAGE);
 			System.out.println("that door is blocked");
-		}
+		}  
+		
+		if (myMaze.getCurrentRoom().checkBlockedDoors()) {
+		      String loseMessage = "You Lose :( \n" + "Please Try Again!";
+		      JOptionPane.showMessageDialog(myPanel, loseMessage, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+		      System.out.println("game over");
+		      System.exit(0);
+		    }
 		
 		 if(myMaze.getCurrentRoom().checkBlockedDoors()) { 
 	    	 System.out.println("game over");
@@ -213,8 +222,11 @@ public class DirectionButton implements ActionListener {
 		} 
 	
 	    System.out.println(myMaze.getCurrentXYString());
-	    if(myMaze.won()) { 
-	    	 System.out.println("you won");
+	    if(myMaze.won()) {  
+	    	 String winMessage = "You win!\n" + "Congratulation!"; 
+	    	 JOptionPane.showMessageDialog(myPanel, winMessage, "Win", JOptionPane.INFORMATION_MESSAGE);
+	    	 System.out.println("you won"); 
+	    	 System.exit(0);
 	     } 
 	    
 	 }
