@@ -8,41 +8,44 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * gameSave class that will take in the mazeContainer object and its data then
- * the save method will save those into .SER file to be loaded back.
+ * A class that will help us with Saving and Loading the game. REFERENCE:
+ * https://www.youtube.com/watch?v=-xW0pBZqpjU&ab_channel=AlmasBaimagambetov
  * 
  * @author Ryan, Arsen, Phuc
  *
  */
 public class gameSaveAndLoad {
+  /**
+   * Save the game into .ser file to be loaded again.
+   * 
+   * @param theData
+   *          data to be saved
+   * @param theFileName
+   *          name of the file that was saved
+   * @throws IOException
+   */
   public static void saveGame(Serializable theData, String theFileName)
       throws IOException {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         Files.newOutputStream(Paths.get(theFileName)))) {
       outputStream.writeObject(theData);
+
     }
   }
 
-  public static Object loadGame(String theFileName) throws Exception {
+  /**
+   * Load the game back to its previous state.
+   * 
+   * @param string
+   *          name of the file that was saved
+   * @return the object that was saved
+   * @throws Exception
+   */
+  public static Object loadGame(String string) throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
-        Files.newInputStream(Paths.get(theFileName)))) {
+        Files.newInputStream(Paths.get(string)))) {
       return inputStream.readObject();
+
     }
   }
-//  public static public static void main(String[] args) {
-//    triviaSQL sq1 = new triviaSQL();
-//    mazeContainer mC1 = new mazeContainer();
-//    mC1.fixedArraySetup();
-//    mC1.setDoors(sq1.setup());
-//    try {
-//      FileOutputStream fileOut = new FileOutputStream("currentMazeVer.ser");
-//      ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//      out.writeObject(mC1);
-//      out.close();
-//      fileOut.close();
-//      System.out.printf("Serialized data is saved in currentMazeVer.ser");
-//    } catch (IOException i) {
-//      i.printStackTrace();
-//    }
-//  }
 }

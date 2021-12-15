@@ -6,14 +6,23 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileSystemView;
 
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
+import triviaMaze.gameSaveAndLoad;
 import triviaMaze.mazeContainer;
 
 //the way triviaGUI is rn is it creates a panel, but we already have gamePanel, so we only need the buttons and other things in a method init or start and then
@@ -33,13 +42,6 @@ public class triviaMazePanel extends JPanel{
 	
 	private mazeContainer myMaze;
 	
-	JPanel myCenterPanel = new JPanel();
-	JLabel myDoorBlockedText = new JLabel("");
-	JLabel myGameOverText = new JLabel("");
-	JLabel myMovedText = new JLabel ("");
-	JLabel myWonText = new JLabel("");
-	JLabel myCorrectAnswerLabel = new JLabel("");
-	private JLabel myWrongAnswerLabel = new JLabel("");
 
 	public triviaMazePanel(mazeContainer theMaze) {
 		super();
@@ -50,6 +52,7 @@ public class triviaMazePanel extends JPanel{
 public void start() {  
 		
 		this.setLayout(new BorderLayout());
+		
 	
 	//	JPanel panel = new JPanel(); 
 	
@@ -71,10 +74,10 @@ public void start() {
 		southPanel.setVisible(false); 
 		add(southPanel,BorderLayout.SOUTH); 
 		
-		myOptionA.addActionListener(new QuestionButton(myMaze,'A',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel));  
-		myOptionB.addActionListener(new QuestionButton(myMaze,'B',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel));   
-		myOptionC.addActionListener(new QuestionButton(myMaze,'C',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel)); 
-		myOptionD.addActionListener(new QuestionButton(myMaze,'D',southPanel, myCorrectAnswerLabel, myWrongAnswerLabel)); 
+		myOptionA.addActionListener(new QuestionButton(myMaze,'A',southPanel));  
+		myOptionB.addActionListener(new QuestionButton(myMaze,'B',southPanel));   
+		myOptionC.addActionListener(new QuestionButton(myMaze,'C',southPanel)); 
+		myOptionD.addActionListener(new QuestionButton(myMaze,'D',southPanel)); 
 	
 		
 		add(southPanel,BorderLayout.SOUTH);
@@ -102,51 +105,39 @@ public void start() {
 		add(westPanel, BorderLayout.WEST);	 
 		
 		JPanel EastPanel = new JPanel();   
-		JLabel faceText = new JLabel("Currently Facing " + myMaze.getCurrentDoorFaceString());
-		
-//		JPanel CenterPanel = new JPanel();
-//		JLabel doorBlockedText = new JLabel("");
-//		JLabel gameOverText = new JLabel("");
-//		JLabel movedText = new JLabel ("");
-//		JLabel wonText = new JLabel("");
-		
-		JButton north = new JButton("north");   
-        north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
-        											myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		JLabel faceText = new JLabel("Currently Facing "+myMaze.getCurrentDoorFaceString());
+		JButton north = new JButton("north");  
+		JLabel image= new JLabel(); 
+		 EastPanel.add(image,BorderLayout.WEST);
+        north.addActionListener(new DirectionButton(myMaze,1,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText,image)); 
 		EastPanel.add(north,BorderLayout.NORTH);  
 		
 		
 		JButton south = new JButton("south");  
-		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
-													 myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		 south.addActionListener(new DirectionButton(myMaze,3,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText,image)); 
 		 EastPanel.add(south,BorderLayout.SOUTH); 
 		 
 		 
 		 JButton west = new JButton("west");  
-		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
-													myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
+		 west.addActionListener(new DirectionButton(myMaze,0,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText,image)); 
 		 EastPanel.add(west,BorderLayout.WEST);
 		 
 		
 		JButton east = new JButton("east");  
-	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText, 
-												   myDoorBlockedText, myGameOverText, myMovedText, myWonText)); 
-		EastPanel.add(east,BorderLayout.EAST);
-		
+	    east.addActionListener(new DirectionButton(myMaze,2,myQuestionText,myOptionA,myOptionB,myOptionC,myOptionD,southPanel,keyButtons,faceText,image)); 
+		EastPanel.add(east,BorderLayout.EAST);    
+	//	JLabel faceText = new JLabel("Currently "+myMaze.getCurrentDoorFaceString());
 		EastPanel.add(faceText, BorderLayout.EAST);
 		add (EastPanel, BorderLayout.EAST); 
-		
-		myCenterPanel.add(myDoorBlockedText, BorderLayout.CENTER);
-		myCenterPanel.add(myGameOverText, BorderLayout.CENTER);
-		myCenterPanel.add(myMovedText, BorderLayout.CENTER);
-		myCenterPanel.add(myWonText, BorderLayout.CENTER);
-		myCenterPanel.add(myCorrectAnswerLabel, BorderLayout.CENTER);
-		myCenterPanel.add(myWrongAnswerLabel, BorderLayout.CENTER);
-		add(myCenterPanel, BorderLayout.CENTER);
 	
 		
-	} 
+		
+		
+		
+		
+		
+		
+	}
 
-	
 
 }

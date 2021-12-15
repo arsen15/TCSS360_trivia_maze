@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class optionsFrame extends JFrame{
 	
@@ -43,8 +44,16 @@ public class optionsFrame extends JFrame{
 				returnToMenu();
 				add(panel, BorderLayout.SOUTH);
 				
-				JLabel label = new JLabel("This is just a label, tutorial text goes here instead.");
+				JLabel label = new JLabel("The goal of the game is to reach the end of the maze by moving from room to room.\n"
+						                   + "Before a player can enter a room through a door, they must answer a question correctly."	
+										   + "Each room has a question on each door present in the room."
+										   + "If a question is answered wrong, that door locks."
+										   + "If all doors in a room are locked, the player loses and the game ends."
+										   + "The player may save and load their game through the in game menu."
+										   + "Check out the Help in game menu if you get stuck!"
+										   + "Good luck, have fun! ");
 				add(label, BorderLayout.NORTH);
+				
 			}
 			
 		});

@@ -1,30 +1,27 @@
 package triviaMaze;
 
+import java.io.File;
 import java.io.Serializable;
 
-/**
- * 
- * @author Ryan. Arsen, Phuc
- *
- */
 public class TFQuestion implements Question, Serializable {
  
-	/**
-   * 
-   */
-  private static final long serialVersionUID = -8456352154158600169L;
-
-  private static String myQuestionText; 
+	
+	private static final long serialVersionUID = -8456352154158600169L;
+	
+	
+	private String myQuestionText; 
 	
 	private boolean myQuestionAnswer;  
-	private char myAnswerCharacter; 
+	private char myAnswerCharacter;  
+	
+	 private File myImageFile;
 	TFQuestion() { 
 	//	myQuestionText = theQuestion; 
 	}
 	
-	public void setQuestionText(final String theQuestionText) { 
+	public void setQuestionText(final  String theQuestionText) { 
 		myQuestionText = theQuestionText;
-	} 
+	}  
 	
 	public String getQuestionText() { 
 		return myQuestionText;
@@ -78,6 +75,13 @@ public class TFQuestion implements Question, Serializable {
 		return "";
 	} 
 	 
-
+	public void setImage(final File theFile) { 
+		myImageFile= theFile;
+	}  
+	
+	
+	public File getImage() { 
+		return myImageFile;
+	}
 	
 }

@@ -2,13 +2,12 @@ package triviaMaze;
 
 import java.io.Serializable;
 
-public class Door implements Serializable {
-    /**
-	 * 
-	 */
+public class Door implements Serializable { 
+	
+	
 	private static final long serialVersionUID = -4273157348381729462L;
-
-	private boolean myDoorStatus= false;
+	
+    private boolean myDoorStatus= false;
     
     private boolean myBlockedStatus= false; 
     
@@ -26,6 +25,17 @@ public class Door implements Serializable {
     private void closeDoor() { 
     	 myDoorStatus = false; 
     } 
+    /*
+    public boolean doorStatus() { 
+    	if(myBlockedStatus == false) { 
+    		return myDoorStatus; 
+    	} 
+    	else { 
+    		return myBlockedStatus;
+    	}
+    	
+    	
+    }  */
       
     public void checkQuestion() { 
     	if( myQuestion.answer() == true) { 
