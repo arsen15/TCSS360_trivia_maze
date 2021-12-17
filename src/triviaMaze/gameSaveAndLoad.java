@@ -41,10 +41,10 @@ public class gameSaveAndLoad {
    * @return the object that was saved
    * @throws Exception
    */
-  public static Object loadGame(String string) throws Exception {
+  public static mazeContainer loadGame(String string) throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         Files.newInputStream(Paths.get(string)))) {
-      return inputStream.readObject();
+      return (mazeContainer) inputStream.readObject();
 
     }
   }

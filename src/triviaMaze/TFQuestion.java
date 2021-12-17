@@ -8,13 +8,13 @@ public class TFQuestion implements Question, Serializable {
 	
 	private static final long serialVersionUID = -8456352154158600169L;
 	
-	
+	// set to public to test geters 
 	private String myQuestionText; 
 	
 	private boolean myQuestionAnswer;  
 	private char myAnswerCharacter;  
 	
-	 private File myImageFile;
+	 public File myImageFile;
 	TFQuestion() { 
 	//	myQuestionText = theQuestion; 
 	}

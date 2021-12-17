@@ -6,8 +6,8 @@ public class Door implements Serializable {
 	
 	
 	private static final long serialVersionUID = -4273157348381729462L;
-	
-    private boolean myDoorStatus= false;
+	// set to public for test cases for geter test cases
+    boolean myDoorStatus= false;
     
     private boolean myBlockedStatus= false; 
     
@@ -15,14 +15,16 @@ public class Door implements Serializable {
     
     
     
-    private Question myQuestion = new TFQuestion();
+    public Question myQuestion = new TFQuestion();
     
     private void openDoor() { 
     	 myDoorStatus = true;
     } 
     
+      
     
-    private void closeDoor() { 
+    // set to public for test case
+    public void closeDoor() { 
     	 myDoorStatus = false; 
     } 
     /*
