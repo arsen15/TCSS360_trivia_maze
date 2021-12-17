@@ -24,7 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileSystemView;
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
-import triviaMaze.gameSaveAndLoad;
+import triviaMaze.GameSaveAndLoad;
 import triviaMaze.mazeContainer;
 import triviaMaze.triviaSQL;
 
@@ -222,7 +222,7 @@ public class triviaGUI extends JPanel {
             try {
               click++;
               System.out.println(click);
-              gameSaveAndLoad.saveGame(mC, click + " Maze.ser");
+              GameSaveAndLoad.saveGame(mC, click + " Maze.ser");
             } catch (Exception e) {
               System.out.println(
                   "Something is wrong! Couldn't save!" + e.getMessage());
@@ -252,7 +252,7 @@ public class triviaGUI extends JPanel {
               jChooser.showSaveDialog(null);
               // Assign the new updated maze into the mainPanel and show it.
               final triviaGUI mainPanel = new triviaGUI(
-                  returnMaze(gameSaveAndLoad
+                  returnMaze(GameSaveAndLoad
                       .loadGame(jChooser.getSelectedFile().getName())));
               mainPanel.start();
               window.pack();

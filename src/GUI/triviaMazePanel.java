@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileSystemView;
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
 import triviaMaze.TFQuestion;
-import triviaMaze.gameSaveAndLoad;
+import triviaMaze.GameSaveAndLoad;
 import triviaMaze.mazeContainer;
 
 //the way triviaGUI is rn is it creates a panel, but we already have gamePanel, so we only need the buttons and other things in a method init or start and then

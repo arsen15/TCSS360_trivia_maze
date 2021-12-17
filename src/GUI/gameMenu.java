@@ -18,7 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileSystemView;
 
-import triviaMaze.gameSaveAndLoad;
+import triviaMaze.GameSaveAndLoad;
 import triviaMaze.mazeContainer;
 import triviaMaze.triviaSQL;
 

@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  * @author Ryan, Arsen, Phuc
  *
  */
-public class gameSaveAndLoad {
+public class GameSaveAndLoad {
   /**
    * Save the game into .ser file to be loaded again.
    * 
