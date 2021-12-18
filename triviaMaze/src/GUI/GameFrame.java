@@ -114,7 +114,19 @@ public class GameFrame extends JFrame {
                 + "3. Who says 'we're more ghosts than people'\n"
                 + "Answer: Arthur Morgan\n"
                 + "4. In the story of GTA V, Michael is in the witness protection program.\n"
-                + "Answer: F";
+                + "Answer: F\n"
+                + "5. Who does this album art depict? \n"
+                + "Answer: Artorias\n"
+                + "6. What song is played at the end of Hades? \n"
+                + "Answer: It's in the blood. \n"
+                + "7. The soul of cinder is found at the first flame. \n"
+                + "Answer: T \n"
+                + "8. Gwyn,Lord of cinder, is the final boss of dark souls 1. \n"
+                + "Answer: T \n"
+                + "9. In Skyrim guards say \"i used to be an adventurer like you until...\" \n"
+                + "Answer: I took an arrow to the knee. \n"
+                + "10. What is the name of the player character in Disco Elysium. \n"
+                + "Answer: Harrier Du Bois";
             JOptionPane.showMessageDialog(myGame, answers, "Cheat Sheet",
                 JOptionPane.INFORMATION_MESSAGE);
           }

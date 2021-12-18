@@ -158,16 +158,16 @@ public class MazeContainer implements Serializable {
    * Method that moves player north when needed.
    * @return
    */
-  public boolean moveNorth() {
+  public void moveNorth() {
     if (checkInBoundY(-1) == false) {
-      return false;
+      return;
     }
     myFixedMaze[myCurrentX][myCurrentY].getNorth().checkQuestion();
     if (myFixedMaze[myCurrentX][myCurrentY].getNorth().checkDoor()) {
       myCurrentY--;
 
     }
-    return true;
+    
   }
 
   /**
