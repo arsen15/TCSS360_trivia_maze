@@ -1,55 +1,92 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
 import java.io.Serializable;
 
-public class Room implements Serializable { 
-	
-	
-	
-	private static final long serialVersionUID = 9101079280627683610L;
-	
+/**
+ * This class creates the maze rooms and room logic.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
+public class Room implements Serializable {
 
-	private static boolean myRoomBlocked; 
-	
-	
-	
-	
-    private	Door myNorthDoor = new Door(); 
-	private Door myEastDoor = new Door();
-	private Door mySouthDoor = new Door();
-	private Door myWestDoor = new Door();  
-	
-	
-	
-    public Door getNorth() { 
-    	return myNorthDoor;
-    }
-	
- public Door getEast() { 
-    	return myEastDoor; 
-    } 
- public Door getSouth() { 
- 	return mySouthDoor;
- } 
- public Door getWest() { 
- 	return myWestDoor;
- } 
- 
-  public boolean checkBlockedDoors() { 
-	   if(myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus() && mySouthDoor.getBlockedStatus() &&  
-			   myWestDoor.getBlockedStatus()) {  
-		   
-		   myRoomBlocked = true;
-		   
-		   return true;
-	   } else {  
-		   myRoomBlocked = false;
-		   return false; 
-		  
-	   }
-		   
+  private static final long serialVersionUID = 9101079280627683610L;
+
+  /**
+   * Boolean value to check if room is blocked.
+   */
+  private static boolean myRoomBlocked;
+
+  /**
+   * Represents north door.
+   */
+  private Door myNorthDoor = new Door();
+  
+  /**
+   * Represents east door.
+   */
+  private Door myEastDoor = new Door();
+  
+  /**
+   * Represents south door.
+   */
+  private Door mySouthDoor = new Door();
+  
+  /**
+   * Represents west door.
+   */
+  private Door myWestDoor = new Door();
+
+  /**
+   * Getter for north door.
+   */
+  public Door getNorth() {
+    return myNorthDoor;
   }
- 
- 
-	
+
+  /**
+   * Getter for east door.
+   */
+  public Door getEast() {
+    return myEastDoor;
+  }
+  
+  /**
+   * Getter for south door.
+   */
+  public Door getSouth() {
+    return mySouthDoor;
+  }
+  
+  /**
+   * Getter for west door.
+   */
+  public Door getWest() {
+    return myWestDoor;
+  }
+
+  /**
+   * Checks if a certain door is blocked.
+   * @return
+   */
+  public boolean checkBlockedDoors() {
+    if (myNorthDoor.getBlockedStatus() && myEastDoor.getBlockedStatus()
+        && mySouthDoor.getBlockedStatus() && myWestDoor.getBlockedStatus()) {
+
+      myRoomBlocked = true;
+
+      return true;
+    } else {
+      myRoomBlocked = false;
+      return false;
+
+    }
+
+  }
+
 }
