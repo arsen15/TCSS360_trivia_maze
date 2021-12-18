@@ -27,17 +27,25 @@ public class MazeContainer implements Serializable {
   /**
    * The current horizontal coordinate.
    */
-  private int myCurrentX = 1;
+  int myCurrentX = 1;
   
   /**
    * The current vertical coordinate.
    */
-  private int myCurrentY = 1;
+  int myCurrentY = 1;
   
   /**
    * The value to represent the door direction.
    */
   private int myDoorDirection = 5;
+  
+  /**
+   * Numbers represent directions.
+   */
+  private static final int NORTH = 1;  
+  private static final int EAST = 2;
+  private static final int SOUTH = 3; 
+  private static final int WEST = 0;
 
   /**
    * The array list of rooms that represents the maze.
@@ -115,18 +123,18 @@ public class MazeContainer implements Serializable {
    * @return
    */
   public Door getCurrentDoorFace() {
-    if (myDoorDirection == 0) {
-      return getCurrentDoorWest();
-    } else if (myDoorDirection == 1) {
-      return getCurrentDoorNorth();
-    } else if (myDoorDirection == 2) {
-      return getCurrentDoorEast();
-    } else if (myDoorDirection == 3) {
-      return getCurrentDoorSouth();
-    } else {
-      return null;
-    }
-  }
+	    if (myDoorDirection == WEST) {
+	      return getCurrentDoorWest();
+	    } else if (myDoorDirection == NORTH) {
+	      return getCurrentDoorNorth();
+	    } else if (myDoorDirection == EAST) {
+	      return getCurrentDoorEast();
+	    } else if (myDoorDirection == SOUTH) {
+	      return getCurrentDoorSouth();
+	    } else {
+	      return null;
+	    }
+	  }
   
   /**
    * The method that gets the value of the door direction.
@@ -141,18 +149,18 @@ public class MazeContainer implements Serializable {
    * @return
    */
   public String getCurrentDoorFaceString() {
-    if (myDoorDirection == 0) {
-      return "west";
-    } else if (myDoorDirection == 1) {
-      return "north";
-    } else if (myDoorDirection == 2) {
-      return "east";
-    } else if (myDoorDirection == 3) {
-      return "south";
-    } else {
-      return "nowhere";
-    }
-  }
+	    if (myDoorDirection == WEST) {
+	      return "west";
+	    } else if (myDoorDirection == NORTH) {
+	      return "north";
+	    } else if (myDoorDirection == EAST) {
+	      return "east";
+	    } else if (myDoorDirection == SOUTH) {
+	      return "south";
+	    } else {
+	      return "nowhere";
+	    }
+	  }
 
   /**
    * Method that moves player north when needed.
@@ -244,39 +252,34 @@ public class MazeContainer implements Serializable {
 
   public boolean checkInBoundDirection(int theDirection) {
 
-    int west = 0;
-    int north = 1;
-    int east = 2;
-    int south = 3;
-
-    if (theDirection == south) {
-      return checkInBoundY(1);
-    } else if (theDirection == east) {
-      return checkInBoundX(1);
-    } else if (theDirection == north) {
-      return checkInBoundY(-1);
-    } else if (theDirection == west) {
-      return checkInBoundX(-1);
-    } else {
-      System.out.println("invalid direction");
-      return false;
-    }
-  }
+	    if (theDirection == SOUTH) {
+	      return checkInBoundY(1);
+	    } else if (theDirection == EAST) {
+	      return checkInBoundX(1);
+	    } else if (theDirection == NORTH) {
+	      return checkInBoundY(-1);
+	    } else if (theDirection == WEST) {
+	      return checkInBoundX(-1);
+	    } else {
+	      System.out.println("invalid direction");
+	      return false;
+	    }
+	  }
 
   /**
    * Moves player in facing direction.
    */
   public void moveFaceDirection() {
-    if (myDoorDirection == 3) {
-      moveSouth();
-    } else if (myDoorDirection == 2) {
-      moveEast();
-    } else if (myDoorDirection == 1) {
-      moveNorth();
-    } else if (myDoorDirection == 0) {
-      moveWest();
-    }
-  }
+	    if (myDoorDirection == SOUTH) {
+	      moveSouth();
+	    } else if (myDoorDirection == EAST) {
+	      moveEast();
+	    } else if (myDoorDirection == NORTH) {
+	      moveNorth();
+	    } else if (myDoorDirection == WEST) {
+	      moveWest();
+	    }
+	  }
 
   /**
    * Getter method that gets current X value.

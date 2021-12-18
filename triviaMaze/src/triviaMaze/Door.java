@@ -21,7 +21,7 @@ public class Door implements Serializable {
 	/**
 	 * Boolean value for open door status.
 	 */
-    private boolean myDoorStatus= false;
+    boolean myDoorStatus= false;
     
     /**
      * Boolean value for blocked door status.
@@ -36,7 +36,7 @@ public class Door implements Serializable {
     /**
      * Boolean value for true/false questions.
      */
-    private Question myQuestion = new TFQuestion();
+    Question myQuestion = new TFQuestion();
     
     /**
      * Method to hold the open door status.
@@ -48,7 +48,7 @@ public class Door implements Serializable {
     /**
      * Method to hold the closed open door status.
      */
-    private void closeDoor() { 
+    void closeDoor() { 
     	 myDoorStatus = false; 
     } 
     

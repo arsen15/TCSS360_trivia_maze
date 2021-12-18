@@ -37,7 +37,7 @@ public class TFQuestion implements Question, Serializable {
 	/**
 	 * Image file.
 	 */
-	private File myImageFile;
+	File myImageFile;
 
 	/**
 	 * Sets the question text.

@@ -25,22 +25,22 @@ public class Room implements Serializable {
   /**
    * Represents north door.
    */
-  private Door myNorthDoor = new Door();
+  Door myNorthDoor = new Door();
   
   /**
    * Represents east door.
    */
-  private Door myEastDoor = new Door();
+  Door myEastDoor = new Door();
   
   /**
    * Represents south door.
    */
-  private Door mySouthDoor = new Door();
+  Door mySouthDoor = new Door();
   
   /**
    * Represents west door.
    */
-  private Door myWestDoor = new Door();
+  Door myWestDoor = new Door();
 
   /**
    * Getter for north door.

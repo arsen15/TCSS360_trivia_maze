@@ -26,7 +26,7 @@ public class MultipleChoiceQuestion implements Question, Serializable {
   /**
    * Question text.
    */
-  private String myQuestionText;
+  String myQuestionText;
 
   /**
    * Question answer options.
@@ -41,7 +41,7 @@ public class MultipleChoiceQuestion implements Question, Serializable {
   /**
    * Image file.
    */
-  private File myImageFile;
+  File myImageFile;
 
   /**
    * Sets the answer.
