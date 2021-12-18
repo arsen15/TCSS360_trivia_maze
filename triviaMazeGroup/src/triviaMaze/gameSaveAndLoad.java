@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
 import java.io.IOException;
@@ -11,10 +16,10 @@ import java.nio.file.Paths;
  * A class that will help us with Saving and Loading the game. REFERENCE:
  * https://www.youtube.com/watch?v=-xW0pBZqpjU&ab_channel=AlmasBaimagambetov
  * 
- * @author Ryan, Arsen, Phuc
- *
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
  */
-public class gameSaveAndLoad {
+public class GameSaveAndLoad {
   /**
    * Save the game into .ser file to be loaded again.
    * 
@@ -41,10 +46,10 @@ public class gameSaveAndLoad {
    * @return the object that was saved
    * @throws Exception
    */
-  public static mazeContainer loadGame(String string) throws Exception {
+  public static MazeContainer loadGame(String string) throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         Files.newInputStream(Paths.get(string)))) {
-      return (mazeContainer) inputStream.readObject();
+      return (MazeContainer) inputStream.readObject();
 
     }
   }

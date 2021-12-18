@@ -1,105 +1,134 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileSystemView;
 
-import triviaMaze.gameSaveAndLoad;
-import triviaMaze.mazeContainer;
-import triviaMaze.triviaSQL;
+/**
+ * This class creates the main menu of the game. The program runs by calling upon the menu.
+ * It holds the start, options, quit buttons. 
+ * The menu buttons appear on hover.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
+public class GameMenu extends JFrame {
 
-public class gameMenu extends JFrame {
-
-  /**
-   * 
-   */
   private static final long serialVersionUID = -4802340630976324291L;
 
   /**
-   * Dimensions
+   * Frame Dimensions
    */
   public static final int WIDTH = 500;
   public static final int HEIGHT = 500;
 
+  /**
+   * The vertical distance between the menu buttons.
+   */
   private int VERT_GAP_BETWEEN_BUTTONS = 10;
+  
+  /**
+   * The dimensions of the buttons.
+   */
+  private final Dimension BUTTON_SIZE = new Dimension(100, 100);
+  
+  /**
+   * Insets dimensions.
+   */
+  private final Insets INSETS_DIMENSIONS = new Insets(150, 190, 150, 190); 
+  
+  /**
+   * Start button color.
+   */
+  private final Color START_COLOR = new Color(156, 117, 186);
+  
+  /**
+   * Options button color.
+   */
+  private final Color OPTIONS_COLOR = new Color(232, 125, 185);
+  
+  /**
+   * The background image of the menu.
+   */
+  private BufferedImage myBackgroundImage;
+  
+  /**
+   * The JPanel that holds contents of the JFrame.
+   */
+  private JPanel myPanel;
 
-  public gameMenu() {
+  /**
+   * The game menu constructor. It initializes the game menu.
+   */
+  public GameMenu() {
+	  
     super("Video Game Trivia");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    setResizable(false);
+    
+    File file = new File("MenuBackground.jpg");
+    try {
+    	 myBackgroundImage = ImageIO.read(file);
+    	 
+    } catch (final Exception theException) {
+        System.out.println("Error loading image or audio" + theException.getMessage());
+      }
+    
+    myPanel = new JPanel();
+    myPanel.setBorder(new EmptyBorder(INSETS_DIMENSIONS));
+    myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));    
+    music();
 
     // Start button
     JButton start = new JButton("START");
-    start.setPreferredSize(new Dimension(50, 50));
+    start.setPreferredSize(BUTTON_SIZE);
     start.addActionListener(new gameListener());
-
-    // Load button
-    // JButton load = new JButton("LOAD");
-    // load.setPreferredSize(new Dimension(50, 50));
-    // load.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent ae) {
-    // load.setEnabled(false);
-    // }
-    // }
-    // );
-    // load.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent ev) {
-    // System.out.println("you pressed LOAD");
-    // try {
-    // // Load the game with the data and initialize the new maze. Need
-    // // to have something like a fileCHooser to allow players to choose
-    // // the
-    // // file that they want.
-    // // Create a file Chooser for LOAD method. And changed the save
-    // // button text on FileChooser to Open.
-    // // Source:
-    // //
-    // https://community.oracle.com/tech/developers/discussion/1390408/jfilechooser-uimanager-keys-i18n
-    // UIManager.put("FileChooser.saveButtonText", "Open");
-    // JFileChooser jChooser = new JFileChooser(
-    // FileSystemView.getFileSystemView().getHomeDirectory());
-    // jChooser.showSaveDialog(null);
-    // // mazeContainer maze = (mazeContainer) gameSaveAndLoad
-    // // .loadGame(jChooser.getSelectedFile().getName());
-    // // // Assign the new updated maze into the mainPanel and show it.
-    // // final triviaGUI mainPanel = new triviaGUI(returnMaze(maze));
-    // // // final triviaGUI mainPanel = new triviaGUI(maze);
-    // final triviaGUI mainPanel = new triviaGUI(
-    // returnMaze(gameSaveAndLoad
-    // .loadGame(jChooser.getSelectedFile().getName())));
-    // mainPanel.start();
-    // setContentPane(mainPanel);
-    // setVisible(true);
-    // } catch (Exception e) {
-    // System.out
-    // .println("Something is wrong! Couldn't load the saved data!\n"
-    // + e.getMessage());
-    // }
-    // }
-    // });
+    start.setBackground(START_COLOR);
+    myPanel.add(start);
+   
+    myPanel.add(Box.createVerticalStrut(VERT_GAP_BETWEEN_BUTTONS));
     
     // Options button
     JButton options = new JButton("OPTIONS");
-    options.setPreferredSize(new Dimension(50, 50));
+    options.setPreferredSize(BUTTON_SIZE);
     options.addActionListener(new optionsListener());
+    options.setBackground(OPTIONS_COLOR);
+    myPanel.add(options);
     pack();
+    
+    myPanel.add(Box.createVerticalStrut(VERT_GAP_BETWEEN_BUTTONS));
+
     // The quit button
     JButton quit = new JButton("Quit Game");
-    quit.setPreferredSize(new Dimension(50, 50));
+    quit.setPreferredSize(BUTTON_SIZE);
     quit.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -107,55 +136,74 @@ public class gameMenu extends JFrame {
         System.exit(0);
       }
     });
-    quit.setBackground(Color.LIGHT_GRAY);
-    JPanel centerPanel = createCenterVerticalPanel(VERT_GAP_BETWEEN_BUTTONS,
-        start, options, quit);
-    add(centerPanel);
-
-    // pack();
+    quit.setBackground(Color.PINK);
+    myPanel.add(quit);
+      
     setLocationRelativeTo(null); // Center in screen
-    // setPreferredSize(new Dimension(1000, 1000));
+    
+    add(myPanel);
+    myPanel.setVisible(true);
   }
 
-  protected mazeContainer returnMaze(mazeContainer theMaze) {
-    triviaSQL sq = new triviaSQL();
-    theMaze.fixedArraySetup();
-    theMaze.setDoors(sq.setup());
-    return theMaze;
-  }
-
-  private static JPanel createCenterVerticalPanel(
-      final int spaceBetweenComponents, final JComponent... components) {
-    final JPanel panel = new JPanel();
-
-    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-    panel.setBorder(new EmptyBorder(new Insets(150, 190, 150, 190)));
-
-    Arrays.stream(components).forEach(component -> {
-      component.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-      panel.add(component);
-      panel.add(Box.createRigidArea(new Dimension(10, spaceBetweenComponents)));
-    });
-
-    return panel;
-  }
-
+  /**
+   * Action listener for the start button. It starts the game.
+   * @author Arsen Shintemirov, Ryan Montoya, Phuc Luu
+   *
+   */
   private class gameListener implements ActionListener {
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent theEvent) {
       setVisible(false);
-      new gameFrame(gameMenu.this).setVisible(true);
-      // pack();
+      new GameFrame(GameMenu.this).setVisible(true);
     }
   }
 
+  /**
+   * Action listener for the options button. It opens the options page.
+   * @author Arsen Shintemirov, Ryan Montoya, Phuc Luu
+   *
+   */
   private class optionsListener implements ActionListener {
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent theEvent) {
       setVisible(false);
-      new optionsFrame(gameMenu.this).setVisible(true);
-      // pack();
+      new OptionsFrame(GameMenu.this).setVisible(true);
+      
     }
   }
+  
+  /**
+   * The music class fetches the audio file and plays it. This is the background music of the game.
+   */
+  public static void music() {
+		 
+	  try {
+		  
+		File musicFile = new File("Blazer Rail.wav");
+		AudioInputStream ais = AudioSystem.getAudioInputStream(musicFile);
+		Clip clip = AudioSystem.getClip();
+        clip.open(ais);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.setFramePosition(0);
+        clip.start();
+        
+	} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+  }
+  
+  /**
+   * Paints the components of the JPanel, specifically the background image.
+   */
+  @Override
+  public void paint(Graphics theGraphic) {
+	   myPanel.paint(theGraphic);
+	   Graphics2D graphics = (Graphics2D) theGraphic;
+	   graphics.drawImage(myBackgroundImage, 0, 0, null );
+	   
+  }
+
 }

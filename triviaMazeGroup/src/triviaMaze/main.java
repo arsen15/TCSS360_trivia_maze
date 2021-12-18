@@ -1,16 +1,26 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
-import GUI.gameMenu;
+import GUI.GameMenu;
 
-
-public class main {
+/**
+ * This main class of the program. It creates the menu object and therefore starts the program.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
+public class Main {
 	
 	/**
-	 * the main method, so far runs the gui
+	 * The main method, creates the menu object
 	 * @param theArgs
 	 */
 	public static void main(final String[] theArgs) {
-		gameMenu gameMenu = new gameMenu();
+		GameMenu gameMenu = new GameMenu();
 		gameMenu.setVisible(true);
 	}
 

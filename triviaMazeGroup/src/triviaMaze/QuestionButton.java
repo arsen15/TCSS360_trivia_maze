@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
 import java.awt.event.ActionEvent;
@@ -5,24 +10,48 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+/**
+ * This class creates action listeners for the question buttons.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
 public class QuestionButton implements ActionListener {
 
-  private mazeContainer myMaze;
+	/**
+	 * The maze.
+	 */
+  private MazeContainer myMaze;
+  
+  /**
+   * Character for multiple choice answers.
+   */
   private char myMultipleChoice;
+  
+  /**
+   * JPanel to hold the components.
+   */
   private JPanel myPanel;
-  public QuestionButton(mazeContainer theMaze, char theChoice) {
-    myMaze = theMaze;
-    myMultipleChoice = theChoice;
-  }
-
-  public QuestionButton(mazeContainer theMaze, char theChoice,
-      JPanel thePanel) {
+  
+  /**
+   * Constructor that initializes the question button.
+   * @param theMaze
+   * @param theChoice
+   * @param thePanel
+   */
+  public QuestionButton(MazeContainer theMaze, char theChoice, JPanel thePanel) {
     myMaze = theMaze;
     myMultipleChoice = theChoice;
     myPanel = thePanel;
   }
+  
 
-  public void actionPerformed(ActionEvent e) {
+  /**
+   * Method that handles the actions performed when question button is pressed.
+   * Also provides some directions to the player.
+   */
+  public void actionPerformed(ActionEvent theEvent) {
+	  
 
     // sets the door into questioning status
     myMaze.getCurrentDoorFace().setQuestioningStatus(true);
@@ -45,23 +74,16 @@ public class QuestionButton implements ActionListener {
       myPanel.setVisible(false);
       System.out.println("WRONG!");
       myPanel.repaint();
+      
+      
     } else {
-      System.out.println("try to move again");
+      System.out.println("Correct! You may enter the room.");
     }
 
     if (myMaze.getCurrentRoom().checkBlockedDoors()) {
       System.out.println("game over");
     }
 
-    /*
-     * if(myMaze.getCurrentDoorFace().getQuestion().answer()) {
-     * System.out.println("try to move again");
-     * myMaze.getCurrentDoorFace().checkQuestion();
-     * 
-     * if(myMaze.getCurrentDoorFace().getBlockedStatus() == true) {
-     * myPanel.setVisible(false); System.out.println("Jpanel case ");
-     * myPanel.repaint(); } }
-     */
 
     myMaze.setDoorDirection(5);
   }

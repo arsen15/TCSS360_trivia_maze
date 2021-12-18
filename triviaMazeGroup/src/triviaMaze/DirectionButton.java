@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
 import java.awt.event.ActionEvent;
@@ -11,70 +16,67 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * This class creates the directional buttons that allow player to choose direction.
+ * It also displays the win pop up when necessary.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
 public class DirectionButton implements ActionListener {
 
-  private mazeContainer myMaze;
-  private int myDirection;
-  private JPanel myPanel;
+  /**
+   * The maze.
+   */
+  private final MazeContainer myMaze;
+  
+  /**
+   * Value used to determine the direction.
+   */
+  private final int myDirection;
+  
+  /**
+   * Panel that holds the button components.
+   */
+  private final JPanel myPanel;
 
-  private JLabel myQuestionText;
-  private JButton myOptionA;
-  private JButton myOptionB;
-  private JButton myOptionC;
-  private JButton myOptionD;
+  /**
+   * The text of the question.
+   */
+  private final JLabel myQuestionText;
+  
+  /**
+   * The buttons for the answer options.
+   */
+  private final JButton myOptionA;
+  private final JButton myOptionB;
+  private final JButton myOptionC;
+  private final JButton myOptionD;
+  
+  /**
+   * Image label used to show the images for each question.
+   */
   private JLabel myImageLabel;
-  JButton[][] myArray;
-  JLabel myDirectionText;
+  
+  private JButton[][] myArray;
+  private JLabel myDirectionText;
 
-  public DirectionButton(mazeContainer theMaze, int theDirection,
-      JPanel thePanel) {
-    myDirection = theDirection;
-    myMaze = theMaze;
-    myPanel = thePanel;
-  }
-
-  public DirectionButton(mazeContainer theMaze, int theDirection,
-      JLabel theQuestionText, JButton theOptionA, JButton theOptionB,
-      JButton theOptionC, JButton theOptionD, JPanel thePanel) {
-    myMaze = theMaze;
-    myDirection = theDirection;
-    myQuestionText = theQuestionText;
-    myOptionA = theOptionA;
-    myOptionB = theOptionB;
-    myOptionC = theOptionC;
-    myOptionD = theOptionD;
-    myPanel = thePanel;
-  }
-  public DirectionButton(mazeContainer theMaze, int theDirection,
-      JLabel theQuestionText, JButton theOptionA, JButton theOptionB,
-      JButton theOptionC, JButton theOptionD, JPanel thePanel,
-      JButton[][] theArray) {
-    myMaze = theMaze;
-    myDirection = theDirection;
-    myQuestionText = theQuestionText;
-    myOptionA = theOptionA;
-    myOptionB = theOptionB;
-    myOptionC = theOptionC;
-    myOptionD = theOptionD;
-    myPanel = thePanel;
-    myArray = theArray;
-  }
-  public DirectionButton(mazeContainer theMaze, int theDirection,
-      final JLabel theQuestionText, JButton theOptionA, JButton theOptionB,
-      JButton theOptionC, JButton theOptionD, JPanel thePanel,
-      JButton[][] theArray, JLabel theDirectionText) {
-    myMaze = theMaze;
-    myDirection = theDirection;
-    myQuestionText = theQuestionText;
-    myOptionA = theOptionA;
-    myOptionB = theOptionB;
-    myOptionC = theOptionC;
-    myOptionD = theOptionD;
-    myPanel = thePanel;
-    myArray = theArray;
-    myDirectionText = theDirectionText;
-  }
-  public DirectionButton(mazeContainer theMaze, int theDirection,
+  /**
+   * The constructor that initializes the object when called.
+   * 
+   * @param theMaze
+   * @param theDirection
+   * @param theQuestionText
+   * @param theOptionA
+   * @param theOptionB
+   * @param theOptionC
+   * @param theOptionD
+   * @param thePanel
+   * @param theArray
+   * @param theDirectionText
+   * @param theImage
+   */
+  public DirectionButton(MazeContainer theMaze, int theDirection,
       final JLabel theQuestionText, JButton theOptionA, JButton theOptionB,
       JButton theOptionC, JButton theOptionD, JPanel thePanel,
       JButton[][] theArray, JLabel theDirectionText, JLabel theImage) {
@@ -91,7 +93,10 @@ public class DirectionButton implements ActionListener {
     myImageLabel = theImage;
   }
 
-  public void actionPerformed(ActionEvent e) {
+  /**
+   * The action event for all of the directional buttons, question images, directional label.
+   */
+  public void actionPerformed(ActionEvent theEvent) {
     // myDirectionText.setText("Currently Facing
     // "+myMaze.getCurrentDoorFaceString());
     // returns if the door is in questioning as movement is locked
@@ -139,7 +144,7 @@ public class DirectionButton implements ActionListener {
           - 1];
       afterMove.setText("'*'");
 
-      System.out.println("moved");
+      System.out.println("Moved into the room.");
       // move door direction out of range
       myMaze.setDoorDirection(5);
       myPanel.setVisible(false);
@@ -148,12 +153,6 @@ public class DirectionButton implements ActionListener {
           .setText("Currently Facing " + myMaze.getCurrentDoorFaceString());
       return;
     }
-
-    // JLabel myQuestionText = (JLabel)myPanel.getComponentAt(1,1);
-    // JButton myOptionA = (JButton)myPanel.getComponentAt(1,2);
-    // JButton myOptionB = (JButton)myPanel.getComponentAt(1,3);
-    // JButton myOptionC = (JButton)myPanel.getComponentAt(1,4);
-    // JButton myOptionD = (JButton)myPanel.getComponentAt(1,5);
 
     if (myMaze.checkInBoundDirection(myDirection)) {
 
@@ -173,14 +172,6 @@ public class DirectionButton implements ActionListener {
 
       File f = myMaze.getCurrentDoorFace().getQuestion().getImage();
       try {
-
-        /*
-         * String url = "./fireSeekerAudio.mp3";
-         * 
-         * Clip clip = AudioSystem.getClip(); AudioInputStream inputStream =
-         * AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(
-         * "/path/to/sounds/" + url)); clip.open(inputStream); clip.start();
-         */
 
         BufferedImage picture = ImageIO.read(f);
 
@@ -209,7 +200,7 @@ public class DirectionButton implements ActionListener {
 
     System.out.println(myMaze.getCurrentXYString());
     if (myMaze.won()) {
-      String winMessage = "You win!\n" + "Congratulation!";
+      String winMessage = "You win!\n" + "Congratulations!";
       JOptionPane.showMessageDialog(myPanel, winMessage, "Win",
           JOptionPane.INFORMATION_MESSAGE);
       System.out.println("you won");

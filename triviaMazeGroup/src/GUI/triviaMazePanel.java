@@ -1,61 +1,58 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.filechooser.FileSystemView;
-
 import triviaMaze.DirectionButton;
 import triviaMaze.QuestionButton;
-import triviaMaze.TFQuestion;
-import triviaMaze.gameSaveAndLoad;
-import triviaMaze.mazeContainer;
+import triviaMaze.MazeContainer;
 
-//the way triviaGUI is rn is it creates a panel, but we already have gamePanel, so we only need the buttons and other things in a method init or start and then
-//run that method in the constructor. where do we include the SQL stuff?
-public class triviaMazePanel extends JPanel {
+/**
+ * This class creates the maze GUI.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov  
+ * @version 12/17/2021
+ */
+public class TriviaMazePanel extends JPanel {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 197500895779284794L;
 
   /**
-   * Dimensions
+   * Dimensions of the JPanel.
    */
   public static final int WIDTH = 500;
   public static final int HEIGHT = 500;
 
-  private mazeContainer myMaze;
-
-  public triviaMazePanel(mazeContainer theMaze) {
+  /**
+   * The maze object used to create the maze.
+   */
+  private MazeContainer myMaze;
+  
+  /**
+   * The constructor that initializes the object when called.
+   * @param theMaze
+   */
+  public TriviaMazePanel(MazeContainer theMaze) {
     super();
     myMaze = theMaze;
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     
   }
 
+  /**
+   * This method builds the maze, questions, directional buttons and label.
+   */
   public void start() {
 
     this.setLayout(new BorderLayout());
-    
-    // JPanel panel = new JPanel();
-
-    // JButton north = new JButton("north");
 
     JPanel southPanel = new JPanel();
 
@@ -79,8 +76,6 @@ public class triviaMazePanel extends JPanel {
     myOptionD.addActionListener(new QuestionButton(myMaze, 'D', southPanel));
 
     add(southPanel, BorderLayout.SOUTH);
-    
-    // add(panel, BorderLayout.EAST);
 
     JPanel westPanel = new JPanel();
     westPanel.setLayout(new GridLayout(5, 5));
@@ -105,7 +100,7 @@ public class triviaMazePanel extends JPanel {
     JPanel EastPanel = new JPanel();
     JLabel faceText = new JLabel(
         "Currently Facing " + myMaze.getCurrentDoorFaceString());
-    JButton north = new JButton("north");
+    JButton north = new JButton("North");
     JLabel image = new JLabel();
     EastPanel.add(image, BorderLayout.WEST);
     north.addActionListener(
@@ -113,25 +108,23 @@ public class triviaMazePanel extends JPanel {
             myOptionC, myOptionD, southPanel, keyButtons, faceText, image));
     EastPanel.add(north, BorderLayout.NORTH);
 
-    JButton south = new JButton("south");
+    JButton south = new JButton("South");
     south.addActionListener(
         new DirectionButton(myMaze, 3, myQuestionText, myOptionA, myOptionB,
             myOptionC, myOptionD, southPanel, keyButtons, faceText, image));
     EastPanel.add(south, BorderLayout.SOUTH);
 
-    JButton west = new JButton("west");
+    JButton west = new JButton("West");
     west.addActionListener(
         new DirectionButton(myMaze, 0, myQuestionText, myOptionA, myOptionB,
             myOptionC, myOptionD, southPanel, keyButtons, faceText, image));
     EastPanel.add(west, BorderLayout.WEST);
 
-    JButton east = new JButton("east");
+    JButton east = new JButton("East");
     east.addActionListener(
         new DirectionButton(myMaze, 2, myQuestionText, myOptionA, myOptionB,
             myOptionC, myOptionD, southPanel, keyButtons, faceText, image));
     EastPanel.add(east, BorderLayout.EAST);
-    // JLabel faceText = new JLabel("Currently
-    // "+myMaze.getCurrentDoorFaceString());
     EastPanel.add(faceText, BorderLayout.EAST);
     add(EastPanel, BorderLayout.EAST);
    

@@ -1,6 +1,10 @@
+/*
+ * TCSS 360 Trivia Maze Project
+ * Fall 2021
+ */
+
 package triviaMaze;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,14 +13,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
 import org.sqlite.SQLiteDataSource;
 
-public class triviaSQL {
+/**
+ * This class opens and sets up the database.
+ *   
+ * @author Ryan Montoya, Phuc Luu, Arsen Shintemirov
+ * @version 12/17/2021
+ */
+public class TriviaSQL {
 
+	/**
+	 * Used to get a random question.
+	 */
   Random myRandomQuestion = new Random();
 
+  /**
+   * Method that sets up the database for the maze.
+   * @return
+   */
   public ArrayList<Question> setup() {
     SQLiteDataSource ds = null;
     ArrayList<Question> questionList = new ArrayList<Question>();
@@ -30,14 +45,6 @@ public class triviaSQL {
     }
 
     System.out.println("Opened database successfully");
-
-    /*
-     * String query = "CREATE TABLE IF NOT EXISTS questions ( " +
-     * "QUESTION TEXT NOT NULL, " + "TYPE TEXT NOT NULL, "
-     * +"ANSWERA TEXT NOT NULL, "+
-     * "ANSWERB TEXT NOT NULL, "+"ANSWERC TEXT NOT NULL, "
-     * +"ANSWERD TEXT NOT NULL )";
-     */
 
     String query = "CREATE TABLE IF NOT EXISTS questions ( "
         + "QUESTION TEXT NOT NULL, " + "TYPE TEXT NOT NULL, "
@@ -57,10 +64,6 @@ public class triviaSQL {
 
     // next insert two rows of data
     System.out.println("Attempting to insert 2 rows into questions table");
-    // initial quarry, use text editor to add future elements for ease
-    String query1 = "INSERT INTO questions ( QUESTION, TYPE, ANSWERA,  "
-        + "ANSWERB, ANSWERC, ANSWERD, IMAGE ) VALUES ( 'what does gael want?', 'MC', 'the dark soul of man "
-        + "', 'the dark sigil', 'manus', 'midir', 'fireSeekerArt.jpg' )";
     try (Connection conn = ds.getConnection();
         Statement stmt = conn.createStatement();) {
       // int rv = stmt.executeUpdate( query1 );
